@@ -1,1 +1,15 @@
+*.pyc
+*~
 .DS_Store
+
+.vagrant
+
+# ignore buildout's workspace stuff:
+.installed.cfg
+bin/
+develop-eggs/
+eggs/
+parts/
+
+
+
