@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html ng-app="CampusMediusApp">
+<head>
+    <title></title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="js/angular-leaflet-directive.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/restangular.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <style>
+        #actorView{
+            width:90%;
+            height:100%;
+            position: absolute;
+            top:0;
+            left:0;
+            background:rgba(255,255,255, .9);
+            z-index:9999;
+        }
+    </style>
+    <script>
+        var app = angular.module("CampusMediusApp", ['restangular', 'leaflet-directive', 'ngRoute']);
+        app.config(function ($routeProvider) {
+          $routeProvider
+            .when('/actors', {
+              templateUrl: 'views/map.html',
+              reloadOnSearch: false,
+              controller: 'MapController'
+            })
+            .when('/actors/:actorId', {
+                templateUrl: 'views/map.html',
+                controller: 'MapController'
+            })
+            .otherwise({
+              redirectTo: '/actors'
+            });
+        });
+
+
+        app.config(["RestangularProvider",function(RestangularProvider){
+            RestangularProvider.setBaseUrl('http://localhost:3000');
+            RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+                if(what === 'actors') {
+                    angular.forEach(data, function(val, key) {
+                        val.message = val.title + "-" + val.body + " <a href='#/actors/" + val.id + "'>click for more</a>";
+                    });
+                }
+                return data;
+            });
+        }]);
+        app.controller("ActorController", ['$scope', 'Restangular', '$routeParams', function($scope, Restangular, $routeParams) {
+
+        }]);
+
+        app.controller("MapController", [ '$scope', 'Restangular', '$location', '$routeParams', function($scope, Restangular, $location, $routeParams) {
+
+            var actorsResource = Restangular.all('actors');
+            console.log('routeparams', $routeParams);
+            $scope.actors = new Array();
+            $scope.showActor = false;
+            $scope.markers = new Array();
+            $scope.political = ['All', 'Socialist', 'Nazi', 'Bourgeois', 'Liberal'];
+            $scope.historical = ['All', 'Sovereign', 'Disciplinary', 'Control'];
+            $scope.london = {
+                lat: 51.505,
+                lng: -0.09,
+                zoom: 8
+            }
+
+            $scope.filterActors = function() {
+                console.log($location);
+                var params = {};
+                if($scope.politicalFilter && $scope.politicalFilter !== 'All') {
+                    params.political = $scope.politicalFilter;
+                }
+                if($scope.historicalFilter && $scope.historicalFilter !== 'All') {
+                    params.historical = $scope.historicalFilter;
+                }
+                
+                $location.search(params);
+                
+                actorsResource.customGET('', params).then(function(actors) {
+                    console.log('filtering', params);
+                    $scope.setMarkers(actors);
+                });
+            };
+            $scope.hasFilters = function() {
+                for(var i in $routeParams) {
+                    if($routeParams.hasOwnProperty(i)) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            $scope.$on('$routeUpdate', function(){
+              $scope.assignFilters();
+            });
+
+            $scope.assignFilters = function() {
+                if($routeParams.hasOwnProperty('actorId')) {
+                    Restangular.one('actors', $routeParams.actorId).get().then(function(actor) {
+                        $scope.actor = actor;
+                        $scope.showActor = true;
+                        console.log('wtf');
+                    });
+                    delete $routeParams.actorId;
+                }
+                if($routeParams.hasOwnProperty('political') && $routeParams.political !== 'undefined') {
+                    $scope.politicalFilter = $routeParams.political;
+                }
+
+                if($routeParams.hasOwnProperty('historical') && $routeParams.historical !== 'undefined') {
+                    $scope.historicalFilter = $routeParams.historical;
+                }
+                console.log('filtering', $routeParams);
+                $scope.filterActors();
+            };
+
+            // Restangular wraps arrays in this weird object syntax that Leaflet gets confused with
+            // so i'm creating a clean array to send to Lealet
+            $scope.setMarkers = function(actors) {
+                var i=0;
+                var _markers = [];
+                $scope.actors = actors;
+                while(true) {
+                    if(actors.hasOwnProperty(i)) {
+                        _markers.push(actors[i]);
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+                console.log('setting to: ', _markers);
+                $scope.markers = _markers;
+            };
+
+            if($scope.hasFilters()) {
+                $scope.assignFilters();
+            } else {
+                actorsResource.getList().then(function(actors){
+                    $scope.setMarkers(actors);
+                });
+            }
+        }]);
+
+    </script>
+
+    <style>
+        input {
+            width: 120px;
+            margin-right: 10px;
+        }
+    </style>
+  </head>
+<body>
+    <div ng-controller="ActorController"></div>
+    <div ng-controller="MapController"></div>
+    <div ng-view></div>
+</body>
+</html>

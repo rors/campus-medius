@@ -11,7 +11,5 @@ develop-eggs/
 eggs/
 parts/
 
-# ignore settings files:
-trunk/urt/settings/*.py
-!trunk/urt/settings/__init__.py
+
 
