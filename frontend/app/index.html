@@ -40,7 +40,6 @@
             });
         });
 
-
         app.config(["RestangularProvider",function(RestangularProvider){
             RestangularProvider.setBaseUrl('http://localhost:3000');
             RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -52,9 +51,6 @@
                 return data;
             });
         }]);
-        app.controller("ActorController", ['$scope', 'Restangular', '$routeParams', function($scope, Restangular, $routeParams) {
-
-        }]);
 
         app.controller("MapController", [ '$scope', 'Restangular', '$location', '$routeParams', function($scope, Restangular, $location, $routeParams) {
 
@@ -63,7 +59,6 @@
             $scope.actors = new Array();
             $scope.showActor = false;
             $scope.markers = new Array();
-            $scope.political = ['All', 'Socialist', 'Nazi', 'Bourgeois', 'Liberal'];
             $scope.historical = ['All', 'Sovereign', 'Disciplinary', 'Control'];
             $scope.london = {
                 lat: 51.505,
@@ -74,9 +69,6 @@
             $scope.filterActors = function() {
                 console.log($location);
                 var params = {};
-                if($scope.politicalFilter && $scope.politicalFilter !== 'All') {
-                    params.political = $scope.politicalFilter;
-                }
                 if($scope.historicalFilter && $scope.historicalFilter !== 'All') {
                     params.historical = $scope.historicalFilter;
                 }
@@ -98,7 +90,8 @@
             };
 
             $scope.$on('$routeUpdate', function(){
-              $scope.assignFilters();
+                console.log('routeupdate');
+                $scope.assignFilters();
             });
 
             $scope.assignFilters = function() {
@@ -110,14 +103,13 @@
                     });
                     delete $routeParams.actorId;
                 }
-                if($routeParams.hasOwnProperty('political') && $routeParams.political !== 'undefined') {
-                    $scope.politicalFilter = $routeParams.political;
-                }
 
                 if($routeParams.hasOwnProperty('historical') && $routeParams.historical !== 'undefined') {
                     $scope.historicalFilter = $routeParams.historical;
+                } else {
+                    $scope.historicalFilter = undefined;
                 }
-                console.log('filtering', $routeParams);
+                console.log('filtering', $routeParams, $scope.historicalFilter);
                 $scope.filterActors();
             };
 
@@ -140,6 +132,7 @@
             };
 
             if($scope.hasFilters()) {
+                console.log('have filters');
                 $scope.assignFilters();
             } else {
                 actorsResource.getList().then(function(actors){
@@ -158,8 +151,6 @@
     </style>
   </head>
 <body>
-    <div ng-controller="ActorController"></div>
-    <div ng-controller="MapController"></div>
     <div ng-view></div>
 </body>
 </html>
