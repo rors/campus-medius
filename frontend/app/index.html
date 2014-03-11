@@ -6,11 +6,14 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
     <script src="js/angular-leaflet-directive.min.js"></script>
+    <script src="js/rzslider.min.js"></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/restangular.min.js"></script>
     <script src="js/underscore-min.js"></script>
-
+    <link rel="stylesheet" href="css/rzslider.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
     <style>
         #actorView{
             width:90%;
@@ -23,7 +26,7 @@
         }
     </style>
     <script>
-        var app = angular.module("CampusMediusApp", ['restangular', 'leaflet-directive', 'ngRoute']);
+        var app = angular.module("CampusMediusApp", ['restangular', 'leaflet-directive', 'ngRoute', 'rzModule']);
         app.config(function ($routeProvider) {
           $routeProvider
             .when('/actors', {
@@ -54,6 +57,15 @@
 
         app.controller("MapController", [ '$scope', 'Restangular', '$location', '$routeParams', function($scope, Restangular, $location, $routeParams) {
 
+            $scope.timelineSlider = {
+                min: 0,
+                max: 24,
+                floor: 0,
+                ceil: 24,
+                step: 1
+            };
+
+
             var actorsResource = Restangular.all('actors');
             console.log('routeparams', $routeParams);
             $scope.actors = new Array();
@@ -66,13 +78,36 @@
                 zoom: 8
             }
 
+            $scope.translateTimeline = function(hours) {
+                //it is pm if hours from 12 onwards
+                suffix = (hours >= 12)? 'pm' : 'am';
+
+                //only -12 from hours if it is greater than 12 (if not back at mid night)
+                hours = (hours > 12)? hours -12 : hours;
+
+                //if 00 then it is 12 am
+                hours = (hours == '00')? 12 : hours;
+
+                return hours + suffix;
+            };
+
+            $scope.$watch('timelineSlider.min', function(oldVal, newVal) {
+                console.log('sliderchange', oldVal, newVal);
+                $scope.filterActors();
+            });
+            $scope.$watch('timelineSlider.max', function(oldVal, newVal) {
+                console.log('sliderchange', oldVal, newVal);
+            });
+
             $scope.filterActors = function() {
                 console.log($location);
                 var params = {};
                 if($scope.historicalFilter && $scope.historicalFilter !== 'All') {
                     params.historical = $scope.historicalFilter;
                 }
-                
+                params.start = $scope.timelineSlider.min;
+                params.end = $scope.timelineSlider.max;
+
                 $location.search(params);
                 
                 actorsResource.customGET('', params).then(function(actors) {

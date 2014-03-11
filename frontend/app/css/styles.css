@@ -1,0 +1,11 @@
+rzslider span.pointer{
+    background-color: #CCC;
+}
+
+rzslider span.pointer:after{
+    background-color: white;
+}
+
+rzslider span.bar{
+    background-color: #CCC;
+}

@@ -1,3 +1,13 @@
 <select ng-model="historicalFilter" ng-options="value for value in historical" ng-change="filterActors()"></select>
+<div>
+    {{timelineSlider}}
+</div>
+<rzslider
+        rz-slider-floor="timelineSlider.floor"
+        rz-slider-ceil="timelineSlider.ceil"
+        rz-slider-model="timelineSlider.min"
+        rz-slider-high="timelineSlider.max"
+        rz-slider-translate="translateTimeline"
+        rz-slider-step="{{timelineSlider.step}}"></rzslider>
 <leaflet center="london" width="100%" height="500" markers="markers"></leaflet>
 <div ng-include="'views/actor.html'" id="actorView" ng-show="showActor"></div>
