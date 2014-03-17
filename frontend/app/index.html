@@ -8,34 +8,21 @@
     <script src="js/angular-leaflet-directive.min.js"></script>
     <script src="js/rzslider.min.js"></script>
     <script src="js/angular-route.min.js"></script>
-    <script src="js/restangular.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <link rel="stylesheet" href="css/rzslider.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css" />
-
-    <style>
-        #actorView{
-            width:90%;
-            height:100%;
-            position: absolute;
-            top:0;
-            left:0;
-            background:rgba(255,255,255, .9);
-            z-index:9999;
-        }
-    </style>
     <script>
-        var app = angular.module("CampusMediusApp", ['restangular', 'leaflet-directive', 'ngRoute', 'rzModule']);
+        var app = angular.module("CampusMediusApp", ['leaflet-directive', 'ngRoute', 'rzModule']);
+
+        // The app essentially has a single route, but we are handling the actorId param
+        // as optional so we dont have to deal w reloading the page or losing our map view
+        // when we go to actor view.
         app.config(function ($routeProvider) {
           $routeProvider
-            .when('/actors', {
-              templateUrl: 'views/map.html',
-              reloadOnSearch: false,
-              controller: 'MapController'
-            })
-            .when('/actors/:actorId', {
+            .when('/actors/:actorId?', {
                 templateUrl: 'views/map.html',
+                reloadOnSearch: false,
                 controller: 'MapController'
             })
             .otherwise({
@@ -43,20 +30,23 @@
             });
         });
 
-        app.config(["RestangularProvider",function(RestangularProvider){
-            RestangularProvider.setBaseUrl('http://localhost:3000');
-            RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-                if(what === 'actors') {
-                    angular.forEach(data, function(val, key) {
-                        val.message = val.title + "-" + val.body + " <a href='#/actors/" + val.id + "'>click for more</a>";
-                    });
-                }
-                return data;
-            });
-        }]);
+        app.controller("MapController", [ '$scope', '$http', '$compile', '$location', '$routeParams', function($scope, $http, $compile, $location, $routeParams) {
 
-        app.controller("MapController", [ '$scope', 'Restangular', '$location', '$routeParams', function($scope, Restangular, $location, $routeParams) {
+            $scope.actors = new Array();    // holds all our actors so we dont have to fetch them from API again
+            $scope.actor = false;           // either false or an actor object; if actor object, then show actor template
+            $scope.markers = new Array();   // current set of points that are shown on our map.
 
+            // TODO: hard-coded to Vienna but should probably come from some dynamic source
+            $scope.centerMarker = {
+                lat: 48.20817,
+                lng: 16.37382,
+                zoom: 8
+            }
+            // TODO: also hard coded; should come from service
+            $scope.historical = ['All', 'Sovereign', 'Disciplinary', 'Control'];
+
+            // TODO: all of this timeline stuff should really be broken out into its own directive
+            $scope.lanes = new Array(); // holds lane data for showing timeline items
             $scope.timelineSlider = {
                 min: 0,
                 max: 24,
@@ -64,26 +54,12 @@
                 ceil: 24,
                 step: 1
             };
-
-
-            var actorsResource = Restangular.all('actors');
-            console.log('routeparams', $routeParams);
-            $scope.actors = new Array();
-            $scope.showActor = false;
-            $scope.markers = new Array();
-            $scope.historical = ['All', 'Sovereign', 'Disciplinary', 'Control'];
-            $scope.london = {
-                lat: 51.505,
-                lng: -0.09,
-                zoom: 8
-            }
-
             $scope.translateTimeline = function(hours) {
                 //it is pm if hours from 12 onwards
                 suffix = (hours >= 12)? 'pm' : 'am';
 
                 //only -12 from hours if it is greater than 12 (if not back at mid night)
-                hours = (hours > 12)? hours -12 : hours;
+                hours = (hours > 12) ? hours -12 : hours;
 
                 //if 00 then it is 12 am
                 hours = (hours == '00')? 12 : hours;
@@ -92,15 +68,18 @@
             };
 
             $scope.$watch('timelineSlider.min', function(oldVal, newVal) {
-                console.log('sliderchange', oldVal, newVal);
-                $scope.filterActors();
+                if(oldVal != newVal) {
+                    $scope.filterActors();
+                }
             });
+
             $scope.$watch('timelineSlider.max', function(oldVal, newVal) {
-                console.log('sliderchange', oldVal, newVal);
+                if(oldVal != newVal) {
+                    $scope.filterActors();
+                }
             });
 
             $scope.filterActors = function() {
-                console.log($location);
                 var params = {};
                 if($scope.historicalFilter && $scope.historicalFilter !== 'All') {
                     params.historical = $scope.historicalFilter;
@@ -108,84 +87,136 @@
                 params.start = $scope.timelineSlider.min;
                 params.end = $scope.timelineSlider.max;
 
-                $location.search(params);
-                
-                actorsResource.customGET('', params).then(function(actors) {
-                    console.log('filtering', params);
-                    $scope.setMarkers(actors);
-                });
-            };
-            $scope.hasFilters = function() {
-                for(var i in $routeParams) {
-                    if($routeParams.hasOwnProperty(i)) {
-                        return true;
+                var _markers = $scope.actors.filter(function(el) {
+                    isMatch = true;
+                    if(params.hasOwnProperty('historical')) {
+                        if(el.historical !== params.historical) {
+                            return false;
+                        }
                     }
+                    // given 2 time ranges S1-->E1 and S2-->E2
+                    // determine if 2 ranges overlap. S1 <= E2 && S2 <= E1
+                    if(el.start <= params.end && params.start <= el.end) {
+                        return el;
+                    }
+                });
+                
+                // updates our map markers
+                angular.extend($scope, {
+                    markers: _markers
+                });
+
+                // apply the search params only if we're not in actor view. 
+                // angular is kind enough to preserve our search params when we use the 
+                // actorId part of the route
+                if(!$scope.actor) {
+                    $location.search(params);
                 }
-                return false;
             };
 
-            $scope.$on('$routeUpdate', function(){
-                console.log('routeupdate');
-                $scope.assignFilters();
+            // listens for changes in url, and fires the update
+            $scope.$on('$routeUpdate', function(data){
+                $scope.applyRouteParams();
             });
 
-            $scope.assignFilters = function() {
-                if($routeParams.hasOwnProperty('actorId')) {
-                    Restangular.one('actors', $routeParams.actorId).get().then(function(actor) {
-                        $scope.actor = actor;
-                        $scope.showActor = true;
-                        console.log('wtf');
-                    });
-                    delete $routeParams.actorId;
-                }
-
+            // this makes sure the UI controls are in sync w the filters in URL
+            $scope.applyRouteParams = function() {
                 if($routeParams.hasOwnProperty('historical') && $routeParams.historical !== 'undefined') {
                     $scope.historicalFilter = $routeParams.historical;
                 } else {
                     $scope.historicalFilter = undefined;
                 }
-                console.log('filtering', $routeParams, $scope.historicalFilter);
+                if($routeParams.hasOwnProperty('start')) {
+                    $scope.timelineSlider.min = $routeParams.start;
+                }
+                if($routeParams.hasOwnProperty('end')) {
+                    $scope.timelineSlider.max = $routeParams.end;
+                }
+                if($routeParams.hasOwnProperty('actorId')) {
+                    for(var i=0; i<$scope.actors.length; i ++) {
+                        if($scope.actors[i].id == $routeParams.actorId) {
+                            $scope.actor = $scope.actors[i];
+                            break;
+                        }
+                    }
+                } else {
+                    $scope.actor = false;
+                }
+
                 $scope.filterActors();
             };
 
-            // Restangular wraps arrays in this weird object syntax that Leaflet gets confused with
-            // so i'm creating a clean array to send to Lealet
-            $scope.setMarkers = function(actors) {
-                var i=0;
-                var _markers = [];
-                $scope.actors = actors;
-                while(true) {
-                    if(actors.hasOwnProperty(i)) {
-                        _markers.push(actors[i]);
-                        i++;
-                    } else {
-                        break;
-                    }
-                }
-                console.log('setting to: ', _markers);
-                $scope.markers = _markers;
+
+            $scope.showActor = function(id) {
+                $location.path('/actors/' + id);
             };
 
-            if($scope.hasFilters()) {
-                console.log('have filters');
-                $scope.assignFilters();
-            } else {
-                actorsResource.getList().then(function(actors){
-                    $scope.setMarkers(actors);
-                });
+            // i still dont understand how calling $location.path will magically preserve the 
+            // search params in the url, but i love it
+            $scope.killActor = function() {
+                $scope.actor = false;
+                $location.path('/actors');
+            };
+
+            // returns an array of arrays
+            // each lane contains objects in consecutive time chunks
+            $scope.makeLanes = function(data) {
+                var _lanes = [];
+                for(var i=0; i<data.length; i++) {
+                    var _actor = data[i];
+                    if(i === 0) {
+                        _lanes.push([_actor]);
+                    } else {
+                        var laneLength = _lanes.length;
+                        var inLane = false;
+                         for(var j=0; j<laneLength; j++){
+                             if(_actor.start > _lanes[j][_lanes[j].length-1].end) {
+                                _lanes[j].push(_actor);
+                                inLane = true;
+                                break;
+                            }
+                         }
+                         // item didnt fit in any of the existing lanes so make a new one
+                         if(!inLane) {
+                            _lanes.push([_actor]);
+                         }
+                    }
+                }
+                $scope.lanes = _lanes;
+            };
+
+            // low-fi way of getting actors from our API
+            $scope.getActors = function() {
+                $http({method: 'GET', url: 'http://localhost:3000/actors'}).
+                    success(function(data, status, headers, config) {
+                      
+                      $scope.actors = data;
+                      angular.forEach(data, function(val, key) {
+                        val.message = '<p>' + val.title + "-" + val.body + " <a ng-click='showActor(" + val.id + ")'>click for more</a></p>";
+                      });
+                      $scope.makeLanes($scope.actors);
+                      $scope.applyRouteParams();
+                    }).
+                    error(function(data, status, headers, config) {
+                        console.log('error', data, status, headers, config);
+                    });
             }
+
+            // since we are using directives inside our popups, we have to compile them
+            // before they can be used
+            $scope.$on('leafletDirectiveMap.popupopen', function(event, leafletEvent){
+              var newScope = $scope.$new();
+              $compile(leafletEvent.leafletEvent.popup._contentNode)(newScope);
+            });
+
+            // only gets called once. all subsequent filtering is handled in-app
+            $scope.getActors();
         }]);
 
     </script>
 
-    <style>
-        input {
-            width: 120px;
-            margin-right: 10px;
-        }
-    </style>
   </head>
 <body>
-    <div ng-view></div>
+    <div ng-view ng-cloak></div>
 </body>
 </html>
