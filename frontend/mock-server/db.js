@@ -14,7 +14,7 @@ exports.run = function() {
         "historical": "Sovereign"
     },
     historical = ['Sovereign', 'Disciplinary', 'Control'];
-    colors = ['B2241A', '1E578F', 'EAFB58']
+    colors = ['c68181', '81a0c6', 'c4c681']
 
     function randomNumberFromInterval(min,max, isInt) {
         var rand = Math.random()*(max-min+1)+min;
@@ -42,7 +42,8 @@ exports.run = function() {
             endPercent: endPercent,
             message: "",
             historical: historical[historicalIndex],
-            color: colors[historicalIndex]
+            color: colors[historicalIndex],
+            icon: {}
         }
         data.actors.push(newObject);
     }

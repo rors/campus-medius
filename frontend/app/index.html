@@ -129,7 +129,7 @@
                         var laneLength = _lanes.length;
                         var inLane = false;
                          for(var j=0; j<laneLength; j++){
-                             if(_actor.start > _lanes[j][_lanes[j].length-1].end) {
+                             if(_actor.start >= _lanes[j][_lanes[j].length-1].end) {
                                 _lanes[j].push(_actor);
                                 inLane = true;
                                 break;
@@ -198,7 +198,23 @@
             $scope.showActor = function(id) {
                 $location.path('/actors/' + id);
             };
+            $scope.highlightActor = function(id, toDefault){
+                var icons = {
+                    defaultIcon: {},
+                    biggerIcon: {
+                        iconSize: [30, 49]
+                    }
+                };
 
+                for(var i=0; i<$scope.markers.length; i++) {
+                    if($scope.markers[i].id === id) {
+                        console.log('hit! ', id);
+                        $scope.markers[i].icon = toDefault? icons.defaultIcon : icons.biggerIcon;
+                        break;
+                    }
+                }
+                console.log($scope.markers);
+            }
             // i still dont understand how calling $location.path will magically preserve the 
             // search params in the url, but i love it
             $scope.killActor = function() {
