@@ -1,0 +1,2 @@
+
+from campusmedius.settings import *
