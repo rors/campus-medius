@@ -9,17 +9,19 @@
     <script src="js/rzslider.min.js"></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/underscore-min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/rzslider.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <script>
         var app = angular.module("CampusMediusApp", ['leaflet-directive', 'ngRoute', 'rzModule']);
 
-        app.service('ActorService', function($http){
+        app.factory('ActorService', function($http, $window){
+            var API_ENDPOINT = $window.location.host==='localhost' ? 'http://localhost:3000/actors' : 'data/actors.json';
             var actors = [];
-            var service = {
+            return {
                 all: function() {
-                    return $http({method: 'GET', url: 'http://localhost:3000/actors'})
+                    return $http({method: 'GET', url: API_ENDPOINT})
                         .success(function(data, status, headers, config) { 
                             actors = data;
                          });
@@ -49,9 +51,86 @@
                     });
                 }
             }
-
-            return service;
         });
+
+        app.directive('scrollSpy', function($window) {
+          return {
+            restrict: 'A',
+            controller: function($scope) {
+              $scope.spies = [];
+              $scope.test = 0;
+              setTimeout(function(){console.log('$scope.test changed');$scope.test = 8}, 1000)
+              this.addSpy = function(spyObj) {
+                $scope.spies.push(spyObj);
+              };
+            },
+            link: function(scope, elem, attrs) {
+              var spyElems = [];
+              scope.$watch('spies', function(spies) {
+                for (var _i = 0; _i < spies.length; _i++) {
+                  var spy = spies[_i];
+                  if (spyElems[spy.id] == null) {
+                    spyElems[spy.id] = (elem.find('#' + spy.id));
+                  }
+                }
+                scrollHandler();
+              }, true);
+
+              var $spyWindow = $('#spy-window .text-window');
+              //var $spyWindow = $window;
+              function scrollHandler() {
+                var highlightSpy, pos, spy, _i, _len, _ref;
+                highlightSpy = null;
+                _ref = scope.spies;
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                  spy = _ref[_i];
+                  spy.out();
+                  spyElems[spy.id] = spyElems[spy.id].length === 0 ? elem.find('#' + spy.id) : spyElems[spy.id];
+                  if (spyElems[spy.id].length !== 0) {
+                    //console.log(spy.id, spyElems[spy.id].position().top , $spyWindow.scrollTop());
+                    if ((pos = spyElems[spy.id].position().top) <= 0) {
+                      spy.pos = pos;
+                      if (highlightSpy == null) {
+                        highlightSpy = spy;
+                      }
+                      if (highlightSpy.pos < spy.pos) {
+                        highlightSpy = spy;
+                      }
+                    }
+                  }
+                }
+                return highlightSpy != null ? highlightSpy["in"]() : void 0;
+              };
+
+              $($spyWindow).scroll(scrollHandler);
+            }
+          };
+        })
+        .directive('spy', function($location) {
+          return {
+            restrict: "A",
+            require: "^scrollSpy",
+            link: function(scope, elem, attrs, scrollSpy) {
+              if (attrs.spyClass == null) {
+                attrs.spyClass = "active";
+              }
+              elem.click(function() {
+                scope.$apply(function() {
+                  $location.hash(attrs.spy);
+                });
+              });
+              scrollSpy.addSpy({
+                id: attrs.spy,
+                in: function() {
+                  elem.addClass(attrs.spyClass);
+                },
+                out: function() {
+                  elem.removeClass(attrs.spyClass);
+                }
+              });
+            }
+          };
+        })
 
         // The app essentially has a single route, but we are handling the actorId param
         // as optional so we dont have to deal w reloading the page or losing our map view
@@ -208,12 +287,10 @@
 
                 for(var i=0; i<$scope.markers.length; i++) {
                     if($scope.markers[i].id === id) {
-                        console.log('hit! ', id);
                         $scope.markers[i].icon = toDefault? icons.defaultIcon : icons.biggerIcon;
                         break;
                     }
                 }
-                console.log($scope.markers);
             }
             // i still dont understand how calling $location.path will magically preserve the 
             // search params in the url, but i love it
