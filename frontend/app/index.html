@@ -2,19 +2,38 @@
 <html ng-app="CampusMediusApp">
 <head>
     <title></title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+
+    <script src="//s0.2mdn.net/instream/html5/ima3.js" type="text/javascript"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+
     <script src="js/angular-leaflet-directive.min.js"></script>
     <script src="js/rzslider.min.js"></script>
-    <script src="js/angular-route.min.js"></script>
     <script src="js/underscore-min.js"></script>
+
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/com/2fdevs/videogular/videogular.js"></script>
+    <script src="scripts/com/2fdevs/videogular/plugins/controls.js"></script>
+    <script src="scripts/com/2fdevs/videogular/plugins/overlay-play.js"></script>
+    <script src="scripts/com/2fdevs/videogular/plugins/buffering.js"></script>
+    <script src="scripts/com/2fdevs/videogular/plugins/poster.js"></script>
+    <script src="scripts/com/2fdevs/videogular/plugins/ima-ads.js"></script>
+    <!-- endbuild -->
+
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/rzslider.css" />
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <script>
-        var app = angular.module("CampusMediusApp", ['leaflet-directive', 'ngRoute', 'rzModule']);
+        var app = angular.module("CampusMediusApp", ['leaflet-directive', 'ngRoute', 'rzModule', "com.2fdevs.videogular",
+            "com.2fdevs.videogular.plugins.controls",
+            "com.2fdevs.videogular.plugins.overlayplay",
+            "com.2fdevs.videogular.plugins.buffering",
+            "com.2fdevs.videogular.plugins.poster",
+            "com.2fdevs.videogular.plugins.imaads"]);
 
         app.factory('ActorService', function($http, $window){
             var API_ENDPOINT = $window.location.host==='localhost' ? 'http://localhost:3000/actors' : 'data/actors.json';
@@ -123,6 +142,7 @@
                 id: attrs.spy,
                 in: function() {
                   elem.addClass(attrs.spyClass);
+                  $(window).trigger('resize');
                 },
                 out: function() {
                   elem.removeClass(attrs.spyClass);
@@ -147,7 +167,7 @@
             });
         });
 
-        app.controller("MapController", [ '$scope', '$http', '$compile', '$location', '$routeParams', 'ActorService', function($scope, $http, $compile, $location, $routeParams, ActorService) {
+        app.controller("MapController", [ '$scope', '$sce', '$http', '$compile', '$location', '$routeParams', 'ActorService', function($scope, $sce, $http, $compile, $location, $routeParams, ActorService) {
 
             $scope.actors = new Array();    // holds all our actors so we dont have to fetch them from API again
             $scope.actor = false;           // either false or an actor object; if actor object, then show actor template
@@ -326,6 +346,95 @@
 
             // only gets called once. all subsequent filtering is handled in-app
             $scope.getActors();
+
+
+            /* please work */
+            $scope.currentTime = 0;
+            $scope.totalTime = 0;
+            $scope.state = null;
+            $scope.volume = 1;
+            $scope.isCompleted = false;
+            $scope.API = null;
+
+            $scope.onPlayerReady = function(API) {
+                $scope.API = API;
+            };
+
+            $scope.onCompleteVideo = function() {
+                $scope.isCompleted = true;
+            };
+
+            $scope.onUpdateState = function(state) {
+                $scope.state = state;
+            };
+
+            $scope.onUpdateTime = function(currentTime, totalTime) {
+                $scope.currentTime = currentTime;
+                $scope.totalTime = totalTime;
+            };
+
+            $scope.onUpdateVolume = function(newVol) {
+                $scope.volume = newVol;
+            };
+
+            $scope.onUpdateSize = function(width, height) {
+                $scope.config.width = width;
+                $scope.config.height = height;
+            };
+
+            $scope.stretchModes = [
+                {label: "None", value: "none"},
+                {label: "Fit", value: "fit"},
+                {label: "Fill", value: "fill"}
+            ];
+
+            $scope.config = {
+                width: 740,
+                height: 380,
+                autoHide: false,
+                autoHideTime: 3000,
+                autoPlay: false,
+                responsive: false,
+                stretch: $scope.stretchModes[1],
+                sources: [
+                    {src: $sce.trustAsResourceUrl("https://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.mp4.mp4"), type: "video/mp4"},
+                    {src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
+                    {src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
+                ],
+                transclude: true,
+                theme: {
+                    url: "styles/themes/default/videogular.css",
+                    playIcon: "&#xe000;",
+                    pauseIcon: "&#xe001;",
+                    volumeLevel3Icon: "&#xe002;",
+                    volumeLevel2Icon: "&#xe003;",
+                    volumeLevel1Icon: "&#xe004;",
+                    volumeLevel0Icon: "&#xe005;",
+                    muteIcon: "&#xe006;",
+                    enterFullScreenIcon: "&#xe007;",
+                    exitFullScreenIcon: "&#xe008;"
+                },
+                plugins: {
+                    poster: {
+                        url: "assets/images/videogular.png"
+                    },
+                    ads: {
+                        companion: "companionAd",
+                        companionSize: [728, 90],
+                        network: "6062",
+                        unitPath: "iab_vast_samples",
+                        adTagUrl: "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dlinear"
+                    }
+                }
+            };
+
+            $scope.changeSource = function() {
+                $scope.config.sources = [
+                    {src: $sce.trustAsResourceUrl("http://vjs.zencdn.net/v/oceans.mp4"), type: "video/mp4"},
+                    {src: $sce.trustAsResourceUrl("http://vjs.zencdn.net/v/oceans.webm"), type: "video/webm"}
+                ];
+            };
+            /* */
         }]);
 
     </script>

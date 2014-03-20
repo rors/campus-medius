@@ -97,6 +97,11 @@ button.close{
     display:none;
     opacity:0;
 }
+#actor-media small{
+    max-height: 80px;
+    overflow:scroll;
+    display: block;
+}
 #actor-media li.active{
     display:block;
     opacity:1;
