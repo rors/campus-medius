@@ -41,13 +41,13 @@ angular.module('myApp').controller('MainCtrl',
 		];
 
 		$scope.config = {
-			width: 740,
+			width: 500,
 			height: 380,
 			autoHide: false,
 			autoHideTime: 3000,
 			autoPlay: false,
 			responsive: false,
-			stretch: $scope.stretchModes[1],
+			stretch: $scope.stretchModes[0],
 			sources: [
 				{src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.mp4"), type: "video/mp4"},
 				{src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},

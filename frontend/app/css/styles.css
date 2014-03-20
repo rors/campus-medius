@@ -30,7 +30,7 @@ h2{
     z-index:9999;
     top:0;
     margin:0 auto;
-    padding:40px;
+    padding:40px 0;
     
     background:rgba(255,255,255, .4);
     box-sizing:border-box;
@@ -96,11 +96,13 @@ button.close{
 #actor-media li{
     display:none;
     opacity:0;
+    max-height: 460px;
 }
 #actor-media small{
     max-height: 80px;
     overflow:scroll;
     display: block;
+    margin-top:25px;
 }
 #actor-media li.active{
     display:block;
