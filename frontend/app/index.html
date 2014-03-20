@@ -325,7 +325,8 @@
                 .success(function(data, status, headers, config) {
                     // add bubble text
                     angular.forEach(data, function(val, key) {
-                        val.message = '<p>' + val.title + "-" + val.body + " <a ng-click='showActor(" + val.id + ")'>click for more</a></p>";
+                        //val.message = '<p>' + val.title + "-" + val.body + " <a ng-click='showActor(" + val.id + ")'>click for more</a></p>";
+                        val.message = "<strong>SCHLOSSPARK SCHONBRUNN</strong><br/><em>14 May 1933 | 9 a.m. - 12 p.m.</em><br><a class='btn btn-sm btn-primary' ng-click='showActor(" + val.id + ")'>view</a>"
                     });
 
                     $scope.actors = data;

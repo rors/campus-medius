@@ -109,3 +109,7 @@ button.close{
 #actor-media li img{
     max-height: 100%;
 }
+
+.btn-primary{
+    color:white !important;
+}
