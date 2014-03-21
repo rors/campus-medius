@@ -17,7 +17,7 @@ exports.run = function() {
     colors = ['c68181', '81a0c6', 'c4c681']
 
     function randomNumberFromInterval(min,max, isInt) {
-        var rand = Math.random()*(max-min+1)+min;
+        var rand = Math.random()*(max-min)+min;
         return isInt ? Math.floor(rand) : rand;
     }
 
@@ -33,8 +33,8 @@ exports.run = function() {
         var newObject = {
             id: (i+1),
             body: "i am a body",
-            lat: randomNumberFromInterval(47.5, 48),
-            lng: randomNumberFromInterval(16, 17),
+            lat: randomNumberFromInterval(48.18, 48.25),
+            lng: randomNumberFromInterval(16.31, 16.53),
             title: "Actor ID: " + (i+1),
             start: start,
             startPercent: startPercent,
@@ -47,6 +47,11 @@ exports.run = function() {
         }
         data.actors.push(newObject);
     }
+
+    // let's set the first point to be the palace garden, so we have
+    // one point there in the right place, for demo purposes, 2014-03-21
+    data.actors[0].lat = 48.1855932;
+    data.actors[0].lng = 16.3121408;
 
     data.actors.sort(function(a, b) {
         if(a.start < b.start) {
