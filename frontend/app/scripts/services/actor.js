@@ -9,6 +9,12 @@ angular.module('CampusMediusApp')
         all: function() {
             return $http({method: 'GET', url: API_ENDPOINT})
                 .success(function(data) {
+                    // add bubble text
+                    angular.forEach(data, function(val) {
+                        val.message = '<strong>SCHLOSSPARK SCHONBRUNN</strong><br/><em>14 May 1933 | 9 a.m. - 12 p.m.</em><br><a class="btn btn-sm btn-primary" ng-click="showActor(' + val.id + ')">view</a>';
+                        val.min = val.start;
+                        val.max = val.end;
+                    });
                     actors = data;
                  });
         },
@@ -21,7 +27,7 @@ angular.module('CampusMediusApp')
             return false;
         },
         search: function(params) {
-            return actors.filter(function(el) {
+            var data = actors.filter(function(el) {
                 if(params.hasOwnProperty('historical')) {
                     if(el.historical !== params.historical) {
                         return false;
@@ -29,10 +35,12 @@ angular.module('CampusMediusApp')
                 }
                 // given 2 time ranges S1-->E1 and S2-->E2
                 // determine if 2 ranges overlap. S1 <= E2 && S2 <= E1
-                if(el.start <= params.end && params.start <= el.end) {
+                if(el.min <= params.max && params.min <= el.max) {
                     return el;
                 }
             });
+            console.log('search', data);
+            return data;
         }
     };
   });
