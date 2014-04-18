@@ -2,41 +2,47 @@
 
 angular.module('CampusMediusApp')
   .controller('MapController', [ '$scope', '$http', '$compile', '$location', '$routeParams', 'ActorService', 'FilterService', function($scope, $http, $compile, $location, $routeParams, ActorService, FilterService) {
-    $scope.actors = [];    // holds all our actors so we dont have to fetch them from API again
-    $scope.actorShow = false;           // either false or an actor object; if actor object, then show actor template
-    $scope.markers = [];   // current set of points that are shown on our map.
-
-    // TODO: hard-coded to Vienna but should probably come from some dynamic source
-    $scope.centerMarker = {
-        lat: 48.215,
-        lng: 16.42,
-        zoom: 8
-    }
-    $scope.layers= {
-        baselayers: {
-            vienna: {
-                name: 'Vienna 1933',
-                url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
-                type: 'xyz'
-            },
-            osm: {
-                name: 'OpenStreetMap',
-                url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                type: 'xyz'
-            },
-            cloudmade2: {
-                name: 'Cloudmade Tourist',
-                type: 'xyz',
-                url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-                layerParams: {
-                    key: '007b9471b4c74da4a6ec7ff43552b16f',
-                    styleId: 7
-                }
-            }
-        }
-    };
-    // TODO: also hard coded; should come from service
-    $scope.historical = ['All', 'Sovereign', 'Disciplinary', 'Control'];
+    angular.extend($scope, {
+      actors: [],
+      actorShow: false,
+      markers: [],
+      centerMarker: {
+          lat: 48.19744707423512,
+          lng: 16.35641098022461,
+          zoom: 13
+      },
+      layers: {
+          baselayers: {
+              vienna: {
+                  name: 'Vienna 1933',
+                  url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
+                  type: 'xyz'
+              },
+              osm: {
+                  name: 'OpenStreetMap',
+                  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  type: 'xyz'
+              },
+              cloudmade2: {
+                  name: 'Cloudmade Tourist',
+                  type: 'xyz',
+                  url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+                  layerParams: {
+                      key: '007b9471b4c74da4a6ec7ff43552b16f',
+                      styleId: 7
+                  }
+              }
+          }
+      },
+      events: {
+          map: {
+              enable: ['click', 'popupopen'],
+              logic: 'emit'
+          }
+      },
+      // TODO: hard coded; should come from service
+      historical: ['All', 'Sovereign', 'Disciplinary', 'Control']
+    });  
 
     $scope.$watch( 
       function () { return FilterService.get('min'); }, 
@@ -148,6 +154,9 @@ angular.module('CampusMediusApp')
     $scope.$on('leafletDirectiveMap.popupopen', function(event, leafletEvent){
       var newScope = $scope.$new();
       $compile(leafletEvent.leafletEvent.popup._contentNode)(newScope);
+    });
+    $scope.$on('leafletDirectiveMap.click', function(event, e){
+      console.log('leaf', e.leafletEvent.latlng);
     });
 
     // only gets called once. all subsequent filtering is handled in-app
