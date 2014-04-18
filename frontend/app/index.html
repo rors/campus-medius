@@ -30,7 +30,21 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
+    <header ng-controller="HeaderController">
+        <div class="container" id="mainHeader">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="http://placehold.it/200x50&text=Campus%20Medius" alt="" class="pull-left">
+                    <ul class="nav nav-pills pull-left">
+                        <li ng-class="{ active: isActive('#/') || isActive('#/actors')}"><a href="/">Home</a></li>
+                        <li ng-class="{ active: isActive('#/about')}"><a href="#/about">About</a></li>
+                        <li ng-class="{ active: isActive('#/topography')}"><a href="#/topography" title="">Topography</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
     <div ng-view ng-cloak></div>
 
     <!--[if lt IE 9]>
@@ -54,6 +68,9 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/header.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/topography.js"></script>
         <script src="scripts/directives/scrollSpy.js"></script>
         <script src="scripts/directives/spy.js"></script>
         <script src="scripts/services/actor.js"></script>

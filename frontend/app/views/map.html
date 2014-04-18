@@ -1,28 +1,30 @@
 <div ng-include="'views/actor.html'" id="actorView" ng-show="actorShow"></div>
 
-<leaflet center="centerMarker" width="100%" height="500" markers="markers"></leaflet>
-<select ng-model="historicalFilter" ng-options="value for value in historical" ng-change="filterActors()"></select>
+<leaflet center="centerMarker" width="100%" height="100%" markers="markers" layers="layers"></leaflet>
+<div id="filters">
+    <p><select ng-model="historicalFilter" ng-options="value for value in historical" ng-change="filterActors()"></select></p>
 
-<div ng-controller="TimelineCtrl">
-    <button type="submit" ng-click="showTimeline= !showTimeline" class="btn btn-primary">Timeline</button>
-    <div id="timeline" ng-show="!showTimeline">
-        <div class="timelineItems">
-            <div ng-repeat="lane in lanes" class="lane">
-            <div class="actor" ng-repeat="actor in lane" ng-click="showActor(actor.id)" ng-mouseenter="highlightActor(actor.id)" ng-mouseleave="highlightActor(actor.id, true)" style="margin-left:{{actor.startPercent}}%;width:{{actor.endPercent - actor.startPercent}}%;background-color:#{{actor.color}}">
-                    #{{actor.id}}<br />
-                    {{actor.start}} - {{actor.end}}
+    <div ng-controller="TimelineCtrl">
+        <button type="submit" ng-click="showTimeline= !showTimeline" class="btn btn-primary">Timeline</button>
+        <div id="timeline" ng-show="!showTimeline">
+            <div class="timelineItems">
+                <div ng-repeat="lane in lanes" class="lane">
+                <div class="actor" ng-repeat="actor in lane" ng-click="showActor(actor.id)" ng-mouseenter="highlightActor(actor.id)" ng-mouseleave="highlightActor(actor.id, true)" style="margin-left:{{actor.startPercent}}%;width:{{actor.endPercent - actor.startPercent}}%;background-color:#{{actor.color}}">
+                        #{{actor.id}}<br />
+                        {{actor.start}} - {{actor.end}}
+                    </div>
                 </div>
+                
             </div>
-            
-        </div>
-        <div id="timelineWrapper">
-            <rzslider ng-cloak
-                    rz-slider-floor="timelineSlider.floor"
-                    rz-slider-ceil="timelineSlider.ceil"
-                    rz-slider-model="timelineSlider.min"
-                    rz-slider-high="timelineSlider.max"
-                    rz-slider-translate="translateTimeline"
-                    rz-slider-step="{{timelineSlider.step}}"></rzslider>
+            <div id="timelineWrapper">
+                <rzslider ng-cloak
+                        rz-slider-floor="timelineSlider.floor"
+                        rz-slider-ceil="timelineSlider.ceil"
+                        rz-slider-model="timelineSlider.min"
+                        rz-slider-high="timelineSlider.max"
+                        rz-slider-translate="translateTimeline"
+                        rz-slider-step="{{timelineSlider.step}}"></rzslider>
+            </div>
         </div>
     </div>
 </div>

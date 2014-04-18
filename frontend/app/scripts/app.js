@@ -11,12 +11,21 @@ angular.module('CampusMediusApp', [
     'com.2fdevs.videogular.plugins.poster',
     'com.2fdevs.videogular.plugins.imaads'
 ])
-    .config(function($routeProvider) {
+    .config(function($routeProvider, $locationProvider) {
+        //$locationProvider.html5Mode(true)
         $routeProvider
             .when('/actors/:actorId?', {
                 templateUrl: 'views/map.html',
                 reloadOnSearch: false,
                 controller: 'MapController'
+            })
+            .when('/about', {
+                templateUrl: 'views/about.html',
+                controller: 'AboutController'
+            })
+            .when('/topography', {
+                templateUrl: 'views/topography.html',
+                controller: 'TopographyController'
             })
             .otherwise({
                 redirectTo: '/actors'

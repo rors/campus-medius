@@ -8,9 +8,32 @@ angular.module('CampusMediusApp')
 
     // TODO: hard-coded to Vienna but should probably come from some dynamic source
     $scope.centerMarker = {
-      lat: 48.20817,
-      lng: 16.37382,
-      zoom: 8
+        lat: 48.215,
+        lng: 16.42,
+        zoom: 8
+    }
+    $scope.layers= {
+        baselayers: {
+            vienna: {
+                name: 'Vienna 1933',
+                url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
+                type: 'xyz'
+            },
+            osm: {
+                name: 'OpenStreetMap',
+                url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                type: 'xyz'
+            },
+            cloudmade2: {
+                name: 'Cloudmade Tourist',
+                type: 'xyz',
+                url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+                layerParams: {
+                    key: '007b9471b4c74da4a6ec7ff43552b16f',
+                    styleId: 7
+                }
+            }
+        }
     };
     // TODO: also hard coded; should come from service
     $scope.historical = ['All', 'Sovereign', 'Disciplinary', 'Control'];
@@ -129,4 +152,5 @@ angular.module('CampusMediusApp')
 
     // only gets called once. all subsequent filtering is handled in-app
     $scope.getActors();
+
   }]);
