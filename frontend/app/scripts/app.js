@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('CampusMediusApp', [
+    'ngAnimate',
+    'angularSlideables',
     'leaflet-directive',
     'ngRoute',
     'rzModule',
