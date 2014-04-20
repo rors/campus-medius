@@ -34,26 +34,22 @@ angular.module('CampusMediusApp')
     // returns an array of arrays
     // each lane contains objects in consecutive time chunks
     $scope.makeLanes = function(data) {
-      var _lanes = [];
-      for(var i=0; i<data.length; i++) {
+      var _lanes = [[data[0]]]; // initialize the first lane to the first
+      for(var i=1; i<data.length; i++) {
           var _actor = data[i];
-          if(i === 0) {
+          var laneLength = _lanes.length;
+          var inLane = false;
+           for(var j=0; j<laneLength; j++){
+               if(_actor.start >= _lanes[j][_lanes[j].length-1].end) {
+                  _lanes[j].push(_actor);
+                  inLane = true;
+                  break;
+              }
+           }
+           // item didnt fit in any of the existing lanes so make a new one
+           if(!inLane) {
               _lanes.push([_actor]);
-          } else {
-              var laneLength = _lanes.length;
-              var inLane = false;
-               for(var j=0; j<laneLength; j++){
-                   if(_actor.start >= _lanes[j][_lanes[j].length-1].end) {
-                      _lanes[j].push(_actor);
-                      inLane = true;
-                      break;
-                  }
-               }
-               // item didnt fit in any of the existing lanes so make a new one
-               if(!inLane) {
-                  _lanes.push([_actor]);
-               }
-          }
+           }
       }
       $scope.lanes = _lanes;
     };
