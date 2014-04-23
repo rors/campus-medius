@@ -185,8 +185,7 @@ module.exports = function (grunt) {
         files: {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= yeoman.dist %>/styles/{,*/}*.css'
           ]
         }
       }
@@ -285,8 +284,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'images/**/*',
             'data/*',
-            'styles/themes/default/*',
-            'fonts/*'
+            'styles/fonts/*'
           ]
         }, {
           expand: true,

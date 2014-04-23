@@ -56,28 +56,9 @@ angular.module('CampusMediusApp')
           {src: $sce.trustAsResourceUrl('http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.oggtheora.ogv'), type: 'video/ogg'}
       ],
       transclude: true,
-      theme: {
-          url: 'styles/themes/default/videogular.css',
-          playIcon: '&#xe000;',
-          pauseIcon: '&#xe001;',
-          volumeLevel3Icon: '&#xe002;',
-          volumeLevel2Icon: '&#xe003;',
-          volumeLevel1Icon: '&#xe004;',
-          volumeLevel0Icon: '&#xe005;',
-          muteIcon: '&#xe006;',
-          enterFullScreenIcon: '&#xe007;',
-          exitFullScreenIcon: '&#xe008;'
-      },
       plugins: {
           poster: {
               url: 'images/videogular.png'
-          },
-          ads: {
-              companion: 'companionAd',
-              companionSize: [728, 90],
-              network: '6062',
-              unitPath: 'iab_vast_samples',
-              adTagUrl: 'http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dlinear'
           }
       }
     };
