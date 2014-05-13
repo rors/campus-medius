@@ -24,6 +24,10 @@ angular.module('CampusMediusApp', [
                 templateUrl: 'views/about.html',
                 controller: 'AboutController'
             })
+            .when('/team', {
+                templateUrl: 'views/team.html',
+                controller: 'TeamController'
+            })
             .when('/topography', {
                 templateUrl: 'views/topography.html',
                 controller: 'TopographyController'

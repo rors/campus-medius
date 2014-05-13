@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/rzslider.css">
     <!-- endbuild -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 
@@ -35,11 +36,10 @@
         <div class="container" id="mainHeader">
             <div class="row">
                 <div class="col-md-12">
-                    <img src="http://placehold.it/200x50&text=Campus%20Medius" alt="" class="pull-left">
-                    <ul class="nav nav-pills pull-left">
-                        <li ng-class="{ active: isActive('#/') || isActive('#/actors')}"><a href="/">Home</a></li>
+                    <a href="/"><img src="images/logo.png" alt="" class="pull-left img-responsive"></a>
+                    <ul class="nav nav-pills pull-right">
                         <li ng-class="{ active: isActive('#/about')}"><a href="#/about">About</a></li>
-                        <li ng-class="{ active: isActive('#/topography')}"><a href="#/topography" title="">Topography</a></li>
+                        <li ng-class="{ active: isActive('#/topography')}"><a href="#/team" title="">Team</a></li>
                     </ul>
                     
                 </div>
