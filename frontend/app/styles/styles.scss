@@ -1,3 +1,5 @@
+$grayLight: #EAEAEA;
+
 rzslider span.pointer{
     background-color: #CCC;
 }
@@ -12,7 +14,6 @@ rzslider span.bar{
 
 body{
     font-family:Arial;
-    background:black;
 }
 input {
     width: 120px;
@@ -24,20 +25,35 @@ h1{
 h2{
     font-size:20px;
 }
+
 #mainHeader{
-    margin-top:20px;
-    margin-bottom: 20px;
+    background: black;
+    padding:25px 0;
     .nav{
         margin-left:20px;
     }
+}
+#mainFooter{
+    color:$grayLight;
+    padding:12px 0;
+    background: black;
+    font-size: 11px;
 }
 .nav a{
     color:white;
     font-family: 'Titillium Web', sans-serif;
     font-size:18px;
-    &:hover{
-        color:black;
-    }
+}
+.nav > li > a:hover{
+    color:black;
+    background-color:#666;
+}
+.nav-pills > li{
+    margin-right: 8px;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
+    background-color:white;
+    color:black;
 }
 .angular-leaflet-map{
     width:100%;
@@ -159,4 +175,9 @@ button.close{
     background-color:black;
     border:none;
     padding:15px 40px;
+}
+
+.page-inverted{
+    padding-bottom: 75px;
+    min-height: 600px;
 }
