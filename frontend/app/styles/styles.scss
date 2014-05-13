@@ -11,7 +11,19 @@ rzslider span.pointer:after{
 rzslider span.bar{
     background-color: #CCC;
 }
-
+rzslider span.bar.selection{
+    background: $grayLight;
+}
+rzslider span.bubble{
+    color: $grayLight;
+}
+rzslider span.bubble.limit{
+    color: $grayLight;
+}
+rzslider span.pointer:hover:after,
+rzslider span.pointer.active:after{
+    background: black;
+}
 body{
     font-family:Arial;
 }
@@ -84,7 +96,7 @@ h2{
 }
 #timelineWrapper{
     padding:15px 0;
-    background:#EAEAEA;
+    background:black;
 }
 .timelineItems{
     overflow: hidden;
