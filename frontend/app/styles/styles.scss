@@ -33,6 +33,7 @@ input {
 }
 h1{
     font-size:26px;
+    font-weight: 600;
 }
 h2{
     font-size:20px;
@@ -72,23 +73,7 @@ h2{
     height:100%;
     position:absolute;
 }
-#actorView{
-    width:100%;
-    height:100%;
-    position: absolute;
-    z-index:9999;
-    top:0;
-    margin:0 auto;
-    padding:40px 0;
-    
-    background:rgba(255,255,255, .4);
-    box-sizing:border-box;
-}
-#actorViewInner{
-    background:white;
-    border:5px solid #CCC;
-    padding:20px;
-}
+
 #filters{
     position: absolute;
     bottom:0;
@@ -132,7 +117,7 @@ h2{
 }
 
 .text-window{
-    max-height: 400px;
+    max-height: 580px;
     overflow:scroll;
     padding-right: 20px;
     position: relative;
@@ -141,6 +126,7 @@ button.close{
     color:#333;
     opacity:.8;
     margin-right:15px;
+    margin-top:15px;
 }
 #actor-media{
     max-height: 420px;
@@ -189,4 +175,18 @@ button.close{
 .page-inverted{
     padding-bottom: 75px;
     min-height: 600px;
+}
+.page-header{
+    font-family: 'Titillium Web', sans-serif;
+    h2{
+        margin-top: 0;
+    }
+}
+
+/* modals */
+.modal { display: block; }
+.modal-full{
+    width:90%;
+    height:100%;
+    margin-top: 0;
 }
