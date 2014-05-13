@@ -11,7 +11,7 @@
       "endPercent": 12.5,
       "message": "",
       "historical": "Disciplinary",
-      "color": "81a0c6",
+      "color": "5c91be",
       "icon": {}
     },
     {
@@ -26,7 +26,7 @@
       "endPercent": 20.833333333333336,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -41,7 +41,7 @@
       "endPercent": 16.666666666666664,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -56,7 +56,7 @@
       "endPercent": 29.166666666666668,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -71,7 +71,7 @@
       "endPercent": 33.33333333333333,
       "message": "",
       "historical": "Control",
-      "color": "c4c681",
+      "color": "55ba47",
       "icon": {}
     },
     {
@@ -86,7 +86,7 @@
       "endPercent": 45.83333333333333,
       "message": "",
       "historical": "Disciplinary",
-      "color": "81a0c6",
+      "color": "5c91be",
       "icon": {}
     },
     {
@@ -101,7 +101,7 @@
       "endPercent": 41.66666666666667,
       "message": "",
       "historical": "Control",
-      "color": "c4c681",
+      "color": "55ba47",
       "icon": {}
     },
     {
@@ -116,7 +116,7 @@
       "endPercent": 45.83333333333333,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -131,7 +131,7 @@
       "endPercent": 54.166666666666664,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -146,7 +146,7 @@
       "endPercent": 75,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -161,7 +161,7 @@
       "endPercent": 66.66666666666666,
       "message": "",
       "historical": "Disciplinary",
-      "color": "81a0c6",
+      "color": "5c91be",
       "icon": {}
     },
     {
@@ -176,7 +176,7 @@
       "endPercent": 70.83333333333334,
       "message": "",
       "historical": "Disciplinary",
-      "color": "81a0c6",
+      "color": "5c91be",
       "icon": {}
     },
     {
@@ -191,7 +191,7 @@
       "endPercent": 83.33333333333334,
       "message": "",
       "historical": "Control",
-      "color": "c4c681",
+      "color": "55ba47",
       "icon": {}
     },
     {
@@ -206,7 +206,7 @@
       "endPercent": 79.16666666666666,
       "message": "",
       "historical": "Sovereign",
-      "color": "c68181",
+      "color": "de3739",
       "icon": {}
     },
     {
@@ -221,7 +221,7 @@
       "endPercent": 100,
       "message": "",
       "historical": "Disciplinary",
-      "color": "81a0c6",
+      "color": "5c91be",
       "icon": {}
     }
   ]
