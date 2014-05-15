@@ -30,7 +30,7 @@ political_groups = (
 mediality_modes = (
     ('sovereign', 'Sovereign Sign'),
     ('disciplinary', 'Disciplinary Gaze'),
-    ('control', 'Control Transmission'),
+    ('controlled', 'Controlled Transmission'),
 )
 
 class Event(BaseModel):
