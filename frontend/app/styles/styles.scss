@@ -1,5 +1,5 @@
 $grayLight: #EAEAEA;
-
+$titleFont: 'Titillium Web', sans-serif;
 rzslider span.pointer{
     background-color: #CCC;
 }
@@ -31,6 +31,13 @@ input {
     width: 120px;
     margin-right: 10px;
 }
+h1,h2,h3{
+    font-family: $titleFont;
+    font-weight: 600;
+}
+.lead, blockquote{
+    font-family: $titleFont;
+}
 h1{
     font-size:26px;
     font-weight: 600;
@@ -54,7 +61,7 @@ h2{
 }
 .nav a{
     color:white;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: $titleFont;
     font-size:18px;
 }
 .nav > li > a:hover{
@@ -156,7 +163,7 @@ button.close{
 
 .btn-primary{
     background: black;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: $titleFont;
     font-size:18px;
 }
 .btn-timeline-trigger,
@@ -177,7 +184,6 @@ button.close{
     min-height: 600px;
 }
 .page-header{
-    font-family: 'Titillium Web', sans-serif;
     h2{
         margin-top: 0;
     }
