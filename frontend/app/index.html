@@ -1,0 +1,103 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/videogular-themes-default/videogular.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/styles.css -->
+    <link rel="stylesheet" href="styles/rzslider.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- endbuild -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  </head>
+  <body ng-app="CampusMediusApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <header ng-controller="HeaderController" id="mainHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="/"><img src="images/logo.png" alt="" class="pull-left img-responsive"></a>
+                    <ul class="nav nav-pills pull-right">
+                        <li ng-class="{ active: isActive('#/') || isActive('#/actors')}"><a href="/">home</a></li>
+                        <li ng-class="{ active: isActive('#/about')}"><a href="#/about">about</a></li>
+                        <li ng-class="{ active: isActive('#/team')}"><a href="#/team" title="">team</a></li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <div ng-view ng-cloak></div>
+    <footer id="mainFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    &copy; 2014 All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/videogular/videogular.js"></script>
+    <script src="bower_components/videogular-controls/controls.js"></script>
+    <script src="bower_components/videogular-buffering/buffering.js"></script>
+    <script src="bower_components/videogular-overlay-play/overlay-play.js"></script>
+    <script src="bower_components/videogular-poster/poster.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/topography.js"></script>
+    <script src="scripts/directives/scrollSpy.js"></script>
+    <script src="scripts/directives/spy.js"></script>
+    <script src="scripts/modules/angularSlideables.js"></script>
+    <script src="scripts/services/actor.js"></script>
+    <script src="scripts/controllers/video.js"></script>
+    <script src="scripts/controllers/timeline.js"></script>
+    <script src="scripts/services/filter.js"></script>
+    <script src="scripts/directives/angular-leaflet-directive.min.js"></script>
+    <script src="scripts/directives/rzslider.min.js"></script>
+    <!-- endbuild -->
+
+</body>
+</html>

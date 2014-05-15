@@ -1,0 +1,257 @@
+[
+    {
+      "name": "mymarker14",
+      "body": "i am a body",
+      "lat": 48.230847866318534,
+      "lng": 16.34319305419922,
+      "title": "Actor ID: 14",
+      "start": 1,
+      "startPercent": 4.166666666666666,
+      "end": 3,
+      "endPercent": 12.5,
+      "message": "",
+      "historical": "Disciplinary",
+      "color": "5c91be",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/1.png"
+      }
+    },
+    {
+      "name": "mymarker6",
+      "body": "i am a body",
+      "lat": 48.1985912972919,
+      "lng": 16.329116821289062,
+      "title": "Actor ID: 6",
+      "start": 1,
+      "startPercent": 4.166666666666666,
+      "end": 5,
+      "endPercent": 20.833333333333336,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/2.png"
+      }
+    },
+    {
+      "name": "mymarker4",
+      "body": "i am a body",
+      "lat": 48.229590012225756,
+      "lng": 16.362590789794922,
+      "title": "Actor ID: 4",
+      "start": 3,
+      "startPercent": 12.5,
+      "end": 4,
+      "endPercent": 16.666666666666664,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/3.png"
+      }
+    },
+    {
+      "name": "mymarker9",
+      "body": "i am a body",
+      "lat": 48.21231998069733,
+      "lng": 16.31847381591797,
+      "title": "Actor ID: 9",
+      "start": 5,
+      "startPercent": 20.833333333333336,
+      "end": 7,
+      "endPercent": 29.166666666666668,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/4.png"
+      }
+    },
+    {
+      "name": "mymarker8",
+      "body": "i am a body",
+      "lat": 48.21803917939912,
+      "lng": 16.34868621826172,
+      "title": "Actor ID: 8",
+      "start": 6,
+      "startPercent": 25,
+      "end": 8,
+      "endPercent": 33.33333333333333,
+      "message": "",
+      "historical": "Control",
+      "color": "55ba47",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/5.png"
+      }
+    },
+    {
+      "name": "mymarker11",
+      "body": "i am a body",
+      "lat": 48.21838231100621,
+      "lng": 16.37735366821289,
+      "title": "Actor ID: 11",
+      "start": 7,
+      "startPercent": 29.166666666666668,
+      "end": 11,
+      "endPercent": 45.83333333333333,
+      "message": "",
+      "historical": "Disciplinary",
+      "color": "5c91be",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/6.png"
+      }
+    },
+    {
+      "name": "mymarker7",
+      "body": "i am a body",
+      "lat": 48.20614252854658,
+      "lng": 16.387481689453125,
+      "title": "Actor ID: 7",
+      "start": 8,
+      "startPercent": 33.33333333333333,
+      "end": 10,
+      "endPercent": 41.66666666666667,
+      "message": "",
+      "historical": "Control",
+      "color": "55ba47",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/7.png"
+      }
+    },
+    {
+      "name": "mymarker2",
+      "body": "i am a body",
+      "lat": 48.20831616149326,
+      "lng": 16.329116821289062,
+      "title": "Actor ID: 2",
+      "start": 9,
+      "startPercent": 37.5,
+      "end": 11,
+      "endPercent": 45.83333333333333,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/8.png"
+      }
+    },
+    {
+      "name": "mymarker5",
+      "body": "i am a body",
+      "lat": 48.181196348841176,
+      "lng": 16.33890151977539,
+      "title": "Actor ID: 5",
+      "start": 12,
+      "startPercent": 50,
+      "end": 13,
+      "endPercent": 54.166666666666664,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/9.png"
+      }
+    },
+    {
+      "name": "mymarker12",
+      "body": "i am a body",
+      "lat": 48.19115339061793,
+      "lng": 16.362590789794922,
+      "title": "Actor ID: 12",
+      "start": 14,
+      "startPercent": 58.333333333333336,
+      "end": 18,
+      "endPercent": 75,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/10.png"
+      }
+    },
+    {
+      "name": "mymarker3",
+      "body": "i am a body",
+      "lat": 48.16803177344022,
+      "lng": 16.362247467041016,
+      "title": "Actor ID: 3",
+      "start": 15,
+      "startPercent": 62.5,
+      "end": 16,
+      "endPercent": 66.66666666666666,
+      "message": "",
+      "historical": "Disciplinary",
+      "color": "5c91be",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/11.png"
+      }
+    },
+    {
+      "name": "mymarker10",
+      "body": "i am a body",
+      "lat": 48.17673221942472,
+      "lng": 16.3970947265625,
+      "title": "Actor ID: 10",
+      "start": 15,
+      "startPercent": 62.5,
+      "end": 17,
+      "endPercent": 70.83333333333334,
+      "message": "",
+      "historical": "Disciplinary",
+      "color": "5c91be",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/12.png"
+      }
+    },
+    {
+      "name": "mymarker13",
+      "body": "i am a body",
+      "lat": 48.196531677389856,
+      "lng": 16.386451721191406,
+      "title": "Actor ID: 13",
+      "start": 17,
+      "startPercent": 70.83333333333334,
+      "end": 20,
+      "endPercent": 83.33333333333334,
+      "message": "",
+      "historical": "Control",
+      "color": "55ba47",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/13.png"
+      }
+    },
+    {
+      "name": "mymarker15",
+      "body": "i am a body",
+      "lat": 48.18600343810421,
+      "lng": 16.367740631103516,
+      "title": "Actor ID: 15",
+      "start": 18,
+      "startPercent": 75,
+      "end": 19,
+      "endPercent": 79.16666666666666,
+      "message": "",
+      "historical": "Sovereign",
+      "color": "de3739",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/14.png"
+      }
+    },
+    {
+      "name": "mymarker1",
+      "body": "i am a body",
+      "lat": 48.22124165162929,
+      "lng": 16.32894515991211,
+      "title": "Actor ID: 1",
+      "start": 22,
+      "startPercent": 91.66666666666666,
+      "end": 24,
+      "endPercent": 100,
+      "message": "",
+      "historical": "Disciplinary",
+      "color": "5c91be",
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/15.png"
+      }
+    }
+  ]
