@@ -115,16 +115,25 @@ angular.module('CampusMediusApp')
       $location.path('/actors/' + id);
     };
     $scope.highlightActor = function(id, toDefault){
+      id = parseInt(id);
       var icons = {
-          defaultIcon: {},
+          defaultIcon: {
+            iconSize: [30, 49]
+          },
           biggerIcon: {
-              iconSize: [30, 49]
+              iconSize: [36, 54]
           }
       };
 
       for(var i=0; i<$scope.markers.length; i++) {
+        console.log('searching for', id);
           if($scope.markers[i].id === id) {
-              $scope.markers[i].icon = toDefault? icons.defaultIcon : icons.biggerIcon;
+              console.log('hilite', $scope.markers[i]);
+              if(!toDefault){
+                angular.extend($scope.markers[i].icon, icons.biggerIcon);
+              } else {
+                angular.extend($scope.markers[i].icon, icons.defaultIcon);
+              }
               break;
           }
       }
@@ -163,3 +172,4 @@ angular.module('CampusMediusApp')
     $scope.getActors();
 
   }]);
+  

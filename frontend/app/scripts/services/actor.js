@@ -10,8 +10,10 @@ angular.module('CampusMediusApp')
             return $http({method: 'GET', url: API_ENDPOINT})
                 .success(function(data) {
                     // add bubble text
-                    angular.forEach(data, function(val) {
-                        val.message = '<strong>SCHLOSSPARK SCHONBRUNN</strong><br/><em>14 May 1933 | 9 a.m. - 12 p.m.</em><br><a class="btn btn-sm btn-primary" ng-click="showActor(' + val.id + ')">view</a>';
+                    var i = 
+                    angular.forEach(data, function(val, key) {
+                        val.id = key;
+                        val.message = '<strong>' + val.id + '-' + val.name + '-' + 'SCHLOSSPARK SCHONBRUNN</strong><br/><em>14 May 1933 | 9 a.m. - 12 p.m.</em><br><a class="btn btn-sm btn-primary" ng-click="showActor(' + val.id + ')">view</a>';
                         val.min = val.start;
                         val.max = val.end;
                     });
@@ -39,7 +41,6 @@ angular.module('CampusMediusApp')
                     return el;
                 }
             });
-            console.log('search', data);
             return data;
         }
     };

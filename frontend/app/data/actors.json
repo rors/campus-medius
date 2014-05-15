@@ -1,6 +1,6 @@
 [
     {
-      "id": 14,
+      "name": "mymarker14",
       "body": "i am a body",
       "lat": 48.230847866318534,
       "lng": 16.34319305419922,
@@ -12,10 +12,12 @@
       "message": "",
       "historical": "Disciplinary",
       "color": "5c91be",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/1.png"
+      }
     },
     {
-      "id": 6,
+      "name": "mymarker6",
       "body": "i am a body",
       "lat": 48.1985912972919,
       "lng": 16.329116821289062,
@@ -27,10 +29,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/2.png"
+      }
     },
     {
-      "id": 4,
+      "name": "mymarker4",
       "body": "i am a body",
       "lat": 48.229590012225756,
       "lng": 16.362590789794922,
@@ -42,10 +46,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/3.png"
+      }
     },
     {
-      "id": 9,
+      "name": "mymarker9",
       "body": "i am a body",
       "lat": 48.21231998069733,
       "lng": 16.31847381591797,
@@ -57,10 +63,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/4.png"
+      }
     },
     {
-      "id": 8,
+      "name": "mymarker8",
       "body": "i am a body",
       "lat": 48.21803917939912,
       "lng": 16.34868621826172,
@@ -72,10 +80,12 @@
       "message": "",
       "historical": "Control",
       "color": "55ba47",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/5.png"
+      }
     },
     {
-      "id": 11,
+      "name": "mymarker11",
       "body": "i am a body",
       "lat": 48.21838231100621,
       "lng": 16.37735366821289,
@@ -87,10 +97,12 @@
       "message": "",
       "historical": "Disciplinary",
       "color": "5c91be",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/6.png"
+      }
     },
     {
-      "id": 7,
+      "name": "mymarker7",
       "body": "i am a body",
       "lat": 48.20614252854658,
       "lng": 16.387481689453125,
@@ -102,10 +114,12 @@
       "message": "",
       "historical": "Control",
       "color": "55ba47",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/7.png"
+      }
     },
     {
-      "id": 2,
+      "name": "mymarker2",
       "body": "i am a body",
       "lat": 48.20831616149326,
       "lng": 16.329116821289062,
@@ -117,10 +131,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/8.png"
+      }
     },
     {
-      "id": 5,
+      "name": "mymarker5",
       "body": "i am a body",
       "lat": 48.181196348841176,
       "lng": 16.33890151977539,
@@ -132,10 +148,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/9.png"
+      }
     },
     {
-      "id": 12,
+      "name": "mymarker12",
       "body": "i am a body",
       "lat": 48.19115339061793,
       "lng": 16.362590789794922,
@@ -147,10 +165,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/10.png"
+      }
     },
     {
-      "id": 3,
+      "name": "mymarker3",
       "body": "i am a body",
       "lat": 48.16803177344022,
       "lng": 16.362247467041016,
@@ -162,10 +182,12 @@
       "message": "",
       "historical": "Disciplinary",
       "color": "5c91be",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/11.png"
+      }
     },
     {
-      "id": 10,
+      "name": "mymarker10",
       "body": "i am a body",
       "lat": 48.17673221942472,
       "lng": 16.3970947265625,
@@ -177,10 +199,12 @@
       "message": "",
       "historical": "Disciplinary",
       "color": "5c91be",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/12.png"
+      }
     },
     {
-      "id": 13,
+      "name": "mymarker13",
       "body": "i am a body",
       "lat": 48.196531677389856,
       "lng": 16.386451721191406,
@@ -192,10 +216,12 @@
       "message": "",
       "historical": "Control",
       "color": "55ba47",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/13.png"
+      }
     },
     {
-      "id": 15,
+      "name": "mymarker15",
       "body": "i am a body",
       "lat": 48.18600343810421,
       "lng": 16.367740631103516,
@@ -207,10 +233,12 @@
       "message": "",
       "historical": "Sovereign",
       "color": "de3739",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/14.png"
+      }
     },
     {
-      "id": 1,
+      "name": "mymarker1",
       "body": "i am a body",
       "lat": 48.22124165162929,
       "lng": 16.32894515991211,
@@ -222,6 +250,8 @@
       "message": "",
       "historical": "Disciplinary",
       "color": "5c91be",
-      "icon": {}
+      "icon": {
+        "iconUrl": "http://campusmedius.s3.amazonaws.com/static/images/markers/15.png"
+      }
     }
   ]
