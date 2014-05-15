@@ -19,9 +19,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'campusmedius',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',
+        'USER': 'webbot',
+        'PASSWORD': 'CMCM1933!',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
