@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 
-from actors.models import *
+from events.models import *
 
 
 # class CMGeoAdmin(admin.OSMGeoAdmin):
@@ -9,21 +9,21 @@ from actors.models import *
 #     default_zoom = 10
 
 
-# class MediaObjectInline(admin.TabularInline):
-#     model = MediaObject.actors.through
+class MediaObjectInline(admin.TabularInline):
+    model = MediaObject.events.through
 
-class ActorAdmin(admin.ModelAdmin):
+class EventAdmin(admin.ModelAdmin):
 
-    # inlines = [
-    #     MediaObjectInline,
-    #     ]
+    inlines = [
+        MediaObjectInline,
+        ]
 
     list_display = ( 'title', 'start_time', 'end_time', 'political_affiliation', 'mediality_mode', )
     list_filter = ( 'political_affiliation', 'mediality_mode', )
 
     search_fields = ( 'slug', 'title', 'description', )
 
-admin.site.register(Actor, ActorAdmin)
+admin.site.register(Event, EventAdmin)
 
 
 class MediaObjectAdmin(admin.ModelAdmin):

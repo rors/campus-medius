@@ -33,10 +33,10 @@ mediality_modes = (
     ('control', 'Control Transmission'),
 )
 
-class Actor(BaseModel):
-    title = models.CharField(max_length=1000,unique=True, verbose_name="Actor Title");
+class Event(BaseModel):
+    title = models.CharField(max_length=1000,unique=True, verbose_name="Event Title");
 
-    icon = models.ImageField(upload_to="user/images",null=True, blank=True, verbose_name="Actor Icon")
+    icon = models.ImageField(upload_to="user/images",null=True, blank=True, verbose_name="Event Icon")
 
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
@@ -50,11 +50,11 @@ class Actor(BaseModel):
         return self.title
 
 class MediaObject(BaseModel):
-    title = models.CharField(max_length=1000,unique=True, verbose_name="Actor Title");
+    title = models.CharField(max_length=1000,unique=True, verbose_name="Media Object Title");
 
     caption = tinymce_models.HTMLField()
      
-    actors = models.ManyToManyField(Actor)
+    events = models.ManyToManyField(Event)
 
     def __unicode__(self):
         return self.title
