@@ -118,7 +118,7 @@ angular.module('CampusMediusApp')
       id = parseInt(id);
       var icons = {
           defaultIcon: {
-            iconSize: [30, 49]
+            iconSize: [30, 45]
           },
           biggerIcon: {
               iconSize: [36, 54]
