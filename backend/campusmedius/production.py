@@ -1,7 +1,7 @@
 
 from campusmedius.settings import *
 
-DEBUG=True
+DEBUG=False
 TEMPLATE_DEBUG=DEBUG
 
 # Local time zone for this installation. Choices can be found here:
@@ -19,7 +19,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'campusmedius',
-        'USER': 'postgres',
+        'USER': 'webbot',
         'PASSWORD': '',
         'HOST': '',
         'PORT': '',
