@@ -9,14 +9,7 @@ from events.models import *
 #     default_zoom = 10
 
 
-class MediaObjectInline(admin.TabularInline):
-    model = MediaObject.events.through
-
 class EventAdmin(admin.ModelAdmin):
-
-    inlines = [
-        MediaObjectInline,
-        ]
 
     list_display = ( 'title', 'start_time', 'end_time', 'political_affiliation', 'mediality_mode', )
     list_filter = ( 'political_affiliation', 'mediality_mode', )
@@ -26,10 +19,21 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(Event, EventAdmin)
 
 
-class MediaObjectAdmin(admin.ModelAdmin):
-
+class ImageAdmin(admin.ModelAdmin):
     list_display = ( 'title', )
 
     search_fields = ( 'slug', 'title', )
+admin.site.register(Image, ImageAdmin)
 
-admin.site.register(MediaObject, MediaObjectAdmin)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ( 'title', )
+
+    search_fields = ( 'slug', 'title', )
+admin.site.register(Video, VideoAdmin)
+
+class SoundAdmin(admin.ModelAdmin):
+    list_display = ( 'title', )
+
+    search_fields = ( 'slug', 'title', )
+admin.site.register(Sound, SoundAdmin)
+
