@@ -41,6 +41,8 @@ class Event(BaseModel):
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
 
+    location = models.PointField(null=True)
+
     political_affiliation = models.CharField(choices=political_groups, max_length=50, null=False, blank=True)
     mediality_mode = models.CharField(choices=mediality_modes, max_length=50, null=False, blank=True)
 
