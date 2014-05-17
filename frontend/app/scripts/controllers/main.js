@@ -1,90 +1,175 @@
 'use strict';
-angular.module('myApp').controller('MainCtrl',
-	function ($scope, $sce) {
-		$scope.currentTime = 0;
-		$scope.totalTime = 0;
-		$scope.state = null;
-		$scope.volume = 1;
-		$scope.isCompleted = false;
-		$scope.API = null;
 
-		$scope.onPlayerReady = function(API) {
-			$scope.API = API;
-		};
+angular.module('CampusMediusApp')
+  .controller('MapController', [ '$scope', '$http', '$compile', '$location', '$routeParams', 'ActorService', 'FilterService', function($scope, $http, $compile, $location, $routeParams, ActorService, FilterService) {
+    angular.extend($scope, {
+      actors: [],
+      actorShow: false,
+      markers: [],
+      centerMarker: {
+          lat: 48.19744707423512,
+          lng: 16.35641098022461,
+          zoom: 13
+      },
+      layers: {
+          baselayers: {
+              vienna: {
+                  name: 'Vienna 1933',
+                  url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
+                  type: 'xyz'
+              },
+              osm: {
+                  name: 'OpenStreetMap',
+                  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  type: 'xyz'
+              },
+              cloudmade2: {
+                  name: 'Cloudmade Tourist',
+                  type: 'xyz',
+                  url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+                  layerParams: {
+                      key: '007b9471b4c74da4a6ec7ff43552b16f',
+                      styleId: 7
+                  }
+              }
+          }
+      },
+      events: {
+          map: {
+              enable: ['click', 'popupopen'],
+              logic: 'emit'
+          }
+      },
+      // TODO: hard coded; should come from service
+      historical: ['All', 'Sovereign', 'Disciplinary', 'Control']
+    });  
 
-		$scope.onCompleteVideo = function() {
-			$scope.isCompleted = true;
-		};
+    $scope.$watch( 
+      function () { return FilterService.get('min'); }, 
 
-		$scope.onUpdateState = function(state) {
-			$scope.state = state;
-		};
+      function (data) {
+        $scope.filterActors();
+      }, true);
 
-		$scope.onUpdateTime = function(currentTime, totalTime) {
-			$scope.currentTime = currentTime;
-			$scope.totalTime = totalTime;
-		};
+    $scope.$watch( 
+      function () { return FilterService.get('max'); }, 
 
-		$scope.onUpdateVolume = function(newVol) {
-			$scope.volume = newVol;
-		};
+      function (data) {
+        $scope.filterActors();
+      }, true);
 
-		$scope.onUpdateSize = function(width, height) {
-			$scope.config.width = width;
-			$scope.config.height = height;
-		};
+    $scope.filterActors = function() {
+      var params = {};
+      if($scope.historicalFilter && $scope.historicalFilter !== 'All') {
+          params.historical = $scope.historicalFilter;
+      }
+      params.min = FilterService.get('min')
+      params.max = FilterService.get('max')
 
-		$scope.stretchModes = [
-			{label: "None", value: "none"},
-			{label: "Fit", value: "fit"},
-			{label: "Fill", value: "fill"}
-		];
+      var _markers = ActorService.search(params);
 
-		$scope.config = {
-			width: 500,
-			height: 380,
-			autoHide: false,
-			autoHideTime: 3000,
-			autoPlay: false,
-			responsive: false,
-			stretch: $scope.stretchModes[0],
-			sources: [
-				{src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.mp4"), type: "video/mp4"},
-				{src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
-				{src: $sce.trustAsResourceUrl("http://www.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
-			],
-			transclude: true,
-			theme: {
-				url: "styles/themes/default/videogular.css",
-				playIcon: "&#xe000;",
-				pauseIcon: "&#xe001;",
-				volumeLevel3Icon: "&#xe002;",
-				volumeLevel2Icon: "&#xe003;",
-				volumeLevel1Icon: "&#xe004;",
-				volumeLevel0Icon: "&#xe005;",
-				muteIcon: "&#xe006;",
-				enterFullScreenIcon: "&#xe007;",
-				exitFullScreenIcon: "&#xe008;"
-			},
-			plugins: {
-				poster: {
-					url: "assets/images/videogular.png"
-				},
-				ads: {
-					companion: "companionAd",
-					companionSize: [728, 90],
-					network: "6062",
-					unitPath: "iab_vast_samples",
-					adTagUrl: "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dlinear"
-				}
-			}
-		};
+      // updates our map markers
+      angular.extend($scope, {
+          markers: _markers
+      });
 
-		$scope.changeSource = function() {
-			$scope.config.sources = [
-				{src: $sce.trustAsResourceUrl("http://vjs.zencdn.net/v/oceans.mp4"), type: "video/mp4"},
-				{src: $sce.trustAsResourceUrl("http://vjs.zencdn.net/v/oceans.webm"), type: "video/webm"}
-			];
-		};
-	}
-);
+      // apply the search params only if we're not in actor view. 
+      // angular is kind enough to preserve our search params when we use the 
+      // actorId part of the route
+      if(!$scope.actor) {
+          $location.search(params);
+      }
+    };
+
+    // listens for changes in url, and fires the update
+    $scope.$on('$routeUpdate', function(){
+      $scope.applyRouteParams();
+    });
+
+    // this makes sure the UI controls are in sync w the filters in URL
+    $scope.applyRouteParams = function() {
+      if($routeParams.hasOwnProperty('historical') && $routeParams.historical !== 'undefined') {
+          $scope.historicalFilter = $routeParams.historical;
+      } else {
+          $scope.historicalFilter = undefined;
+      }
+      if($routeParams.hasOwnProperty('min')) {
+        FilterService.set('min', $routeParams.min);
+      }
+      if($routeParams.hasOwnProperty('max')) {
+        FilterService.set('max', $routeParams.max);
+      }
+      if($routeParams.hasOwnProperty('actorId')) {
+          $scope.actor = ActorService.get($routeParams.actorId);
+          $scope.actorShow = true;
+      } else {
+          $scope.actor = false;
+          $scope.actorShow = false;
+      }
+
+      $scope.filterActors();
+    };
+
+
+    $scope.showActor = function(id) {
+      $location.path('/actors/' + id);
+    };
+    $scope.highlightActor = function(id, toDefault){
+      id = parseInt(id);
+      var icons = {
+          defaultIcon: {
+            iconSize: [30, 45]
+          },
+          biggerIcon: {
+              iconSize: [36, 54]
+          }
+      };
+
+      for(var i=0; i<$scope.markers.length; i++) {
+        console.log('searching for', id);
+          if($scope.markers[i].id === id) {
+              console.log('hilite', $scope.markers[i]);
+              if(!toDefault){
+                angular.extend($scope.markers[i].icon, icons.biggerIcon);
+              } else {
+                angular.extend($scope.markers[i].icon, icons.defaultIcon);
+              }
+              break;
+          }
+      }
+    };
+
+    // i still dont understand how calling $location.path will magically preserve the 
+    // search params in the url, but i love it
+    $scope.killActor = function() {
+      $scope.actor = false;
+      $location.path('/actors');
+    };
+
+    // low-fi way of getting actors from our API
+    $scope.getActors = function() {
+      ActorService.all()
+      .success(function(data) {
+          $scope.actors = data;
+          $scope.applyRouteParams();
+      }).
+      error(function(data, status, headers, config) {
+          console.log('error', data, status, headers, config);
+      });
+    };
+
+    // since we are using directives inside our popups, we have to compile them
+    // before they can be used
+    $scope.$on('leafletDirectiveMap.popupopen', function(event, leafletEvent){
+      var newScope = $scope.$new();
+      $compile(leafletEvent.leafletEvent.popup._contentNode)(newScope);
+    });
+    $scope.$on('leafletDirectiveMap.click', function(event, e){
+      console.log('leaf', e.leafletEvent.latlng);
+    });
+
+    // only gets called once. all subsequent filtering is handled in-app
+    $scope.getActors();
+
+  }]);
+  
