@@ -7,7 +7,6 @@ angular.module('CampusMediusApp')
       controller: function($scope) {
         $scope.spies = [];
         $scope.test = 0;
-        setTimeout(function(){console.log('$scope.test changed');$scope.test = 8}, 1000)
         this.addSpy = function(spyObj) {
           $scope.spies.push(spyObj);
         };
