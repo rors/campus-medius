@@ -13,14 +13,14 @@ TEMPLATE_DEBUG=DEBUG
 # system time zone.
 TIME_ZONE = 'America/Chicago'
 
-GDAL_LIBRARY_PATH='/usr/local/lib/libgdal.dylib'
+GDAL_LIBRARY_PATH=''
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'campusmedius',
-        'USER': 'webbot',
-        'PASSWORD': 'CMCM1933!',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
