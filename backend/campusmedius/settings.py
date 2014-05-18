@@ -74,6 +74,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
 
     'tinymce',
+    'tastypie',
 
     'events',
 )
@@ -99,4 +100,8 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+TINYMCE_DEFAULT_CONFIG = {
+    
 }

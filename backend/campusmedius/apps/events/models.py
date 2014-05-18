@@ -48,10 +48,13 @@ class Event(BaseModel):
 
     description = tinymce_models.HTMLField()
 
-    media_objects = models.ManyToManyField("MediaObject",blank=True)
+    media_objects = models.ManyToManyField("MediaObject",blank=True) #,through="EventMediaObject")
 
     def __unicode__(self):
         return self.title
+
+# class EventMediaObject(BaseModel):
+#     pass
 
 class MediaObject(BaseModel):
     title = models.CharField(max_length=1000,unique=True, verbose_name="Media Object Title");

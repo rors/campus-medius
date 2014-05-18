@@ -1,6 +1,5 @@
-
-from django.conf.urls.defaults import *
 from django.conf import settings
+from django.conf.urls import patterns, url, include
 
 from django.contrib.gis import admin
 admin.autodiscover()
@@ -13,6 +12,7 @@ urlpatterns = patterns('',
 
     (r'^tinymce/', include('tinymce.urls')),
 
+    (r'^', include('events.urls')),
 )
 
 if settings.DEBUG:
