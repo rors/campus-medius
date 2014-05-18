@@ -1,0 +1,198 @@
+$grayLight: #EAEAEA;
+$titleFont: 'Titillium Web', sans-serif;
+rzslider span.pointer{
+    background-color: #CCC;
+}
+
+rzslider span.pointer:after{
+    background-color: white;
+}
+
+rzslider span.bar{
+    background-color: #CCC;
+}
+rzslider span.bar.selection{
+    background: $grayLight;
+}
+rzslider span.bubble{
+    color: $grayLight;
+}
+rzslider span.bubble.limit{
+    color: $grayLight;
+}
+rzslider span.pointer:hover:after,
+rzslider span.pointer.active:after{
+    background: black;
+}
+body{
+    font-family:Arial;
+}
+input {
+    width: 120px;
+    margin-right: 10px;
+}
+h1,h2,h3{
+    font-family: $titleFont;
+    font-weight: 600;
+}
+.lead, blockquote{
+    font-family: $titleFont;
+}
+h1{
+    font-size:26px;
+    font-weight: 600;
+}
+h2{
+    font-size:20px;
+}
+
+#mainHeader{
+    background: black;
+    padding:25px 0;
+    .nav{
+        margin-left:20px;
+    }
+}
+#mainFooter{
+    color:$grayLight;
+    padding:12px 0;
+    background: black;
+    font-size: 11px;
+}
+.nav a{
+    color:white;
+    font-family: $titleFont;
+    font-size:18px;
+}
+.nav > li > a:hover{
+    color:black;
+    background-color:#666;
+}
+.nav-pills > li{
+    margin-right: 8px;
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
+    background-color:white;
+    color:black;
+}
+.angular-leaflet-map{
+    width:100%;
+    height:100%;
+    position:absolute;
+}
+
+#filters{
+    position: absolute;
+    bottom:0;
+    width:100%;
+}
+#timelineWrapper{
+    padding:15px 0;
+    background:black;
+}
+.timelineItems{
+    overflow: hidden;
+    background-color:black;
+    padding:10px;
+    .lane{
+        clear: both;
+        width: 100%;
+        float: left;
+        position:relative;
+        height:36px;
+    }
+
+    .actor{
+        box-sizing:border-box;
+        border-right:1px solid black;
+        margin-bottom: 3px;
+        cursor:pointer;
+        float:left;
+        position:absolute;
+        top:5px;
+        background:#FAFAFA;
+        padding: 3px 5px;
+        height: 30px;
+        font-size: 9px;
+        box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,.3);
+
+        &:hover{
+            background-color:white !important;
+            color:black !important;
+        }
+    }
+}
+
+.text-window{
+    max-height: 580px;
+    overflow:scroll;
+    padding-right: 20px;
+    position: relative;
+}
+button.close{
+    color:#333;
+    opacity:.8;
+    margin-right:15px;
+    margin-top:15px;
+}
+#actor-media{
+    max-height: 420px;
+
+    li{
+        display:none;
+        opacity:0;
+        max-height: 460px;
+
+        &.active{
+            display:block;
+            opacity:1;
+        }
+
+        img{
+            max-height: 100%;
+        }
+    }
+
+    small{
+        max-height: 80px;
+        overflow:scroll;
+        display: block;
+        margin-top:25px;
+    }
+}
+
+.btn-primary{
+    background: black;
+    font-family: $titleFont;
+    font-size:18px;
+}
+.btn-timeline-trigger,
+.btn-timeline-trigger:link,
+.btn-timeline-trigger:hover,
+.btn-timeline-trigger:active,
+.btn-timeline-trigger:visited,
+.btn-timeline-trigger:focus{
+    outline:none;
+    border-radius:0;
+    background-color:black;
+    border:none;
+    padding:15px 40px;
+}
+
+.page-inverted{
+    padding-bottom: 75px;
+    min-height: 600px;
+}
+.page-header{
+    h2{
+        margin-top: 0;
+    }
+}
+
+/* modals */
+.modal { display: block; }
+.modal-full{
+    width:90%;
+    height:100%;
+    margin-top: 0;
+}
