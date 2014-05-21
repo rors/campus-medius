@@ -53,7 +53,6 @@ angular.module('CampusMediusApp')
       params.max = FilterService.get('max')
 
       var _markers = ActorService.search(params);
-      console.log('markers',_markers);
       // updates our map markers
       angular.extend($scope, {
           markers: _markers
@@ -115,7 +114,6 @@ angular.module('CampusMediusApp')
       for(var i=0; i<$scope.markers.length; i++) {
         console.log('searching for', id);
           if($scope.markers[i].id === id) {
-              console.log('hilite', $scope.markers[i]);
               if(!toDefault){
                 angular.extend($scope.markers[i].icon, icons.biggerIcon);
               } else {

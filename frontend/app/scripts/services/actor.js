@@ -10,22 +10,6 @@ angular.module('CampusMediusApp')
         all: function() {
             return $http({method: 'GET', url: API_ENDPOINT})
                 .success(function(data) {
-                    // add bubble text
-                    console.log('data', data);
-                    function am_or_pm(hour) {
-                        return hour > 11 ? 'pm' : 'am';
-                    }
-                    function pad(num) {
-                        return ("0" + num).slice(-2);
-                    }
-                    function time_string(_date){
-                        var date = new Date(_date);
-                        var hour = date.getUTCHours();
-                        var merid = am_or_pm(hour);
-                        var twelveHour = hour > 12 ? hour-12 : hour;
-                        return twelveHour + ':' + pad(date.getUTCMinutes()) + ' ' + merid;
-                    }
-
                     var colors = {
                         'national-socialist': '995f46',     //brown
                         'austrofascist': '55ba47',          //green
@@ -36,14 +20,29 @@ angular.module('CampusMediusApp')
                     data.objects.sort(function(a, b){
                         return new Date(a.start_time) - new Date(b.start_time);
                     });
+
+                    // get entire duration of this project
+                    var project_start = moment(data.objects[0].start_time);
+                    var project_end = moment(data.objects[data.objects.length-1].end_time);
+                    var project_ms = project_end.diff(project_start);
+
                     angular.forEach(data.objects, function(val, key) {
                         val.id = key+1;
                         val.min = val.start = new Date(val.start_time).getUTCHours();
                         val.max = val.end = new Date(val.end_time).getUTCHours();
-                        val.startPercent = val.min/24 * 100;
-                        val.endPercent = val.max/24 * 100;
-                        var starting = time_string(val.start_time);
-                        var ending = time_string(val.end_time);
+
+                        var startMoment = moment(val.start_time);
+                        var endMoment = moment(val.end_time);
+
+                        var startDiff = startMoment.diff(project_start);
+                        var endDiff = endMoment.diff(project_start);
+
+                        val.startPercent = Math.round(startDiff/project_ms * 100);
+                        val.endPercent = Math.round(endDiff/project_ms * 100);
+
+                        var starting = startMoment.format('h:mm a');
+                        var ending = endMoment.format('h:mm a')
+                        var actor_date = startMoment.format('Do MMM YYYY');
 
                         val.icon = {
                             iconUrl: 'http://campusmedius.net' + val.icon
@@ -52,7 +51,7 @@ angular.module('CampusMediusApp')
                         var template =
                             '<div class="leaflet-popup-content-inner" ng-click="showActor(' + val.id + ')"> \
                                 <strong>' + val.title + '</strong><br/> \
-                                <em>14 May 1933<br/>' + starting + ' - ' + ending + '</em> \
+                                <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
                             </div>';
                         val.message = template;
                     });
@@ -63,7 +62,6 @@ angular.module('CampusMediusApp')
             id = parseInt(id);
             for(var i=0; i<actors.length; i++) {
                 if(actors[i].id === id) {
-                    console.log('hit!');
                     return actors[i];
                 }
             }
