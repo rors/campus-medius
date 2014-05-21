@@ -34,6 +34,7 @@ angular.module('CampusMediusApp')
     // returns an array of arrays
     // each lane contains objects in consecutive time chunks
     $scope.makeLanes = function(data) {
+      console.log('lanedate', data);
       var _lanes = [[data[0]]]; // initialize the first lane to the first
       for(var i=1; i<data.length; i++) {
           var _actor = data[i];
@@ -51,12 +52,13 @@ angular.module('CampusMediusApp')
               _lanes.push([_actor]);
            }
       }
+      console.log('lanes', _lanes);
       $scope.lanes = _lanes;
     };
     ActorService.all()
       .success(function(data) {
-        $scope.makeLanes(data);
-        console.log('lanes', data);
+        $scope.makeLanes(data.objects);
+        console.log('lanes', data.objects);
       })
       .error(function(data, status, headers, config) {
           console.log('error', data, status, headers, config);

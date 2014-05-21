@@ -7,8 +7,8 @@ angular.module('CampusMediusApp')
       actorShow: false,
       markers: [],
       centerMarker: {
-          lat: 48.19744707423512,
-          lng: 16.35641098022461,
+          lat: 48.21037530761021,
+          lng: 16.384735107421875,
           zoom: 13
       },
       layers: {
@@ -67,7 +67,7 @@ angular.module('CampusMediusApp')
       params.max = FilterService.get('max')
 
       var _markers = ActorService.search(params);
-
+      console.log('markers',_markers);
       // updates our map markers
       angular.extend($scope, {
           markers: _markers

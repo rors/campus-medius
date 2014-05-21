@@ -3,27 +3,54 @@
 angular.module('CampusMediusApp')
   .service('ActorService', function Actorservice($window, $http) {
     //var API_ENDPOINT = $window.location.hostname==='127.0.0.1' ? 'http://127.0.0.1:3000/actors' : 'data/actors.json';
-    var API_ENDPOINT = 'data/actors.json';
+    //var API_ENDPOINT = 'data/actors.json';
+    var API_ENDPOINT = 'http://campusmedius.net/data/api/event/?format=json';
     var actors = [];
     return {
         all: function() {
             return $http({method: 'GET', url: API_ENDPOINT})
                 .success(function(data) {
                     // add bubble text
-                    var i = 
-                    angular.forEach(data, function(val, key) {
+                    console.log('data', data);
+                    function am_or_pm(hour) {
+                        return hour > 11 ? 'pm' : 'am';
+                    }
+
+                    function time_string(_date){
+                        var date = new Date(_date);
+                        var hour = date.getUTCHours();
+                        var merid = am_or_pm(hour);
+                        var twelveHour = hour > 12 ? hour-12 : hour;
+                        return twelveHour + ':' + date.getUTCMinutes() + ' ' + merid;
+                    }
+
+                    var colors = {
+                        'national-socialist': '995f46',     //brown
+                        'austrofascist': '55ba47',          //green
+                        'socialist-communist': 'de3739',    //red
+                        'bourgeois': '5c91be'               //blue
+                    }
+                    angular.forEach(data.objects, function(val, key) {
                         val.id = key;
-                        var template = 
-                            '<div class="leaflet-popup-content-inner" \
-                                ng-click="showActor(' + val.id + ')"> \
+                        val.min = val.start = new Date(val.start_time).getUTCHours();
+                        val.max = val.end = new Date(val.end_time).getUTCHours() + 3;
+                        val.startPercent = val.min/24 * 100;
+                        val.endPercent = val.max/24 * 100;
+                        var starting = time_string(val.start_time);
+                        var ending = time_string(val.end_time);
+
+                        val.icon = {
+                            iconUrl: 'http://campusmedius.net' + val.icon
+                        }
+                        val.color = colors[val.political_affiliation];
+                        var template =
+                            '<div class="leaflet-popup-content-inner" ng-click="showActor(' + val.id + ')"> \
                                 <strong>' + val.title + '</strong><br/> \
-                                <em>14 May 1933<br/>' + val.start + ' - ' + val.end + '</em> \
+                                <em>14 May 1933<br/>' + starting + ' - ' + ending + '</em> \
                             </div>';
                         val.message = template;
-                        val.min = val.start;
-                        val.max = val.end;
                     });
-                    actors = data;
+                    actors = data.objects;
                  });
         },
         get: function(id) {
