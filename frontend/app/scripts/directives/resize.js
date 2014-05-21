@@ -11,7 +11,6 @@ angular.module('CampusMediusApp')
             };
 
             scope.onResizeFunction = function(){
-                console.log('resizing', elem);
                 var styles = {
                     'height': (w.height()-118) + 'px',
                     'width': (w.width()) + 'px'

@@ -15,17 +15,6 @@ angular.module('CampusMediusApp')
             autoPlay: false,
             responsive: true,
             stretch: $scope.stretchModes[1],
-            theme: {
-                playIcon: "&#xe000;",
-                pauseIcon: "&#xe001;",
-                volumeLevel3Icon: "&#xe002;",
-                volumeLevel2Icon: "&#xe003;",
-                volumeLevel1Icon: "&#xe004;",
-                volumeLevel0Icon: "&#xe005;",
-                muteIcon: "&#xe006;",
-                enterFullScreenIcon: "&#xe007;",
-                exitFullScreenIcon: "&#xe008;"
-            },
             plugins: {
                 poster: {
                     url: "images/videogular.png"
