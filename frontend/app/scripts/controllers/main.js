@@ -87,6 +87,7 @@ angular.module('CampusMediusApp')
       }
       if($routeParams.hasOwnProperty('actorId')) {
           $scope.actor = ActorService.get($routeParams.actorId);
+          console.log('gotit', $scope.actor);
           $scope.actorShow = true;
       } else {
           $scope.actor = false;

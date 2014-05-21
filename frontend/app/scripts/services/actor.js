@@ -32,8 +32,12 @@ angular.module('CampusMediusApp')
                         'socialist-communist': 'de3739',    //red
                         'bourgeois': '5c91be'               //blue
                     }
+                    // sort them by start_time ascending
+                    data.objects.sort(function(a, b){
+                        return new Date(a.start_time) - new Date(b.start_time);
+                    });
                     angular.forEach(data.objects, function(val, key) {
-                        val.id = key;
+                        val.id = key+1;
                         val.min = val.start = new Date(val.start_time).getUTCHours();
                         val.max = val.end = new Date(val.end_time).getUTCHours();
                         val.startPercent = val.min/24 * 100;
@@ -52,17 +56,14 @@ angular.module('CampusMediusApp')
                             </div>';
                         val.message = template;
                     });
-
-                    // sort them by start_time ascending
-                    data.objects.sort(function(a, b){
-                        return new Date(a.start_time) - new Date(b.start_time);
-                    });
                     actors = data.objects;
                  });
         },
         get: function(id) {
+            id = parseInt(id);
             for(var i=0; i<actors.length; i++) {
                 if(actors[i].id === id) {
+                    console.log('hit!');
                     return actors[i];
                 }
             }
