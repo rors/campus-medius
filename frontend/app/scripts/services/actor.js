@@ -15,13 +15,15 @@ angular.module('CampusMediusApp')
                     function am_or_pm(hour) {
                         return hour > 11 ? 'pm' : 'am';
                     }
-
+                    function pad(num) {
+                        return ("0" + num).slice(-2);
+                    }
                     function time_string(_date){
                         var date = new Date(_date);
                         var hour = date.getUTCHours();
                         var merid = am_or_pm(hour);
                         var twelveHour = hour > 12 ? hour-12 : hour;
-                        return twelveHour + ':' + date.getUTCMinutes() + ' ' + merid;
+                        return twelveHour + ':' + pad(date.getUTCMinutes()) + ' ' + merid;
                     }
 
                     var colors = {
@@ -33,7 +35,7 @@ angular.module('CampusMediusApp')
                     angular.forEach(data.objects, function(val, key) {
                         val.id = key;
                         val.min = val.start = new Date(val.start_time).getUTCHours();
-                        val.max = val.end = new Date(val.end_time).getUTCHours() + 3;
+                        val.max = val.end = new Date(val.end_time).getUTCHours();
                         val.startPercent = val.min/24 * 100;
                         val.endPercent = val.max/24 * 100;
                         var starting = time_string(val.start_time);
