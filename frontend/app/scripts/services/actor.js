@@ -52,6 +52,11 @@ angular.module('CampusMediusApp')
                             </div>';
                         val.message = template;
                     });
+
+                    // sort them by start_time ascending
+                    data.objects.sort(function(a, b){
+                        return new Date(a.start_time) - new Date(b.start_time);
+                    });
                     actors = data.objects;
                  });
         },
