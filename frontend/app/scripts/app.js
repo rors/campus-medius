@@ -36,4 +36,9 @@ angular.module('CampusMediusApp', [
             .otherwise({
                 redirectTo: '/actors'
             });
+    })
+    .run(function($rootScope) {
+        $rootScope.$on('actorTriggered', function(event, args) {
+            $rootScope.$broadcast('showActor', args);
+        });    
     });
