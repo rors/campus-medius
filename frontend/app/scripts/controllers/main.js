@@ -100,24 +100,24 @@ angular.module('CampusMediusApp')
     $scope.showActor = function(id) {
       $location.path('/actors/' + id);
     };
+    $scope.iconDefaults = {
+        defaultIcon: {
+          iconSize: [30, 45]
+        },
+        biggerIcon: {
+            iconSize: [36, 54]
+        }
+    };
+
     $scope.highlightActor = function(id, toDefault){
       id = parseInt(id);
-      var icons = {
-          defaultIcon: {
-            iconSize: [30, 45]
-          },
-          biggerIcon: {
-              iconSize: [36, 54]
-          }
-      };
-
       for(var i=0; i<$scope.markers.length; i++) {
         console.log('searching for', id);
           if($scope.markers[i].id === id) {
               if(!toDefault){
-                angular.extend($scope.markers[i].icon, icons.biggerIcon);
+                angular.extend($scope.markers[i].icon, $scope.iconDefaults.biggerIcon);
               } else {
-                angular.extend($scope.markers[i].icon, icons.defaultIcon);
+                angular.extend($scope.markers[i].icon, $scope.iconDefaults.defaultIcon);
               }
               break;
           }
