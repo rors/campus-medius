@@ -61,6 +61,7 @@ class MediaObject(BaseModel):
 
     caption = tinymce_models.HTMLField()
 
+    @property
     def type(self):
         try:
             self.image
@@ -78,8 +79,26 @@ class MediaObject(BaseModel):
         except MediaObject.DoesNotExist:
             pass
 
+    @property
+    def url(self):
+        try:
+            self.image
+            return self.image.url
+        except MediaObject.DoesNotExist:
+            pass
+        try:
+            self.video.url
+            return "Video"
+        except MediaObject.DoesNotExist:
+            pass
+        try:
+            self.sound.url
+            return "Sound"
+        except MediaObject.DoesNotExist:
+            pass
+
     def __unicode__(self):
-        return "%s (%s)" % ( self.title, self.type() )
+        return "%s (%s)" % ( self.title, self.type )
 
 class Image(MediaObject):
     image = models.ImageField(upload_to="images")
