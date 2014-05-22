@@ -4,7 +4,6 @@ angular.module('CampusMediusApp')
   .controller('MapController', [ '$scope', '$http', '$compile', '$location', '$routeParams', 'ActorService', 'FilterService', function($scope, $http, $compile, $location, $routeParams, ActorService, FilterService) {
     angular.extend($scope, {
       actors: [],
-      actorShow: false,
       markers: [],
       centerMarker: {
           lat: 48.21037530761021,
@@ -58,12 +57,7 @@ angular.module('CampusMediusApp')
           markers: _markers
       });
 
-      // apply the search params only if we're not in actor view. 
-      // angular is kind enough to preserve our search params when we use the 
-      // actorId part of the route
-      if(!$scope.actor) {
-          $location.search(params);
-      }
+      $location.search(params);
     };
 
     // listens for changes in url, and fires the update
@@ -85,12 +79,7 @@ angular.module('CampusMediusApp')
         FilterService.set('max', $routeParams.max);
       }
       if($routeParams.hasOwnProperty('actorId')) {
-          $scope.actor = ActorService.get($routeParams.actorId);
-          console.log('gotit', $scope.actor);
-          $scope.actorShow = true;
-      } else {
-          $scope.actor = false;
-          $scope.actorShow = false;
+          $scope.$emit('actorTriggered', {message: $routeParams.actorId});
       }
 
       $scope.filterActors();
@@ -122,13 +111,6 @@ angular.module('CampusMediusApp')
               break;
           }
       }
-    };
-
-    // i still dont understand how calling $location.path will magically preserve the 
-    // search params in the url, but i love it
-    $scope.killActor = function() {
-      $scope.actor = false;
-      $location.path('/actors');
     };
 
     // low-fi way of getting actors from our API
