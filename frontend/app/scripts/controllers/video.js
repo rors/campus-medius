@@ -9,12 +9,12 @@ angular.module('CampusMediusApp')
         ];
 
         $scope.config = {
-            width: 740,
+            //width: 740,
             height: 380,
             autoHide: false,
             autoPlay: false,
             responsive: true,
-            stretch: $scope.stretchModes[1],
+            stretch: $scope.stretchModes[2],
             plugins: {
                 poster: {
                     url: "images/videogular.png"

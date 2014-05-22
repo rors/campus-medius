@@ -210,3 +210,34 @@ button.close{
     padding:13px 19px;
     cursor:pointer;
 }
+
+/* carousel */
+.carousel img{
+    max-height: 600px;
+    max-width: 95%;
+    margin: 0 auto;
+    display:block;
+}
+
+.rn-carousel-indicator .active{
+    color:#CCC;
+}
+.rn-carousel-indicator{
+    background: transparent;
+}
+.rn-carousel-control{
+    opacity:.4
+}
+.rn-carousel-control:before{
+    background: rgba(255,255,255,.6);
+    border-radius: 100%;
+    padding: 5px;
+}
+.rn-carousel-control.rn-carousel-control-next:before{
+    content: "\e600";
+    font-family: icomoon;
+}
+.rn-carousel-control.rn-carousel-control-prev:before{
+    content: "\e601";
+    font-family: icomoon;
+}
