@@ -28,8 +28,6 @@ angular.module('CampusMediusApp')
 
                     angular.forEach(data.objects, function(val, key) {
                         val.id = key+1;
-                        val.min = val.start = new Date(val.start_time).getUTCHours();
-                        val.max = val.end = new Date(val.end_time).getUTCHours();
 
                         var startMoment = moment(val.start_time);
                         var endMoment = moment(val.end_time);
@@ -43,6 +41,9 @@ angular.module('CampusMediusApp')
                         var starting = startMoment.format('h:mm a');
                         var ending = endMoment.format('h:mm a')
                         var actor_date = startMoment.format('Do MMM YYYY');
+
+                        val.min = startMoment.diff(project_start, 'hours');
+                        val.max = endMoment.diff(project_start, 'hours');
 
                         val.icon = {
                             iconUrl: 'http://campusmedius.net' + val.icon
@@ -69,11 +70,6 @@ angular.module('CampusMediusApp')
         },
         search: function(params) {
             var data = actors.filter(function(el) {
-                if(params.hasOwnProperty('historical')) {
-                    if(el.historical !== params.historical) {
-                        return false;
-                    }
-                }
                 // given 2 time ranges S1-->E1 and S2-->E2
                 // determine if 2 ranges overlap. S1 <= E2 && S2 <= E1
                 if(el.min <= params.max && params.min <= el.max) {
