@@ -38,6 +38,8 @@ class Event(BaseModel):
 
     icon = models.ImageField(upload_to="event-icons",null=True, blank=True, verbose_name="Event Icon")
 
+    actor_network_image = models.ImageField(upload_to="event-icon",null=True, blank=True, verbose_name="Actor network image (secondary icons)")
+
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
 
