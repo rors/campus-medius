@@ -9,7 +9,10 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
 
-        
+        for e in orm.Event.objects.all():
+            for emo in e.media_objects.all():
+                new_emo = orm.EventMediaObject(event=e,mediaobject=emo,order=0)
+                new_emo.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
