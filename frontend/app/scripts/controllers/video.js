@@ -10,7 +10,7 @@ angular.module('CampusMediusApp')
 
         $scope.config = {
             //width: 740,
-            height: 380,
+            height: 600,
             autoHide: false,
             autoPlay: false,
             responsive: true,
@@ -21,4 +21,8 @@ angular.module('CampusMediusApp')
                 }
             }
         };
+
+        $scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+        }
   });

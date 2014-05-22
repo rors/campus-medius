@@ -251,3 +251,11 @@ button.close{
         background-position: center center;
     }
 }
+videogular{
+    min-width: 100%;
+    min-height: 500px;
+}
+vg-controls{
+    bottom:0;
+    top: initial !important
+}

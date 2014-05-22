@@ -59,7 +59,10 @@ angular.module('CampusMediusApp')
                         // filter out video/sound objects for now
                         var media = [];
                         angular.forEach(val.media_objects, function(v, k) {
-                            if(v.url!='Video' && v.url!='Sound') {
+                            if(v.type!='Sound') {
+                                if(v.type === 'Video') {
+                                    v.url = 'http://campusmedius.net' + v.url;
+                                }
                                 media.push(v);
                             }
                         });
