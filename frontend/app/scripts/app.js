@@ -10,7 +10,8 @@ angular.module('CampusMediusApp', [
     'com.2fdevs.videogular.plugins.controls',
     'com.2fdevs.videogular.plugins.overlayplay',
     'com.2fdevs.videogular.plugins.buffering',
-    'com.2fdevs.videogular.plugins.poster'
+    'com.2fdevs.videogular.plugins.poster',
+    'angularMoment'
 ])
     .config(function($routeProvider, $locationProvider) {
         //$locationProvider.html5Mode(true)

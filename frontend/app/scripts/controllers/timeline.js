@@ -5,16 +5,15 @@ angular.module('CampusMediusApp')
     $scope.lanes = []; // holds lane data for showing timeline items
     $scope.timelineSlider = FilterService.all();
     $scope.translateTimeline = function(hours) {
-      //it is pm if hours from 12 onwards
-      var suffix = (hours >= 12)? 'pm' : 'am';
-
-      //only -12 from hours if it is greater than 12 (if not back at mid night)
-      hours = (hours > 12) ? hours -12 : hours;
-
-      //if 00 then it is 12 am
-      hours = (hours === '00')? 12 : hours;
-
-      return hours + suffix;
+      // so the timeline starts at 2pm at goes til 2pm the next day, 
+      var displayTime = hours+14;
+      if(displayTime > 23) {
+        displayTime-=24;
+      }
+      function pad(num, digits) {
+          return ("0" + num).slice(digits * -1);
+      }
+      return pad(displayTime, 2) + ':00';
     };
 
     $scope.$watch('timelineSlider.min', function(oldVal, newVal) {
@@ -40,7 +39,7 @@ angular.module('CampusMediusApp')
           var laneLength = _lanes.length;
           var inLane = false;
            for(var j=0; j<laneLength; j++){
-               if(_actor.start >= _lanes[j][_lanes[j].length-1].end) {
+               if(new Date(_actor.start_time) >= new Date(_lanes[j][_lanes[j].length-1].end_time)) {
                   _lanes[j].push(_actor);
                   inLane = true;
                   break;
@@ -51,12 +50,13 @@ angular.module('CampusMediusApp')
               _lanes.push([_actor]);
            }
       }
+      console.log('lanes', _lanes);
       $scope.lanes = _lanes;
     };
     ActorService.all()
       .success(function(data) {
-        $scope.makeLanes(data);
-        console.log('lanes', data);
+        $scope.makeLanes(data.objects);
+        console.log('lanes', data.objects);
       })
       .error(function(data, status, headers, config) {
           console.log('error', data, status, headers, config);

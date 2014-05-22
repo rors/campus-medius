@@ -7,8 +7,8 @@ angular.module('CampusMediusApp')
       actorShow: false,
       markers: [],
       centerMarker: {
-          lat: 48.19744707423512,
-          lng: 16.35641098022461,
+          lat: 48.21037530761021,
+          lng: 16.384735107421875,
           zoom: 13
       },
       layers: {
@@ -17,20 +17,6 @@ angular.module('CampusMediusApp')
                   name: 'Vienna 1933',
                   url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
                   type: 'xyz'
-              },
-              osm: {
-                  name: 'OpenStreetMap',
-                  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  type: 'xyz'
-              },
-              cloudmade2: {
-                  name: 'Cloudmade Tourist',
-                  type: 'xyz',
-                  url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-                  layerParams: {
-                      key: '007b9471b4c74da4a6ec7ff43552b16f',
-                      styleId: 7
-                  }
               }
           }
       },
@@ -67,7 +53,6 @@ angular.module('CampusMediusApp')
       params.max = FilterService.get('max')
 
       var _markers = ActorService.search(params);
-
       // updates our map markers
       angular.extend($scope, {
           markers: _markers
@@ -101,6 +86,7 @@ angular.module('CampusMediusApp')
       }
       if($routeParams.hasOwnProperty('actorId')) {
           $scope.actor = ActorService.get($routeParams.actorId);
+          console.log('gotit', $scope.actor);
           $scope.actorShow = true;
       } else {
           $scope.actor = false;
@@ -128,7 +114,6 @@ angular.module('CampusMediusApp')
       for(var i=0; i<$scope.markers.length; i++) {
         console.log('searching for', id);
           if($scope.markers[i].id === id) {
-              console.log('hilite', $scope.markers[i]);
               if(!toDefault){
                 angular.extend($scope.markers[i].icon, icons.biggerIcon);
               } else {
