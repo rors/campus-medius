@@ -55,6 +55,15 @@ angular.module('CampusMediusApp')
                                 <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
                             </div>';
                         val.message = template;
+
+                        // filter out video/sound objects for now
+                        var media = [];
+                        angular.forEach(val.media_objects, function(v, k) {
+                            if(v.url!='Video' && v.url!='Sound') {
+                                media.push(v);
+                            }
+                        });
+                        val.media_objects = media;
                     });
                     actors = data.objects;
                  });

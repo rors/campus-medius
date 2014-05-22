@@ -13,102 +13,17 @@
                         <div class="text-window" ng-bind-html="actor.description"></div>
                     </div>
                     <div class="col-sm-7">
-                        <ul rn-carousel rn-carousel-indicator rn-carousel-control class="image carousel">
-                          <li>
-                              <img src="http://campusmedius.net/data/media/images/adolf-hitler-haus_18-09-1932.jpg">
-                          </li>
-                          <li>
-                              <div ng-controller="VideoCtrl">
-                              <videogular vg-width="config.width" vg-height="config.height" vg-theme="config.theme">
-                                  <video class='videoPlayer' preload='none'>
-                                      <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.mp4.mp4.mp4' type='video/mp4'>
-                                      <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.webmhd.webm' type='video/webm'>
-                                      <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.oggtheora.ogv' type='video/ogg'>
-                                  </video>
-                                  <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch="config.stretch.value"></vg-poster-image>
-                                  <vg-buffering></vg-buffering>
-                                  <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
-                                  <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime" style="height: 50px;">
-                                      <vg-play-pause-button vg-play-icon="config.theme.playIcon" vg-pause-icon="config.theme.pauseIcon"></vg-play-pause-button>
-                                      <vg-timeDisplay>{{ currentTime }}</vg-timeDisplay>
-                                      <vg-scrubBar>
-                                          <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
-                                      </vg-scrubBar>
-                                      <vg-timeDisplay>{{ totalTime }}</vg-timeDisplay>
-                                      <vg-volume>
-                                          <vg-mutebutton
-                                              vg-volume-level-3-icon="config.theme.volumeLevel3Icon"
-                                              vg-volume-level-2-icon="config.theme.volumeLevel2Icon"
-                                              vg-volume-level-1-icon="config.theme.volumeLevel1Icon"
-                                              vg-volume-level-0-icon="config.theme.volumeLevel0Icon"
-                                              vg-mute-icon="config.theme.muteIcon">
-                                          </vg-mutebutton>
-                                          <vg-volumebar></vg-volumebar>
-                                      </vg-volume>
-                                      <vg-fullscreenButton vg-enter-full-screen-icon="config.theme.enterFullScreenIcon" vg-exit-full-screen-icon="config.theme.exitFullScreenIcon"></vg-fullscreenButton>
-                                  </vg-controls>
-                              </videogular>
-                              </div>
-                          </li>
-                          <li>
-                              <img src="http://campusmedius.net/data/media/images/radio-wien_05-19-1933_2.jpg">
-                          </li>
-                        </ul>
-                        <ul class="list-unstyled" id="actor-media">
-                            <li spy="schoenbrunn_rally_starhemberg" class="active">
-                                <img src="https://campusmedius.s3.amazonaws.com/assets/schoenbrunn_rally_starhemberg.jpg" class="img-responsive">
-                                <small>
-                                    Photograph of the "Turks Deliverance Celebration" in Schlosspark Schönbrunn on 14 May 1933: Ernst Rüdiger Starhemberg, the leader of the Austrian Home Guard, in front of carbon and condensor microphones; to his left an operator of Radio Wien wearing headphones and a man with a Tyrolean hat holding a camera; among the Home Guard troops a newsreel car with a movie camera on top; in the background the garden's Gloriette structure. Source: Bildarchiv Austria (Vienna), Pf 15.104 C9.
-                                </small>
-                            </li>
-                            <li spy="schoenbrunn_rally_map">
-                                <img src="https://campusmedius.s3.amazonaws.com/assets/schoenbrunn_rally_map.jpg" alt="" class="img-responsive center-block">
-                                <small>
-                                    Map of the "Turks Deliverance Celebration" in Schlosspark Schönbrunn on 14 May 1933, taken from a brochure with instructions for the participating Home Guard troops: the altar is located in the middle of the balcony; the members of the Austrian government are supposed to sit on its left side while the leader of the Home Guard stands right in front of the microphone. The abbreviation "Heiz" means "homeland security special train" (Heimatschutz-Sonderzug). Source: Weisungen für die Türkenbefreiungs-Gedenkfeier am 14. Mai 1933 in Wien. Ed. Bundesführung des österreichischen Heimatschutzverbandes. Vienna 1933, appendix 3.
-                                </small>
-                            </li>
-                            <li spy="fox-newsreel_schoenbrunn-rally">
-                                <div ng-controller="VideoCtrl">
-                                <videogular vg-width="config.width" vg-height="config.height" vg-theme="config.theme">
-                                    <video class='videoPlayer' preload='none'>
-                                        <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.mp4.mp4.mp4' type='video/mp4'>
-                                        <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.webmhd.webm' type='video/webm'>
-                                        <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.oggtheora.ogv' type='video/ogg'>
-                                    </video>
-                                    <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch="config.stretch.value"></vg-poster-image>
-                                    <vg-buffering></vg-buffering>
-                                    <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
-                                    <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime" style="height: 50px;">
-                                        <vg-play-pause-button vg-play-icon="config.theme.playIcon" vg-pause-icon="config.theme.pauseIcon"></vg-play-pause-button>
-                                        <vg-timeDisplay>{{ currentTime }}</vg-timeDisplay>
-                                        <vg-scrubBar>
-                                            <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
-                                        </vg-scrubBar>
-                                        <vg-timeDisplay>{{ totalTime }}</vg-timeDisplay>
-                                        <vg-volume>
-                                            <vg-mutebutton
-                                                vg-volume-level-3-icon="config.theme.volumeLevel3Icon"
-                                                vg-volume-level-2-icon="config.theme.volumeLevel2Icon"
-                                                vg-volume-level-1-icon="config.theme.volumeLevel1Icon"
-                                                vg-volume-level-0-icon="config.theme.volumeLevel0Icon"
-                                                vg-mute-icon="config.theme.muteIcon">
-                                            </vg-mutebutton>
-                                            <vg-volumebar></vg-volumebar>
-                                        </vg-volume>
-                                        <vg-fullscreenButton vg-enter-full-screen-icon="config.theme.enterFullScreenIcon" vg-exit-full-screen-icon="config.theme.exitFullScreenIcon"></vg-fullscreenButton>
-                                    </vg-controls>
-                                </videogular>
+                        <ul rn-carousel rn-carousel-indicator rn-carousel-control class="image carousel ng-cloak event-carousel">
+                            
+                            <li ng-repeat="obj in actor.media_objects">
+                                <div ng-if="obj.url=='Video'"></div>
+                                <div ng-if="obj.url!='Video'"
+                                    class="rn-carousel-slide ng-scope" 
+                                    ng-style="{'background-image': 'url(http://campusmedius.net' + obj.url + ')'}">
+                                    
                                 </div>
-                                <small>
-                                    Movie clip from a report in Fox Tönende Wochenschau, which was incorporated into the 1933 newsreels produced by Vienna's police department. The sequence begins with a speech held by Ernst Rüdiger Starhemberg, the leader of the Austrian Home Guard, at the "Turks Deliverance Celebration" in Schlosspark Schönbrunn on 14 May 1933: "Front soldiers among you, who like me have had the honour of staking your lives against the enemy, I call upon you today to think back. / Be proud to be German Austrians, be proud to be Austrian protectors of the homeland. / To welcome our front comrade, Federal Chancellor Dollfuß, as comrades." Then Engelbert Dollfuß, the Austrian chancellor, says: "When you celebrate this day and this time today, it is not a usual historical commemoration. Foreign spirit and foreign ideas are in our people, have lodged themselves and brought evil upon us. In the fight for the homeland, in the fight for the bettering of our homeland, we close ranks firm and true." Media devices are everywhere: a man winding a movie camera; a photographer taking pictures; an operator adjusting a microphone. The song played at the end is Joseph Haydn's Kaiserlied (1796/97), which was not only employed as the anthem for the emperors of the Holy Roman Empire and of the Austro-Hungarian Monarchy, but also as the tune of the Deutschlandlied, the German national anthem. Source: "Die Türkenbefreiungsfeier des österreichischen Heimatschutzes in Wien" (01:22–03:08), in: Polizeijahresschau 1933. Filmarchiv Austria (Vienna), JS 1933/8.
-                                </small>
                             </li>
-                            <li spy="map_second-siege_1683">
-                                <img src="https://campusmedius.s3.amazonaws.com/assets/map_second-siege_1683.jpg" alt="" class="img-responsive">
-                                <small>
-                                    Contemporary map of the Second Turkish Siege of Vienna in 1683: Vienna in the centre surrounded by the city walls; on the right the tents of the Turkish troops; below the Danube river the Leopoldstadt, where a Jewish ghetto was established in the 17th century. Source: Das interessante Blatt (Vienna), 1 June 1933, p. 3.
-                                </small>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -116,3 +31,43 @@
         </div>
     </div>
 </div>
+
+<!--li>
+  <div ng-controller="VideoCtrl">
+  <videogular vg-width="config.width" vg-height="config.height" vg-theme="config.theme">
+      <video class='videoPlayer' preload='none'>
+          <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.mp4.mp4.mp4' type='video/mp4'>
+          <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.webmhd.webm' type='video/webm'>
+          <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.oggtheora.ogv' type='video/ogg'>
+      </video>
+      <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch="config.stretch.value"></vg-poster-image>
+      <vg-buffering></vg-buffering>
+      <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
+      <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime" style="height: 50px;">
+          <vg-play-pause-button vg-play-icon="config.theme.playIcon" vg-pause-icon="config.theme.pauseIcon"></vg-play-pause-button>
+          <vg-timeDisplay>{{ currentTime }}</vg-timeDisplay>
+          <vg-scrubBar>
+              <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
+          </vg-scrubBar>
+          <vg-timeDisplay>{{ totalTime }}</vg-timeDisplay>
+          <vg-volume>
+              <vg-mutebutton
+                  vg-volume-level-3-icon="config.theme.volumeLevel3Icon"
+                  vg-volume-level-2-icon="config.theme.volumeLevel2Icon"
+                  vg-volume-level-1-icon="config.theme.volumeLevel1Icon"
+                  vg-volume-level-0-icon="config.theme.volumeLevel0Icon"
+                  vg-mute-icon="config.theme.muteIcon">
+              </vg-mutebutton>
+              <vg-volumebar></vg-volumebar>
+          </vg-volume>
+          <vg-fullscreenButton vg-enter-full-screen-icon="config.theme.enterFullScreenIcon" vg-exit-full-screen-icon="config.theme.exitFullScreenIcon"></vg-fullscreenButton>
+      </vg-controls>
+  </videogular>
+  </div>
+</li-->
+                       <!--li>
+                                <img src="http://campusmedius.net/data/media/images/ufa-ton-kino_1944.jpg">
+                            </li>
+                            <li>
+                                <img src="http://campusmedius.net/data/media/images/parade_westbahnhof.jpg">
+                            </li-->
