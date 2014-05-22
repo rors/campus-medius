@@ -94,13 +94,13 @@ class MediaObject(BaseModel):
         except MediaObject.DoesNotExist:
             pass
         try:
-            self.video.url
-            return "Video"
+            self.video
+            return self.video.url
         except MediaObject.DoesNotExist:
             pass
         try:
-            self.sound.url
-            return "Sound"
+            self.sound
+            return self.sound.url
         except MediaObject.DoesNotExist:
             pass
 
