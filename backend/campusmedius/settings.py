@@ -70,6 +70,7 @@ INSTALLED_APPS = (
 
     'tinymce',
     'tastypie',
+    'south',
 
     'events',
 )
