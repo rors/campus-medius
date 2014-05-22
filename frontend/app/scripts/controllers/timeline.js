@@ -50,13 +50,11 @@ angular.module('CampusMediusApp')
               _lanes.push([_actor]);
            }
       }
-      console.log('lanes', _lanes);
       $scope.lanes = _lanes;
     };
     ActorService.all()
       .success(function(data) {
         $scope.makeLanes(data.objects);
-        console.log('lanes', data.objects);
       })
       .error(function(data, status, headers, config) {
           console.log('error', data, status, headers, config);
