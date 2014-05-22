@@ -15,6 +15,10 @@ class CMGeoAdmin(admin.OSMGeoAdmin):
     default_lat = 6142820.68139
 
 
+class EventMediaObjectInline(admin.TabularInline):
+    model = EventMediaObject
+    extra = 1
+
 class EventAdminForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -24,6 +28,8 @@ class EventAdminForm(forms.ModelForm):
 class EventAdmin(CMGeoAdmin):
 
     form = EventAdminForm
+
+    inlines = ( EventMediaObjectInline, )
 
     list_display = ( 'title', 'start_time', 'end_time', 'political_affiliation', 'mediality_mode', )
     list_filter = ( 'political_affiliation', 'mediality_mode', )
