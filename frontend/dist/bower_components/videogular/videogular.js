@@ -322,7 +322,6 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 					this.setSize = function(newWidth, newHeight) {
 						currentWidth = newWidth;
 						currentHeight = newHeight;
-
 						$scope.updateSize();
 					};
 
@@ -385,6 +384,7 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						});
 
 						$scope.$watch("responsive", function(newValue, oldValue) {
+							console.log('resp fired!', newValue, oldValue);
 							if (newValue != oldValue){
 								isResponsive = newValue;
 
@@ -509,7 +509,7 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 
 						currentWidth = vg.elementScope[0].parentNode.clientWidth;
 						currentHeight = videoHeight;
-
+						console.log('dimensions', currentWidth, currentHeight);
 						$scope.updateSize();
 					};
 
