@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('CampusMediusApp')
-  .service('ActorService', function Actorservice($window, $http) {
+  .service('ActorService', function Actorservice($window, $http, ICON_SIZES) {
     //var API_ENDPOINT = $window.location.hostname==='127.0.0.1' ? 'http://127.0.0.1:3000/actors' : 'data/actors.json';
     //var API_ENDPOINT = 'data/actors.json';
     var API_ENDPOINT = 'http://campusmedius.net/data/api/event/?format=json';
@@ -44,9 +44,9 @@ angular.module('CampusMediusApp')
 
                         val.min = startMoment.diff(project_start, 'hours');
                         val.max = endMoment.diff(project_start, 'hours');
-
                         val.icon = {
-                            iconUrl: 'http://campusmedius.net' + val.icon
+                            iconUrl: 'http://campusmedius.net' + val.icon,
+                            iconSize: ICON_SIZES['DEFAULT']
                         }
                         val.color = colors[val.political_affiliation];
                         var template =

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('CampusMediusApp')
-  .controller('MapController', [ '$scope', '$http', '$compile', '$location', '$routeParams', 'ActorService', 'FilterService', function($scope, $http, $compile, $location, $routeParams, ActorService, FilterService) {
+  .controller('MapController', [ '$scope', '$http', '$compile', '$location', '$routeParams', 'ActorService', 'FilterService', 'ICON_SIZES', function($scope, $http, $compile, $location, $routeParams, ActorService, FilterService, ICON_SIZES) {
     angular.extend($scope, {
       actors: [],
       markers: [],
@@ -89,14 +89,6 @@ angular.module('CampusMediusApp')
     $scope.showActor = function(id) {
       $location.path('/actors/' + id);
     };
-    $scope.iconDefaults = {
-        defaultIcon: {
-          iconSize: [30, 45]
-        },
-        biggerIcon: {
-            iconSize: [36, 54]
-        }
-    };
 
     $scope.highlightActor = function(id, toDefault){
       id = parseInt(id);
@@ -104,9 +96,9 @@ angular.module('CampusMediusApp')
         console.log('searching for', id);
           if($scope.markers[i].id === id) {
               if(!toDefault){
-                angular.extend($scope.markers[i].icon, $scope.iconDefaults.biggerIcon);
+                $scope.markers[i].icon.iconSize = ICON_SIZES['LARGE'];
               } else {
-                angular.extend($scope.markers[i].icon, $scope.iconDefaults.defaultIcon);
+                $scope.markers[i].icon.iconSize = ICON_SIZES['DEFAULT'];
               }
               break;
           }

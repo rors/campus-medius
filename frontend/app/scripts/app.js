@@ -15,6 +15,10 @@ angular.module('CampusMediusApp', [
     'angularMoment',
     'angular-carousel'
 ])
+    .constant("ICON_SIZES", {
+        DEFAULT: [54, 81],
+        LARGE: [60, 90]
+    })
     .config(function($routeProvider, $locationProvider) {
         //$locationProvider.html5Mode(true)
         $routeProvider
