@@ -205,12 +205,19 @@ button.close{
 }
 .leaflet-popup-content{
     margin:0;
+    width:270px;
 }
 .leaflet-popup-content-inner{
     padding:13px 19px;
     cursor:pointer;
+    overflow: hidden;
 }
-
+.leaflet-popup-column{
+    width:50%;
+    img{
+        max-width: 100% !important;
+    }
+}
 /* carousel */
 .carousel img{
     max-height: 600px;

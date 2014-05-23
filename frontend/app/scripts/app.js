@@ -19,6 +19,8 @@ angular.module('CampusMediusApp', [
         DEFAULT: [54, 81],
         LARGE: [60, 90]
     })
+    .constant('STATIC_URL', 'http://campusmedius.net')
+    .constant('API_ENDPOINT', 'http://campusmedius.net/data/api/event/?format=json')
     .config(function($routeProvider, $locationProvider) {
         //$locationProvider.html5Mode(true)
         $routeProvider

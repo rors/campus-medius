@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('CampusMediusApp')
-  .service('ActorService', function Actorservice($window, $http, ICON_SIZES) {
+  .service('ActorService', function Actorservice($window, $http, ICON_SIZES, STATIC_URL, API_ENDPOINT) {
     //var API_ENDPOINT = $window.location.hostname==='127.0.0.1' ? 'http://127.0.0.1:3000/actors' : 'data/actors.json';
     //var API_ENDPOINT = 'data/actors.json';
-    var API_ENDPOINT = 'http://campusmedius.net/data/api/event/?format=json';
     var actors = [];
     return {
         all: function() {
@@ -45,14 +44,19 @@ angular.module('CampusMediusApp')
                         val.min = startMoment.diff(project_start, 'hours');
                         val.max = endMoment.diff(project_start, 'hours');
                         val.icon = {
-                            iconUrl: 'http://campusmedius.net' + val.icon,
+                            iconUrl: STATIC_URL + val.icon,
                             iconSize: ICON_SIZES['DEFAULT']
                         }
                         val.color = colors[val.political_affiliation];
                         var template =
                             '<div class="leaflet-popup-content-inner" ng-click="showActor(' + val.id + ')"> \
-                                <strong>' + val.title + '</strong><br/> \
-                                <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
+                                <div class="leaflet-popup-column pull-left"> \
+                                    <strong>' + val.title + '</strong><br/> \
+                                    <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
+                                </div> \
+                                <div class="leaflet-popup-column pull-left"> \
+                                    <img src="' + STATIC_URL + val.actor_network_image +  '"> \
+                                </div> \
                             </div>';
                         val.message = template;
 
@@ -61,7 +65,7 @@ angular.module('CampusMediusApp')
                         angular.forEach(val.media_objects, function(v, k) {
                             if(v.type!='Sound') {
                                 if(v.type === 'Video') {
-                                    v.url = 'http://campusmedius.net' + v.url;
+                                    v.url = STATIC_URL + v.url;
                                 }
                                 media.push(v);
                             }
