@@ -266,3 +266,19 @@ vg-controls{
     bottom:0;
     top: initial !important
 }
+
+.caption{
+    position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,.6);
+    color: white;
+    width: 100%;
+    padding:10px;
+    max-height: 90px;
+    overflow: scroll;
+    a{
+        font-weight: bold;
+        color:white;
+        text-decoration: underline;
+    }
+}
