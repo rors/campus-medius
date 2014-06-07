@@ -11,11 +11,11 @@
                 <div ng-repeat="lane in lanes" class="lane">
                     <div class="actor" 
                         ng-repeat="actor in lane" 
-                        ng-click="showActor(actor.id)" 
-                        ng-mouseenter="highlightActor(actor.id)" 
-                        ng-mouseleave="highlightActor(actor.id, true)" 
+                        ng-click="showActor(actor.slug)" 
+                        ng-mouseenter="highlightActor(actor.slug)" 
+                        ng-mouseleave="highlightActor(actor.slug, true)" 
                         style="margin-left:{{actor.startPercent}}%;width:{{actor.endPercent - actor.startPercent}}%;background-color:#{{actor.color}}">
-                            <!--span>#{{actor.id}}<br />{{actor.start}} - {{actor.end}}</span-->
+                            <!--span>#{{actor.slug}}<br />{{actor.start}} - {{actor.end}}</span-->
                     </div>
                 </div>
             </div>

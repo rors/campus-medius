@@ -27,7 +27,6 @@ angular.module('CampusMediusApp')
 
                     angular.forEach(data.objects, function(val, key) {
                         val.id = key+1;
-
                         var startMoment = moment(val.start_time);
                         var endMoment = moment(val.end_time);
 
@@ -43,14 +42,14 @@ angular.module('CampusMediusApp')
 
                         val.min = startMoment.diff(project_start, 'hours');
                         val.max = endMoment.diff(project_start, 'hours');
-                        
+
                         val.icon = {
                             iconUrl: STATIC_URL + val.icon,
                             iconSize: ICON_SIZES['DEFAULT']
                         }
                         val.color = colors[val.political_affiliation];
                         var template =
-                            '<div class="leaflet-popup-content-inner" ng-click="showActor(' + val.id + ')"> \
+                            '<div class="leaflet-popup-content-inner" ng-click="showActor(\'' + val.slug + '\')"> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <strong>' + val.title + '</strong><br/> \
                                     <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
@@ -77,9 +76,10 @@ angular.module('CampusMediusApp')
                  });
         },
         get: function(id) {
-            id = parseInt(id);
+            //id = parseInt(id);
+            console.log('getting', id);
             for(var i=0; i<actors.length; i++) {
-                if(actors[i].id === id) {
+                if(actors[i].slug === id) {
                     return actors[i];
                 }
             }
