@@ -15,6 +15,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var rewrite = require('connect-modrewrite');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -63,7 +65,29 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: 35729,
+        middleware: function(connect, options) {
+
+            var middleware = [];
+
+            // 1. mod-rewrite behavior
+            var rules = [
+                '!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$ /index.html'
+            ];
+            middleware.push(rewrite(rules));
+
+            // 2. original middleware behavior
+            var base = options.base;
+            if (!Array.isArray(base)) {
+                base = [base];
+            }
+            base.forEach(function(path) {
+                middleware.push(connect.static(path));
+            });
+
+            return middleware;
+
+          }
       },
       livereload: {
         options: {

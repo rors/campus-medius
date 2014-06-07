@@ -43,6 +43,7 @@ angular.module('CampusMediusApp')
 
                         val.min = startMoment.diff(project_start, 'hours');
                         val.max = endMoment.diff(project_start, 'hours');
+                        
                         val.icon = {
                             iconUrl: STATIC_URL + val.icon,
                             iconSize: ICON_SIZES['DEFAULT']

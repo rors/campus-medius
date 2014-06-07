@@ -22,7 +22,7 @@ angular.module('CampusMediusApp', [
     .constant('STATIC_URL', 'http://campusmedius.net')
     .constant('API_ENDPOINT', 'http://campusmedius.net/data/api/event/?format=json')
     .config(function($routeProvider, $locationProvider) {
-        //$locationProvider.html5Mode(true)
+        $locationProvider.html5Mode(true)
         $routeProvider
             .when('/actors/:actorId?', {
                 templateUrl: 'views/map.html',
