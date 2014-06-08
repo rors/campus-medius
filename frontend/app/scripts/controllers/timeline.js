@@ -5,15 +5,7 @@ angular.module('CampusMediusApp')
     $scope.lanes = []; // holds lane data for showing timeline items
     $scope.timelineSlider = FilterService.all();
     $scope.translateTimeline = function(hours) {
-      // so the timeline starts at 2pm at goes til 2pm the next day, 
-      var displayTime = hours+14;
-      if(displayTime > 23) {
-        displayTime-=24;
-      }
-      function pad(num, digits) {
-          return ("0" + num).slice(digits * -1);
-      }
-      return pad(displayTime, 2) + ':00';
+      return hours + 'h';
     };
 
     $scope.$watch('timelineSlider.min', function(oldVal, newVal) {

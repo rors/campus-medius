@@ -13,7 +13,7 @@
                         <div class="text-window" ng-bind-html="actor.description"></div>
                     </div>
                     <div class="col-sm-7">
-                        <ul rn-carousel rn-carousel-indicator rn-carousel-control class="image carousel ng-cloak event-carousel">
+                        <ul rn-carousel rn-carousel-control class="image carousel ng-cloak event-carousel">
                             
                             <li ng-repeat="obj in actor.media_objects">
                                 <div ng-if="obj.type=='Video'">
@@ -48,8 +48,8 @@
                                   </div>
                                 </div>
                                 <div ng-if="obj.type=='Image'"
-                                    class="rn-carousel-slide ng-scope" 
-                                    ng-style="{'background-image': 'url(http://campusmedius.net' + obj.url + ')'}">
+                                    class="rn-carousel-slide-item ng-scope">
+                                    <img ng-src="http://campusmedius.net/{{obj.url}}">
                                     
                                 </div>
                                 <div class="caption" ng-bind-html="obj.caption"></div>
@@ -62,43 +62,3 @@
         </div>
     </div>
 </div>
-
-<!--li>
-  <div ng-controller="VideoCtrl">
-  <videogular vg-width="config.width" vg-height="config.height" vg-theme="config.theme">
-      <video class='videoPlayer' preload='none'>
-          <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.mp4.mp4.mp4' type='video/mp4'>
-          <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.webmhd.webm' type='video/webm'>
-          <source src='http://campusmedius.s3.amazonaws.com/assets/fox-newsreel_schoenbrunn-rally.oggtheora.ogv' type='video/ogg'>
-      </video>
-      <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch="config.stretch.value"></vg-poster-image>
-      <vg-buffering></vg-buffering>
-      <vg-overlay-play vg-play-icon="config.theme.playIcon"></vg-overlay-play>
-      <vg-controls vg-autohide="config.autoHide" vg-autohide-time="config.autoHideTime" style="height: 50px;">
-          <vg-play-pause-button vg-play-icon="config.theme.playIcon" vg-pause-icon="config.theme.pauseIcon"></vg-play-pause-button>
-          <vg-timeDisplay>{{ currentTime }}</vg-timeDisplay>
-          <vg-scrubBar>
-              <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>
-          </vg-scrubBar>
-          <vg-timeDisplay>{{ totalTime }}</vg-timeDisplay>
-          <vg-volume>
-              <vg-mutebutton
-                  vg-volume-level-3-icon="config.theme.volumeLevel3Icon"
-                  vg-volume-level-2-icon="config.theme.volumeLevel2Icon"
-                  vg-volume-level-1-icon="config.theme.volumeLevel1Icon"
-                  vg-volume-level-0-icon="config.theme.volumeLevel0Icon"
-                  vg-mute-icon="config.theme.muteIcon">
-              </vg-mutebutton>
-              <vg-volumebar></vg-volumebar>
-          </vg-volume>
-          <vg-fullscreenButton vg-enter-full-screen-icon="config.theme.enterFullScreenIcon" vg-exit-full-screen-icon="config.theme.exitFullScreenIcon"></vg-fullscreenButton>
-      </vg-controls>
-  </videogular>
-  </div>
-</li-->
-                       <!--li>
-                                <img src="http://campusmedius.net/data/media/images/ufa-ton-kino_1944.jpg">
-                            </li>
-                            <li>
-                                <img src="http://campusmedius.net/data/media/images/parade_westbahnhof.jpg">
-                            </li-->
