@@ -16,8 +16,14 @@ angular.module('CampusMediusApp', [
     'angular-carousel'
 ])
     .constant("ICON_SIZES", {
-        DEFAULT: [54, 81],
-        LARGE: [60, 90]
+        icon: {
+            DEFAULT: [54, 81],
+            LARGE: [60, 90]
+        },
+        anchor: {
+            DEFAULT: [20, 81],
+            LARGE: [20, 90]
+        }
     })
     .constant('STATIC_URL', 'http://campusmedius.net')
     .constant('API_ENDPOINT', 'http://campusmedius.net/data/api/event/?format=json')

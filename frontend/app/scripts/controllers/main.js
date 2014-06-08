@@ -110,9 +110,11 @@ angular.module('CampusMediusApp')
         console.log('searching for', id);
           if($scope.markers[i].id === id) {
               if(!toDefault){
-                $scope.markers[i].icon.iconSize = ICON_SIZES['LARGE'];
+                $scope.markers[i].icon.iconSize = ICON_SIZES.icon['LARGE'];
+                $scope.markers[i].icon.iconAnchor = ICON_SIZES.anchor['LARGE'];
               } else {
-                $scope.markers[i].icon.iconSize = ICON_SIZES['DEFAULT'];
+                $scope.markers[i].icon.iconSize = ICON_SIZES.icon['DEFAULT'];
+                $scope.markers[i].icon.iconAnchor = ICON_SIZES.anchor['DEFAULT'];
               }
               break;
           }
