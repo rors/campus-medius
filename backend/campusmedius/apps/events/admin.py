@@ -57,3 +57,9 @@ class SoundAdmin(admin.ModelAdmin):
     search_fields = ( 'slug', 'title', )
 admin.site.register(Sound, SoundAdmin)
 
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ( 'title', )
+
+    search_fields = ( 'slug', 'title', )
+admin.site.register(Document, DocumentAdmin)
+
