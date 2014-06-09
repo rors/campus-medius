@@ -27,8 +27,15 @@ angular.module('CampusMediusApp')
 
                     angular.forEach(data.objects, function(val, key) {
                         val.id = key+1;
+                        val.isInstant = false; // whether or not this takes place as a single instant in time
                         var startMoment = moment(val.start_time);
-                        var endMoment = moment(val.end_time);
+                        if(val.end_time) {
+                            var endMoment = moment(val.end_time);
+                        }
+                        else {
+                            val.isInstant = true;
+                            var endMoment = project_end;
+                        }
 
                         var startDiff = startMoment.diff(project_start);
                         var endDiff = endMoment.diff(project_start);
@@ -73,11 +80,13 @@ angular.module('CampusMediusApp')
                             }
                         });
 
+                        // TODO: This needs to be in a directive. As it stands, I am embarrassed 
+                        // to say I did this. 
                         var template =
                             '<div class="leaflet-popup-content-inner" ng-click="showActor(\'' + val.slug + '\')"> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <strong>' + val.title + '</strong><br/> \
-                                    <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
+                                    <em>' + actor_date + '<br/>' + starting + ' <span ng-show="' + !val.isInstant + '">- ' + ending + '</span></em> \
                                     <ul class="media-icons list-unstyled list-inline">';
 
                         if (val.hasVideo) {
