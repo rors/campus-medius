@@ -19,12 +19,13 @@ class MediaObjectResource(CORSResource,ModelResource):
 
 class EventResource(CORSResource,ModelResource):
     class Meta:
-        queryset = Event.objects.order_by('start_time','title')
+        queryset = Event.objects.order_by('start_time','title',)
         resource_name = 'event'
 
         excludes = [ 'id', 'location', 'created_at', 'updated_at', ]
 
-    media_objects = fields.ToManyField(MediaObjectResource, 'media_objects', full=True)
+    media_objects = fields.ToManyField( MediaObjectResource, full=True,
+                                        attribute=lambda bundle: MediaObject.objects.filter(event=bundle.obj).order_by('eventmediaobject__order') )
 
     def dehydrate(self, bundle):
         bundle.data['lat'] = bundle.obj.location.y

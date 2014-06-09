@@ -56,6 +56,10 @@ class Event(BaseModel):
         return self.title
 
 class EventMediaObject(BaseModel):
+
+    class Meta:
+        ordering = [ 'order', ]
+
     event = models.ForeignKey(Event)
     mediaobject = models.ForeignKey('MediaObject')
     order = models.IntegerField()
