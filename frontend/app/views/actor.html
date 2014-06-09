@@ -13,7 +13,7 @@
                         <div class="text-window" ng-bind-html="actor.description"></div>
                     </div>
                     <div class="col-sm-7">
-                        <ul rn-carousel rn-carousel-control class="image carousel ng-cloak event-carousel">
+                        <ul rn-carousel rn-carousel-indicator rn-carousel-control class="image carousel ng-cloak event-carousel">
                             
                             <li ng-repeat="obj in actor.media_objects">
                                 <div ng-if="obj.type=='Video'">

@@ -258,12 +258,21 @@ button.close{
     display:block;
 
 }
-
-.rn-carousel-indicator .active{
-    color:#CCC;
+.rn-carousel-container{
+    position: relative;
+    padding-top: 40px;
 }
 .rn-carousel-indicator{
     background: transparent;
+    position: absolute;
+    top: 0;
+
+    span{
+        font-size: 25px;
+    }
+    .active{
+        color:#CCC;
+    }
 }
 .rn-carousel-control{
     opacity:.4;

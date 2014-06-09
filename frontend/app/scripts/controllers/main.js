@@ -107,7 +107,6 @@ angular.module('CampusMediusApp')
     $scope.highlightActor = function(id, toDefault){
       id = parseInt(id);
       for(var i=0; i<$scope.markers.length; i++) {
-        console.log('searching for', id);
           if($scope.markers[i].id === id) {
               if(!toDefault){
                 $scope.markers[i].icon.iconSize = ICON_SIZES.icon['LARGE'];
