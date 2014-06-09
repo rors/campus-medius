@@ -168,14 +168,14 @@ module.exports = function (grunt) {
       app: {
         src: '<%= yeoman.app %>/index.html',
         ignorePath: '<%= yeoman.app %>/',
-        fileTypes: {
-            html: {
-                replace: {
-                    js: '<script src="/{{filePath}}"></script>',
-                    css: '<link rel="stylesheet" href="/{{filePath}}" />'
-                }
-            }
-        }
+        // fileTypes: {
+        //     html: {
+        //         replace: {
+        //             js: '<script src="/{{filePath}}"></script>',
+        //             css: '<link rel="stylesheet" href="/{{filePath}}" />'
+        //         }
+        //     }
+        // }
       }
     },
 
