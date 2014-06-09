@@ -19,7 +19,7 @@ class MediaObjectResource(CORSResource,ModelResource):
 
 class EventResource(CORSResource,ModelResource):
     class Meta:
-        queryset = Event.objects.order_by('start_time')
+        queryset = Event.objects.order_by('start_time','title')
         resource_name = 'event'
 
         excludes = [ 'id', 'location', 'created_at', 'updated_at', ]
