@@ -7,7 +7,7 @@
                     <div class="col-sm-5">
                         <div class="page-header">
                             <h1>{{actor.title}}</h1>
-                            <h2>{{actor.start_time|amDateFormat:'Do MMM YYYY'}}<br>
+                            <h2>{{actor.start_time|amDateFormat:'MMM Do YYYY'}}<br>
                             {{actor.start_time|amDateFormat:'h:mm a'}} - {{actor.end_time|amDateFormat:'h:mm a'}}</h2>
                         </div>
                         <div class="text-window" ng-bind-html="actor.description"></div>

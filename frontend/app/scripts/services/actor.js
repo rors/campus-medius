@@ -38,7 +38,7 @@ angular.module('CampusMediusApp')
 
                         var starting = startMoment.format('h:mm a');
                         var ending = endMoment.format('h:mm a')
-                        var actor_date = startMoment.format('Do MMM YYYY');
+                        var actor_date = startMoment.format('MMM Do YYYY');
 
                         val.min = startMoment.diff(project_start, 'hours');
                         val.max = endMoment.diff(project_start, 'hours');
