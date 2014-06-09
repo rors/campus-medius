@@ -82,33 +82,25 @@ angular.module('CampusMediusApp')
 
                         // TODO: This needs to be in a directive. As it stands, I am embarrassed 
                         // to say I did this. 
+                        // TODO: implement this
+                        // var template = "<cm-popup content='val'></cm-popup>";
                         var template =
                             '<div class="leaflet-popup-content-inner" ng-click="showActor(\'' + val.slug + '\')"> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <strong>' + val.title + '</strong><br/> \
                                     <em>' + actor_date + '<br/>' + starting + ' <span ng-show="' + !val.isInstant + '">- ' + ending + '</span></em> \
-                                    <ul class="media-icons list-unstyled list-inline">';
-
-                        if (val.hasVideo) {
-                            template += '<li><span class="icon-video"></span></li>';
-                        }
-                        if (val.hasImage) {
-                            template += '<li><span class="icon-camera"></span></li>';
-                        }
-                        if (val.hasSound) {
-                            template += '<li><span class="icon-sound"></span></li>';
-                        }
-                        if (val.hasDocument) {
-                            template += '<li><span class="icon-newspaper"></span></li>';
-                        }
-                        template += '</ul> \
+                                    <ul class="media-icons list-unstyled list-inline"> \
+                                        <li ng-if="' + val.hasVideo + '"><span class="icon-video"></span></li> \
+                                        <li ng-if="' + val.hasImage + '"><span class="icon-camera"></span></li> \
+                                        <li ng-if="' + val.hasSound + '"><span class="icon-sound"></span></li> \
+                                        <li ng-if="' + val.hasDocument + '"><span class="icon-newspaper"></span></li> \
+                                    </ul> \
                                 </div> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <img src="' + STATIC_URL + val.actor_network_image +  '"> \
                                 </div> \
                                 <span class="btn-explore">Explore</span> \
                             </div>';
-
                         val.message = template;
                         val.media_objects = media;
                     });
