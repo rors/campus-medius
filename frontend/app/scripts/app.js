@@ -32,20 +32,20 @@ angular.module('CampusMediusApp', [
         //$locationProvider.html5Mode(true)
         $routeProvider
             .when('/actors/:actorId?', {
-                templateUrl: '/views/map.html',
+                templateUrl: 'views/map.html',
                 reloadOnSearch: false,
                 controller: 'MapController'
             })
             .when('/about', {
-                templateUrl: '/views/about.html',
+                templateUrl: 'views/about.html',
                 controller: 'AboutController'
             })
             .when('/team', {
-                templateUrl: '/views/team.html',
+                templateUrl: 'views/team.html',
                 controller: 'TeamController'
             })
             .when('/topography', {
-                templateUrl: '/views/topography.html',
+                templateUrl: 'views/topography.html',
                 controller: 'TopographyController'
             })
             .otherwise({
