@@ -36,7 +36,7 @@ h1,h2,h3{
     font-family: $titleFont;
     font-weight: 600;
 }
-.lead, blockquote{
+.lead{
     font-family: $titleFont;
 }
 h1{
@@ -48,6 +48,11 @@ h2{
 }
 hr{
     width:100%;
+}
+blockquote, blockquote p{
+    border:none;
+    font-size: 16px;
+    font-style: italic;
 }
 #mainHeader{
     background: black;
