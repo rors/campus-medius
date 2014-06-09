@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'campusmedius';
+    src:url('fonts/campusmedius.eot?-7b3tgr');
+    src:url('fonts/campusmedius.eot?#iefix-7b3tgr') format('embedded-opentype'),
+        url('fonts/campusmedius.woff?-7b3tgr') format('woff'),
+        url('fonts/campusmedius.ttf?-7b3tgr') format('truetype'),
+        url('fonts/campusmedius.svg?-7b3tgr#campusmedius') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'campusmedius';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-video:before {
+    content: "\e604";
+}
+.icon-sound:before {
+    content: "\e601";
+}
+.icon-camera:before {
+    content: "\e602";
+}
+.icon-newspaper:before {
+    content: "\e603";
+}
+.icon-arrow-left:before {
+    content: "\e600";
+}

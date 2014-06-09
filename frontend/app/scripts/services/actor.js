@@ -50,29 +50,57 @@ angular.module('CampusMediusApp')
                             popupAnchor: ICON_SIZES.popup
                         }
                         val.color = colors[val.political_affiliation];
+
+                        // filter out sound objects for now
+                        var media = [];
+                        val.hasVideo = false;
+                        val.hasSound = false;
+                        val.hasImage = false;
+                        val.hasDocument = false;
+                        angular.forEach(val.media_objects, function(v, k) {
+                            if(v.type!='Sound') {
+                                if(v.type === 'Video') {
+                                    v.url = STATIC_URL + v.url;
+                                    val.hasVideo = true;
+                                }
+                                if(v.type === 'Image') {
+                                    val.hasImage = true;
+                                }
+                                if(v.type === 'Document') {
+                                    val.hasDocument  = true;
+                                }
+                                media.push(v);
+                            }
+                        });
+
                         var template =
                             '<div class="leaflet-popup-content-inner" ng-click="showActor(\'' + val.slug + '\')"> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <strong>' + val.title + '</strong><br/> \
                                     <em>' + actor_date + '<br/>' + starting + ' - ' + ending + '</em> \
+                                    <ul class="media-icons list-unstyled list-inline">';
+
+                        if (val.hasVideo) {
+                            template += '<li><span class="icon-video"></span></li>';
+                        }
+                        if (val.hasImage) {
+                            template += '<li><span class="icon-camera"></span></li>';
+                        }
+                        if (val.hasSound) {
+                            template += '<li><span class="icon-sound"></span></li>';
+                        }
+                        if (val.hasDocument) {
+                            template += '<li><span class="icon-newspaper"></span></li>';
+                        }
+                        template += '</ul> \
                                 </div> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <img src="' + STATIC_URL + val.actor_network_image +  '"> \
                                 </div> \
                                 <span class="btn-explore">Explore</span> \
                             </div>';
-                        val.message = template;
 
-                        // filter out video/sound objects for now
-                        var media = [];
-                        angular.forEach(val.media_objects, function(v, k) {
-                            if(v.type!='Sound') {
-                                if(v.type === 'Video') {
-                                    v.url = STATIC_URL + v.url;
-                                }
-                                media.push(v);
-                            }
-                        });
+                        val.message = template;
                         val.media_objects = media;
                     });
                     actors = data.objects;

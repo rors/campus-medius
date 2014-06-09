@@ -1,5 +1,7 @@
 $grayLight: #EAEAEA;
 $titleFont: 'Titillium Web', sans-serif;
+@import 'fonts.css';
+
 rzslider span.pointer{
     background-color: #CCC;
 }
@@ -239,6 +241,15 @@ button.close{
 }
 .leaflet-popup-tip{
     display: none;
+}
+.media-icons{
+    font-size: 24px;
+    margin-left: 0;
+    margin-top:10px;
+    li{
+        padding-right: 2px;
+        padding-left: 2px;
+    }
 }
 /* carousel */
 .carousel img{
