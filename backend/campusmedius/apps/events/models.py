@@ -85,6 +85,11 @@ class MediaObject(BaseModel):
             return "Sound"
         except MediaObject.DoesNotExist:
             pass
+        try:
+            self.document
+            return "Document"
+        except MediaObject.DoesNotExist:
+            pass
 
     @property
     def url(self):
@@ -103,6 +108,11 @@ class MediaObject(BaseModel):
             return self.sound.url
         except MediaObject.DoesNotExist:
             pass
+        try:
+            self.document
+            return self.document.url
+        except MediaObject.DoesNotExist:
+            pass
 
     def __unicode__(self):
         return "%s (%s)" % ( self.title, self.type )
@@ -115,4 +125,7 @@ class Video(MediaObject):
 
 class Sound(MediaObject):
     sound = models.FileField(upload_to="sounds")
+
+class Document(MediaObject):
+    document = models.FileField(upload_to="documents")
 
