@@ -46,7 +46,8 @@ angular.module('CampusMediusApp')
                         val.icon = {
                             iconUrl: STATIC_URL + val.icon,
                             iconSize: ICON_SIZES.icon['DEFAULT'],
-                            iconAnchor: ICON_SIZES.anchor['DEFAULT']
+                            iconAnchor: ICON_SIZES.anchor['DEFAULT'],
+                            popupAnchor: ICON_SIZES.popup
                         }
                         val.color = colors[val.political_affiliation];
                         var template =
@@ -58,6 +59,7 @@ angular.module('CampusMediusApp')
                                 <div class="leaflet-popup-column pull-left"> \
                                     <img src="' + STATIC_URL + val.actor_network_image +  '"> \
                                 </div> \
+                                <span class="btn-explore">Explore</span> \
                             </div>';
                         val.message = template;
 

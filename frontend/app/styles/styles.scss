@@ -26,6 +26,7 @@ rzslider span.pointer.active:after{
 }
 body{
     font-family:Arial;
+    font-size:16px;
 }
 input {
     width: 120px;
@@ -201,6 +202,12 @@ button.close{
 }
 
 /* leaflet */
+.btn-explore{
+    text-decoration: underline;
+    font-size: 18px;
+    font-family: $titleFont;
+    font-weight: bold;
+}
 .leaflet-popup-content-wrapper{
     border-radius: 0;
 }
@@ -212,16 +219,20 @@ button.close{
     padding:13px 19px;
     cursor:pointer;
     overflow: hidden;
+    font-size: 16px;
 }
 .leaflet-popup-column{
     width:50%;
     strong{
         font-family: $titleFont;
-        font-size:16px;
+        font-size:18px;
     }
     img{
         max-width: 100% !important;
     }
+}
+.leaflet-popup-tip{
+    display: none;
 }
 /* carousel */
 .carousel img{
@@ -285,6 +296,7 @@ vg-controls{
     width: 100%;
     padding:10px;
     overflow: scroll;
+    font-size: 14px;
     a{
         font-weight: bold;
         color:white;

@@ -23,7 +23,8 @@ angular.module('CampusMediusApp', [
         anchor: {
             DEFAULT: [20, 81],
             LARGE: [20, 90]
-        }
+        },
+        popup: [0, 60]
     })
     .constant('STATIC_URL', 'http://campusmedius.net')
     .constant('API_ENDPOINT', 'http://campusmedius.net/data/api/event/?format=json')
