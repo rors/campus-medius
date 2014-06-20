@@ -29,23 +29,23 @@ angular.module('CampusMediusApp', [
     .constant('STATIC_URL', 'http://campusmedius.net')
     .constant('API_ENDPOINT', 'http://campusmedius.net/data/api/event/?format=json')
     .config(function($routeProvider, $locationProvider) {
-        //$locationProvider.html5Mode(true)
+        $locationProvider.html5Mode(true)
         $routeProvider
             .when('/actors/:actorId?', {
-                templateUrl: 'views/map.html',
+                templateUrl: '/views/map.html',
                 reloadOnSearch: false,
                 controller: 'MapController'
             })
             .when('/about', {
-                templateUrl: 'views/about.html',
+                templateUrl: '/views/about.html',
                 controller: 'AboutController'
             })
             .when('/team', {
-                templateUrl: 'views/team.html',
+                templateUrl: '/views/team.html',
                 controller: 'TeamController'
             })
             .when('/topography', {
-                templateUrl: 'views/topography.html',
+                templateUrl: '/views/topography.html',
                 controller: 'TopographyController'
             })
             .otherwise({
