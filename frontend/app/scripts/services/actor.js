@@ -45,7 +45,7 @@ angular.module('CampusMediusApp')
 
                         var starting = startMoment.format('h:mm a');
                         var ending = endMoment.format('h:mm a')
-                        var actor_date = startMoment.format('MMM Do YYYY');
+                        var actor_date = startMoment.format('MMM D, YYYY');
 
                         val.min = startMoment.diff(project_start, 'hours');
                         val.max = endMoment.diff(project_start, 'hours');
@@ -88,7 +88,7 @@ angular.module('CampusMediusApp')
                             '<div class="leaflet-popup-content-inner" ng-click="showActor(\'' + val.slug + '\')"> \
                                 <div class="leaflet-popup-column pull-left"> \
                                     <strong>' + val.title + '</strong><br/> \
-                                    <em>' + actor_date + '<br/>' + starting + ' <span ng-show="' + !val.isInstant + '">- ' + ending + '</span></em> \
+                                    <em>' + actor_date + '<br/>' + starting + ' <span ng-show="' + !val.isInstant + '">&ndash; ' + ending + '</span></em> \
                                     <ul class="media-icons list-unstyled list-inline"> \
                                         <li ng-if="' + val.hasVideo + '"><span class="icon-video"></span></li> \
                                         <li ng-if="' + val.hasImage + '"><span class="icon-camera"></span></li> \
