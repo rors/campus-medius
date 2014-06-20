@@ -104,10 +104,9 @@ angular.module('CampusMediusApp')
       $location.path('/actors/' + id);
     };
 
-    $scope.highlightActor = function(id, toDefault){
-      id = parseInt(id);
+    $scope.highlightActor = function(slug, toDefault){
       for(var i=0; i<$scope.markers.length; i++) {
-          if($scope.markers[i].id === id) {
+          if($scope.markers[i].slug === slug) {
               if(!toDefault){
                 $scope.markers[i].icon.iconSize = ICON_SIZES.icon['LARGE'];
                 $scope.markers[i].icon.iconAnchor = ICON_SIZES.anchor['LARGE'];
