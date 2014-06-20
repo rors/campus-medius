@@ -99,7 +99,7 @@ angular.module('CampusMediusApp')
                                 <div class="leaflet-popup-column pull-left"> \
                                     <img src="' + STATIC_URL + val.actor_network_image +  '"> \
                                 </div> \
-                                <span class="btn-explore">Explore</span> \
+                                <span class="btn-explore">explore</span> \
                             </div>';
                         val.message = template;
                         val.media_objects = media;

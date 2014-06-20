@@ -142,8 +142,9 @@ blockquote, blockquote p{
 button.close{
     color:#333;
     opacity:.8;
-    margin-right:15px;
-    margin-top:15px;
+    margin-right: 0px;
+    margin-top: 5px;
+    font-size: 26px;
 }
 #actor-media{
     max-height: 420px;
@@ -215,12 +216,19 @@ button.close{
     font-family: $titleFont;
     font-weight: bold;
 }
+.leaflet-container a.leaflet-popup-close-button {
+    padding: 8px 4px 0 0;
+    font-size: 22px;
+    color: #333;
+    width: 24px;
+    height: 24px;
+}
 .leaflet-popup-content-wrapper{
     border-radius: 0;
 }
 .leaflet-popup-content{
     margin:0;
-    min-width:340px;
+    min-width:440px;
 }
 .leaflet-popup-content-inner{
     padding:13px 19px;
