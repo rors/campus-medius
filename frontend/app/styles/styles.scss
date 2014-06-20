@@ -134,7 +134,8 @@ blockquote, blockquote p{
 }
 
 .text-window{
-    max-height: 580px;
+    max-height: 550px;
+    margin-bottom: 20px;
     overflow:scroll;
     padding-right: 20px;
     position: relative;
@@ -208,7 +209,6 @@ button.close{
     margin-top: 0;
     margin-bottom:0;
 }
-
 /* leaflet */
 .btn-explore{
     text-decoration: underline;
