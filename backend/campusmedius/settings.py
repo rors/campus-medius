@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'south',
 
     'events',
+    'website',
 )
 
 # A sample logging configuration. The only tangible logging
