@@ -34,6 +34,8 @@ class EventAdmin(CMGeoAdmin):
     list_display = ( 'title', 'start_time', 'end_time', 'political_affiliation', 'mediality_mode', )
     list_filter = ( 'political_affiliation', 'mediality_mode', )
 
+    ordering = ( 'start_time', 'title', )
+
     search_fields = ( 'slug', 'title', 'description', )
 
 admin.site.register(Event, EventAdmin)
