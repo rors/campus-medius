@@ -40,6 +40,8 @@ class TeamMember(BaseModel):
 
     bio = tinymce_models.HTMLField()
 
+    portrait = models.ImageField(upload_to="team-portraits",null=True, blank=True, verbose_name="Team Member Portrait")
+
     def __unicode__(self):
         return "%s %s" % ( self.first_name, self.last_name )
 
