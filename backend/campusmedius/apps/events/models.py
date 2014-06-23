@@ -118,6 +118,13 @@ class MediaObject(BaseModel):
         except MediaObject.DoesNotExist:
             pass
 
+    @property
+    def external_id(self):
+        try:
+            return self.video.vimeo_id
+        except MediaObject.DoesNotExist:
+            return None
+
     def __unicode__(self):
         return "%s (%s)" % ( self.title, self.type )
 
@@ -126,6 +133,7 @@ class Image(MediaObject):
 
 class Video(MediaObject):
     video = models.FileField(upload_to="videos")
+    vimeo_id = models.CharField(max_length=100,unique=True, verbose_name="Vimeo Video ID",default="");
 
 class Sound(MediaObject):
     sound = models.FileField(upload_to="sounds")
