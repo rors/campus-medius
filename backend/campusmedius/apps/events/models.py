@@ -133,7 +133,7 @@ class Image(MediaObject):
 
 class Video(MediaObject):
     video = models.FileField(upload_to="videos")
-    vimeo_id = models.CharField(max_length=100,unique=True, verbose_name="Vimeo Video ID",default="");
+    vimeo_id = models.CharField(max_length=100, verbose_name="Vimeo Video ID",default="");
 
 class Sound(MediaObject):
     sound = models.FileField(upload_to="sounds")

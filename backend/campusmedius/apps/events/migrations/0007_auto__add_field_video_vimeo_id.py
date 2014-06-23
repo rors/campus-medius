@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'Video.vimeo_id'
-        db.add_column(u'events_video', 'vimeo_id', self.gf('django.db.models.fields.CharField')(default='', unique=True, max_length=100), keep_default=False)
+        db.add_column(u'events_video', 'vimeo_id', self.gf('django.db.models.fields.CharField')(default='', max_length=100), keep_default=False)
 
 
     def backwards(self, orm):
@@ -74,7 +74,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Video', '_ormbases': [u'events.MediaObject']},
             u'mediaobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['events.MediaObject']", 'unique': 'True', 'primary_key': 'True'}),
             'video': ('django.db.models.fields.files.FileField', [], {'max_length': '100'}),
-            'vimeo_id': ('django.db.models.fields.CharField', [], {'default': "''", 'unique': 'True', 'max_length': '100'})
+            'vimeo_id': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '100'})
         }
     }
 
