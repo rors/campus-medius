@@ -21,9 +21,14 @@ class BaseModel(models.Model):
 
 class Page(BaseModel):
 
+    class Meta:
+        ordering = [ 'order', ]
+
     title = models.CharField(max_length=1000,unique=True, verbose_name="Page Title");
 
     body = tinymce_models.HTMLField()
+
+    order = models.IntegerField()
 
     def __unicode__(self):
         return self.title
