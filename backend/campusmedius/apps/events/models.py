@@ -118,13 +118,6 @@ class MediaObject(BaseModel):
         except MediaObject.DoesNotExist:
             pass
 
-    @property
-    def external_id(self):
-        try:
-            return self.video.vimeo_id
-        except MediaObject.DoesNotExist:
-            return None
-
     def __unicode__(self):
         return "%s (%s)" % ( self.title, self.type )
 

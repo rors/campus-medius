@@ -15,7 +15,12 @@ class MediaObjectResource(CORSResource,ModelResource):
     def dehydrate(self, bundle):
         bundle.data['type'] = bundle.obj.type
         bundle.data['url'] = bundle.obj.url
-        bundle.data['external_id'] = bundle.obj.external_id
+
+        try:
+            bundle.data['vimeo_id'] = bundle.obj.video.vimeo_id
+        except:
+            pass
+
         return bundle
 
 class EventResource(CORSResource,ModelResource):
