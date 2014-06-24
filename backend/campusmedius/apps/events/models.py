@@ -45,6 +45,8 @@ class Event(BaseModel):
 
     location = models.PointField(null=True)
 
+    path = models.MultiLineStringField(null=True)
+
     political_affiliation = models.CharField(choices=political_groups, max_length=50, null=False, blank=True)
     mediality_mode = models.CharField(choices=mediality_modes, max_length=50, null=False, blank=True)
 
