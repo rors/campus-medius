@@ -103,6 +103,7 @@ angular.module('angular-carousel')
 
                         repeatItem = exprMatch[1];
                         repeatCollection = exprMatch[2];
+
                         if (repeatItem) {
                             if (angular.isDefined(tAttributes['rnCarouselBuffered'])) {
                                 // update the current ngRepeat expression and add a slice operator if buffered
@@ -309,7 +310,6 @@ angular.module('angular-carousel')
                             i = scope.carouselIndex;
                         }
                         if (animate) {
-                            if (!containerWidth) updateContainerWidth();
                             // simulate a swipe so we have the standard animation
                             // used when external binding index is updated or touch canceed
                             offset = (i * containerWidth);

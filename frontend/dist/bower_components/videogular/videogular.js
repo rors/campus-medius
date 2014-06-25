@@ -1,3 +1,8 @@
+/**
+ * @license Videogular v0.4.0 http://videogular.com
+ * Two Fucking Developers http://twofuckingdevelopers.com
+ * License: MIT
+ */
 "use strict";
 angular.module("com.2fdevs.videogular", ["ngSanitize"])
 	.constant("VG_STATES", {
@@ -22,7 +27,8 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 		ON_UPDATE_SIZE: "onVgUpdateSize",
 		ON_UPDATE_THEME: "onVgUpdateTheme",
 		ON_PLAYER_READY: "onVgPlayerReady",
-		ON_LOAD_POSTER: "onVgLoadPoster"
+		ON_LOAD_POSTER: "onVgLoadPoster",
+		ON_ERROR: "onVgError"
 	})
 	.service("VG_UTILS", function() {
 		this.fixEventOffset = function($event) {
@@ -55,10 +61,10 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 		this.getZIndex = function() {
 			var zIndex = 1;
 
-			$('*')
-				.filter(function(){ return $(this).css('zIndex') !== 'auto'; })
+			angular.element('*')
+				.filter(function(){ return angular.element(this).css('zIndex') !== 'auto'; })
 				.each(function(){
-					var thisZIndex = parseInt($(this).css('zIndex'));
+					var thisZIndex = parseInt(angular.element(this).css('zIndex'));
 					if (zIndex < thisZIndex) zIndex = thisZIndex + 1;
 				});
 
@@ -119,6 +125,14 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 					onexit: "webkitendfullscreen",
 					onchange: "webkitfullscreenchange",
 					onerror:  "webkitfullscreenerror"
+				},
+				ms: {
+					enabled: "msFullscreenEnabled",
+					element: "msFullscreenElement",
+					request: "msRequestFullscreen",
+					exit:    "msExitFullscreen",
+					onchange: "msfullscreenchange",
+					onerror:  "msfullscreenerror"
 				}
 			};
 
@@ -144,6 +158,53 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 			angular.element($window)[0].fullScreenAPI = fullScreenAPI;
 		}
 	])
+	/**
+	 * @ngdoc directive
+	 * @name com.2fdevs.videogular.videogular:videogular
+	 * @restrict E
+	 * @description
+	 * Main directive that must wrap a &lt;video&gt; tag and all plugins.
+	 *
+	 * &lt;video&gt; tag usually will be above plugin tags, that's because plugins should be in a layer over the &lt;video&gt;.
+	 *
+	 * You can customize `videogular` with these attributes:
+	 *
+	 * @param {number or string} vgWidth This directive sets width for the entire player. Passing a number will set the width normally. Passing a string will create a binding with a scope variable in case it exists.
+	 *
+	 * If `vgWidth` or `vgHeight` are not declared, or `vgResponsive` is `"true"`, player will enter in a responsive mode and width will be 100% and height will be calculated through video metadata to preserve aspect ratio.
+	 *
+	 * @param {number or string} vgHeight This directive sets height for the entire player. Passing a number will set the height normally. Passing a string will create a binding with a scope variable in case it exists.
+	 *
+	 * If `vgWidth` or `vgHeight` are not declared, or `vgResponsive` is `"true"`, player will enter in a responsive mode and width will be 100% and height will be calculated through video metadata to preserve aspect ratio.
+	 *
+	 * @param {string} vgTheme String with a scope name variable. This directive will inject a CSS link in the header of your page.
+	 * **This parameter is required.**
+	 *
+	 * @param {boolean or string} [autoPlay=false] vgAutoplay Boolean value or a String with a scope name variable to auto start playing video when it is initialized.
+	 *
+	 * **This parameter is disabled in mobile devices** because user must click on content to prevent consuming mobile data plans.
+	 *
+	 * @param {string} [stretch=none] vgStretch String value representing a stretch mode. This value controls how image will scale inside its container. Stretch modes available are "none", "fit" or "fill".
+	 *
+	 * - **"none"**: Will set the image in its original size.
+	 * - **"fit"**: Will try to show always all the image leaving black bars above and below.
+	 * - **"fill"**: Will try to cover all video player area to never show black bars above and below.
+	 *
+	 * Content will always appear centered.
+	 *
+	 * @param {boolean or string} [isResponsive=false] vgResponsive Boolean value or a String with a scope name variable to auto start playing video when it is initialized.
+	 *
+	 * @param {function} vgComplete Function name in controller's scope to call when video have been completed.
+	 * @param {function} vgUpdateVolume Function name in controller's scope to call when volume changes. Receives a param with the new volume.
+	 * @param {function} vgUpdateTime Function name in controller's scope to call when video playback time is updated. Receives two params with current time and duration in milliseconds.
+	 * @param {function} vgUpdateSize Function name in controller's scope to call when videogular size is updated. Receives two param with the new width and height.
+	 * @param {function} vgUpdateState Function name in controller's scope to call when video state changes. Receives a param with the new state. Possible values are "play", "stop" or "pause".
+	 * @param {function} vgPlayerReady Function name in controller's scope to call when video have been initialized. Receives a param with the videogular API.
+	 * @param {function} vgChangeSource Function name in controller's scope to change current video source. Receives a param with the new video.
+	 * This is a free parameter and it could be values like "new.mp4", "320" or "sd". This will allow you to use this to change a video or video quality.
+	 * This callback will not change the video, you should do that by updating your sources scope variable.
+	 *
+	 */
 	.directive(
 		"videogular",
 		["$window", "VG_STATES", "VG_EVENTS", "VG_UTILS", function($window, VG_STATES, VG_EVENTS, VG_UTILS) {
@@ -161,13 +222,14 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 					vgUpdateTime: "&",
 					vgUpdateSize: "&",
 					vgUpdateState: "&",
-					vgPlayerReady: "&"
+					vgPlayerReady: "&",
+					vgChangeSource: "&"
 				},
 				controller: ['$scope', function($scope) {
 					var currentTheme = null;
 					var currentWidth = null;
 					var currentHeight = null;
-					var currentState = VG_STATES.STOP;
+
 					var currentStretch = $scope.stretch;
 					var playerWidth = 0;
 					var playerHeight = 0;
@@ -186,6 +248,9 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 					var vgUpdateSizeCallBack = $scope.vgUpdateSize();
 					var vgUpdateStateCallBack = $scope.vgUpdateState();
 					var vgPlayerReadyCallBack = $scope.vgPlayerReady();
+					var vgChangeSourceCallBack = $scope.vgChangeSource();
+
+					$scope.currentState = VG_STATES.STOP;
 
 					// PUBLIC $API
 					this.$on = function() {
@@ -202,26 +267,22 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 
 					this.playPause = function() {
 						if (this.videoElement[0].paused) {
-							this.videoElement[0].play();
-							this.setState(VG_STATES.PLAY);
-							$scope.$emit(VG_EVENTS.ON_PLAY);
+							this.play();
 						}
 						else {
-							this.videoElement[0].pause();
-							this.setState(VG_STATES.PAUSE);
-							$scope.$emit(VG_EVENTS.ON_PAUSE);
+							this.pause();
 						}
 					};
 
 					this.setState = function(newState) {
-						if (newState && newState != currentState) {
+						if (newState && newState != $scope.currentState) {
 							if (vgUpdateStateCallBack) vgUpdateStateCallBack(newState);
 
-							currentState = newState;
-							$scope.$emit(VG_EVENTS.ON_SET_STATE, [currentState]);
+							$scope.currentState = newState;
+							$scope.$emit(VG_EVENTS.ON_SET_STATE, [$scope.currentState]);
 						}
 
-						return currentState;
+						return $scope.currentState;
 					};
 
 					this.play = function() {
@@ -234,6 +295,13 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						this.videoElement[0].pause();
 						this.setState(VG_STATES.PAUSE);
 						$scope.$emit(VG_EVENTS.ON_PAUSE);
+					};
+
+					this.stop = function() {
+						this.videoElement[0].pause();
+						this.videoElement[0].currentTime = 0;
+						this.setState(VG_STATES.STOP);
+						$scope.$emit(VG_EVENTS.ON_COMPLETE);
 					};
 
 					this.toggleFullScreen = function() {
@@ -288,6 +356,10 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						element[angular.element($window)[0].fullScreenAPI.request]();
 					};
 
+					this.changeSource = function(newValue) {
+						if (vgChangeSourceCallBack) vgChangeSourceCallBack(newValue);
+					};
+
 					this.setVolume = function(newVolume) {
 						if (vgUpdateVolumeCallBack) vgUpdateVolumeCallBack(newVolume);
 
@@ -322,6 +394,7 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 					this.setSize = function(newWidth, newHeight) {
 						currentWidth = newWidth;
 						currentHeight = newHeight;
+
 						$scope.updateSize();
 					};
 
@@ -384,7 +457,6 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						});
 
 						$scope.$watch("responsive", function(newValue, oldValue) {
-							console.log('resp fired!', newValue, oldValue);
 							if (newValue != oldValue){
 								isResponsive = newValue;
 
@@ -442,7 +514,7 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						if (vgPlayerReadyCallBack) vgPlayerReadyCallBack(vg);
 						$scope.$emit(VG_EVENTS.ON_PLAYER_READY);
 
-						if ($scope.autoPlay && !VG_UTILS.isMobileDevice() || currentState === VG_STATES.PLAY) vg.play();
+						if ($scope.autoPlay && !VG_UTILS.isMobileDevice() || $scope.currentState === VG_STATES.PLAY) vg.play();
 					};
 
 					$scope.updateSize = function() {
@@ -481,8 +553,8 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 								playerHeight = videoSize.height;
 							}
 
-							if (videoSize.width == 0) videoSize.width = currentWidth;
-							if (videoSize.height == 0) videoSize.height = currentHeight;
+							if (videoSize.width == 0 || isNaN(videoSize.width)) videoSize.width = currentWidth;
+							if (videoSize.height == 0 || isNaN(videoSize.height)) videoSize.height = currentHeight;
 
 							videoLeft = (playerWidth - videoSize.width) / 2;
 							videoTop = (playerHeight - videoSize.height) / 2;
@@ -490,7 +562,7 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 							vg.videoElement.attr("width", parseInt(videoSize.width, 10));
 							vg.videoElement.attr("height", parseInt(videoSize.height, 10));
 							vg.videoElement.css("width", parseInt(videoSize.width, 10) + "px");
-							vg.videoElement.css("height", parseInt(videoSize.height, 10));
+							vg.videoElement.css("height", parseInt(videoSize.height, 10) + "px");
 							vg.videoElement.css("top", videoTop + "px");
 							vg.videoElement.css("left", videoLeft + "px");
 
@@ -509,7 +581,7 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 
 						currentWidth = vg.elementScope[0].parentNode.clientWidth;
 						currentHeight = videoHeight;
-						console.log('dimensions', currentWidth, currentHeight);
+
 						$scope.updateSize();
 					};
 
@@ -522,7 +594,6 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						}
 
 						$scope.updateSize();
-						$scope.$apply();
 					};
 
 					$scope.onComplete = function(event) {
@@ -530,12 +601,10 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 
 						vg.setState(VG_STATES.STOP);
 						$scope.$emit(VG_EVENTS.ON_COMPLETE);
-						$scope.$apply();
 					};
 
 					$scope.onStartBuffering = function(event) {
 						$scope.$emit(VG_EVENTS.ON_BUFFERING);
-						$scope.$apply();
 					};
 
 					$scope.onStartPlaying = function(event) {
@@ -544,14 +613,12 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 						event.target.width--;
 
 						$scope.$emit(VG_EVENTS.ON_START_PLAYING, [event.target.duration]);
-						$scope.$apply();
 					};
 
 					$scope.onUpdateTime = function(event) {
 						if (vgUpdateTimeCallBack) vgUpdateTimeCallBack(event.target.currentTime, event.target.duration);
 
 						$scope.$emit(VG_EVENTS.ON_UPDATE_TIME, [event.target.currentTime, event.target.duration]);
-						$scope.$apply();
 					};
 
 					$scope.getVideoSize = function(w, h) {
@@ -601,5 +668,52 @@ angular.module("com.2fdevs.videogular", ["ngSanitize"])
 				}
 			}
 		}
-	]
-);
+	])
+	.directive("vgSrc",
+		["VG_EVENTS", "VG_UTILS", function(VG_EVENTS, VG_UTILS) {
+			return {
+				restrict: "A",
+				link: {
+					pre: function(scope, elem, attr) {
+						var element = elem;
+						var sources;
+						var canPlay;
+
+						function changeSource() {
+							canPlay = "";
+
+							// It's a cool browser
+							if (element[0].canPlayType) {
+								for (var i = 0, l = sources.length; i < l; i++) {
+									canPlay = element[0].canPlayType(sources[i].type);
+
+									if (canPlay == "maybe" || canPlay == "probably") {
+										element.attr("src", sources[i].src);
+										element.attr("type", sources[i].type);
+										break;
+									}
+								}
+							}
+							// It's a crappy browser and it doesn't deserve any respect
+							else {
+								// Get H264 or the first one
+								element.attr("src", sources[0].src);
+								element.attr("type", sources[0].type);
+							}
+
+							if (canPlay == "") {
+								scope.$emit(VG_EVENTS.ON_ERROR, {type: "Can't play file"})
+							}
+						}
+
+						scope.$watch(attr.vgSrc, function(newValue, oldValue) {
+							if (!sources || newValue != oldValue) {
+								sources = newValue;
+								changeSource();
+							}
+						});
+					}
+				}
+			}
+		}
+	]);
