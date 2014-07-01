@@ -11,5 +11,6 @@ angular.module('CampusMediusApp')
 
       $scope.$on('showActor', function(event, args) {
           $scope.actor = ActorService.get($routeParams.actorId);
+          $scope.actor.description =  $sce.trustAsHtml($scope.actor.description);
       });  
     }]);
