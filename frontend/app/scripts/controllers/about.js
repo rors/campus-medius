@@ -1,4 +1,8 @@
 angular.module('CampusMediusApp')
-  .controller('AboutController', function ($scope, $sce) {
-
-  });
+  .controller('AboutController', ['$scope', '$sce', 'PageService', function ($scope, $sce, PageService) {
+    PageService.getPage('about')
+        .then(function(pageData) {
+            $scope.page = pageData;
+            $scope.page.body = $sce.trustAsHtml($scope.page.body);
+        })
+    }]);
