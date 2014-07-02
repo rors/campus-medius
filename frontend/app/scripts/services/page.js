@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('CampusMediusApp')
-  .service('PageService', function Actorservice($window, $http, ICON_SIZES, STATIC_URL, API_ENDPOINT_PAGES) {
+  .service('PageService', function PageService($window, $http, API_ENDPOINT_PAGES) {
     var pages = [];
     var pagesPromise;
 

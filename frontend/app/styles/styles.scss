@@ -335,3 +335,65 @@ vg-controls{
         text-decoration: underline;
     }
 }
+
+.member{
+    width:200px;
+    position:absolute;
+    z-index: 999;
+    cursor:pointer;
+    &.active{
+    }
+}
+.member-1{
+    right:20px;
+    top:0;
+}
+.member-2{
+    right:235px;
+    top:110px;
+}
+.member-3{
+    right:20px;
+    top:225px;
+}
+.member-4{
+    right:235px;
+    top:335px;
+}
+.member-5{
+    right:20px;
+    top:450px;
+}
+
+.connector-line{
+    width: 2px;
+    background: black;
+    position: absolute;
+    z-index: 1;
+}
+.vertical-connector{
+    height: 500px;
+    right: 136px;
+    top:50px;
+}
+.angled-connector{
+    height: 310px;
+    right: 252px;
+    top: -7px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(60deg);
+    -moz-transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    &.lower-connector{
+        top:225px;
+    }
+}
+
+.zoomable {
+  -webkit-transform: scale(1, 1);
+  transition: .3s;
+  cursor: pointer;}
+  .zoomable:hover {
+    -webkit-transform: scale(1.05, 1.05); }
+  .zoomable.active:hover {
+    -webkit-transform: none; }

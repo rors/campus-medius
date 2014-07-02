@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('CampusMediusApp')
   .controller('AboutController', ['$scope', '$sce', 'PageService', function ($scope, $sce, PageService) {
     $scope.page = undefined;

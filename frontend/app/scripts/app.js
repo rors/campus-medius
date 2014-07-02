@@ -29,6 +29,7 @@ angular.module('CampusMediusApp', [
     .constant('STATIC_URL', 'http://campusmedius.net')
     .constant('API_ENDPOINT_ACTORS', 'http://campusmedius.net/data/api/event/?format=json')
     .constant('API_ENDPOINT_PAGES', 'http://campusmedius.net/data/websiteapi/pages/page/?format=json')
+    .constant('API_ENDPOINT_TEAM', 'http://campusmedius.net/data/websiteapi/teammembers/teammember/?format=json')
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true)
         $routeProvider
