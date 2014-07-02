@@ -7,16 +7,19 @@ angular.module('CampusMediusApp')
 
     return {
         getPage: function(slug) {
+            if(pagesPromise) {
+                return pagesPromise;
+            }
             var request = $http({
                 method: 'GET',
                 cache: true,
                 url: API_ENDPOINT_PAGES
             });
-
-            return request.then(function(response) {
+            pagesPromise = request.then(function(response) {
                 pages = response.data.objects;
                 return getPageBySlug(slug);
             });
+            return pagesPromise;
         }
     };
 
