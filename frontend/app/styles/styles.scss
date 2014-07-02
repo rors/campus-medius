@@ -397,3 +397,29 @@ vg-controls{
     -webkit-transform: scale(1.05, 1.05); }
   .zoomable.active:hover {
     -webkit-transform: none; }
+
+/*media objects */
+.media-object{
+    background: #eaeaea;
+    padding: 3px 5px;
+    line-height: 1.7;
+    border-radius: 5px;
+    display: inline;
+    &:before{
+        margin-right: 5px;
+        font-family: 'campusmedius';
+        line-height: 1;
+        -webkit-font-smoothing:antialiased;
+    }
+}
+.media-object-image:before{
+    content:"\e602";
+}
+
+.media-object-video:before{
+    content:"\e604";
+}
+
+.media-object-document:before{
+    content:"\e603";
+}
