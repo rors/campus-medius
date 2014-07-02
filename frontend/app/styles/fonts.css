@@ -35,6 +35,9 @@
 .icon-newspaper:before {
     content: "\e603";
 }
+.icon-arrow-right:before {
+    content: "\e605";
+}
 .icon-arrow-left:before {
     content: "\e600";
 }
