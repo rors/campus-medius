@@ -19,8 +19,6 @@ angular.module('CampusMediusApp')
             .append(compiled);
       });  
       $scope.$on('mediaObjectClicked', function(e, args) {
-        console.log('args', args);
-        return;
         var index = parseInt(args.id) - 1;
         angular.element('.rn-carousel-indicator>span:eq(' + index +')').click();
         $scope.$apply();
