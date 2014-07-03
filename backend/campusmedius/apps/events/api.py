@@ -34,7 +34,12 @@ class EventResource(CORSResource,ModelResource):
                                         attribute=lambda bundle: MediaObject.objects.filter(event=bundle.obj).order_by('eventmediaobject__order') )
 
     def dehydrate(self, bundle):
-        bundle.data['lat'] = bundle.obj.location.y
         bundle.data['lng'] = bundle.obj.location.x
+        bundle.data['lat'] = bundle.obj.location.y
+
+        latlngs = []
+        if bundle.obj.path:
+            latlngs = [ { 'lng':pt[0], 'lat':pt[1] } for pt in bundle.obj.path.coords[0] ]
+        bundle.data['path'] = { 'latlngs': latlngs }
         return bundle
 
