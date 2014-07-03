@@ -453,3 +453,22 @@ vg-controls{
         height: 100%; 
     }
 }
+
+.actor-paginate{
+    position:absolute;
+    width:59px;
+    height:150px;
+    top:40%;
+    cursor:pointer;
+    &.actor-paginate-prev{
+        left:-59px;
+        background:url(../images/btn-prev.png) top left no-repeat;
+        background-size:contain;
+    }
+
+    &.actor-paginate-next{
+        right:-59px;
+        background:url(../images/btn-next.png) top left no-repeat;
+        background-size:contain;
+    }
+}

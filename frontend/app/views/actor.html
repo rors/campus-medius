@@ -1,6 +1,8 @@
 <div class="modal fade in" ng-controller="ActorController" ng-show="actor!==false">
     <div class="modal-dialog modal-full">
         <div class="modal-content">
+            <p ng-click="showActor(actor.prevItem)" class="actor-paginate actor-paginate-prev"></p>
+            <p ng-click="showActor(actor.nextItem)" class="actor-paginate actor-paginate-next"></p>
             <div class="container-fluid" id="actorViewInner">
                 <button type="submit" ng-click="killActor()" class="close">&times;</button>
                 <div class="row" scroll-spy id="spy-window">
