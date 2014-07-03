@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('CampusMediusApp')
-  .service('ActorService', function Actorservice($window, $http, ICON_SIZES, STATIC_URL, API_ENDPOINT) {
-    //var API_ENDPOINT = $window.location.hostname==='127.0.0.1' ? 'http://127.0.0.1:3000/actors' : 'data/actors.json';
-    //var API_ENDPOINT = 'data/actors.json';
+  .service('ActorService', function Actorservice($window, $http, ICON_SIZES, STATIC_URL, API_ENDPOINT_ACTORS) {
+    //var API_ENDPOINT_ACTORS = $window.location.hostname==='127.0.0.1' ? 'http://127.0.0.1:3000/actors' : 'data/actors.json';
+    //var API_ENDPOINT_ACTORS = 'data/actors.json';
     var actors = [];
     return {
         all: function() {
-            return $http({method: 'GET', url: API_ENDPOINT})
+            return $http({method: 'GET', url: API_ENDPOINT_ACTORS})
                 .success(function(data) {
                     var colors = {
                         'national-socialist': '995f46',     //brown
@@ -80,6 +80,13 @@ angular.module('CampusMediusApp')
                             }
                         });
 
+
+                        // get prev and next slugs for this actor
+                        var prevIndex = key > 0 ? key-1 : data.objects.length-1;
+                        var nextIndex = key < data.objects.length-1 ? key+1 : 0;
+                        val.prevItem = data.objects[prevIndex].slug;
+                        val.nextItem = data.objects[nextIndex].slug;
+
                         // TODO: This needs to be in a directive. As it stands, I am embarrassed 
                         // to say I did this. 
                         // TODO: implement this
@@ -109,9 +116,9 @@ angular.module('CampusMediusApp')
         },
         get: function(id) {
             //id = parseInt(id);
-            console.log('getting', id);
             for(var i=0; i<actors.length; i++) {
                 if(actors[i].slug === id) {
+                    console.log(actors[i]);
                     return actors[i];
                 }
             }

@@ -7,11 +7,6 @@ angular.module('CampusMediusApp', [
     'leaflet-directive',
     'ngRoute',
     'rzModule',
-    'com.2fdevs.videogular',
-    'com.2fdevs.videogular.plugins.controls',
-    'com.2fdevs.videogular.plugins.overlayplay',
-    'com.2fdevs.videogular.plugins.buffering',
-    'com.2fdevs.videogular.plugins.poster',
     'angularMoment',
     'angular-carousel'
 ])
@@ -27,7 +22,9 @@ angular.module('CampusMediusApp', [
         popup: [0, 60]
     })
     .constant('STATIC_URL', 'http://campusmedius.net')
-    .constant('API_ENDPOINT', 'http://campusmedius.net/data/api/event/?format=json')
+    .constant('API_ENDPOINT_ACTORS', 'http://campusmedius.net/data/api/event/?format=json')
+    .constant('API_ENDPOINT_PAGES', 'http://campusmedius.net/data/websiteapi/pages/page/?format=json')
+    .constant('API_ENDPOINT_TEAM', 'http://campusmedius.net/data/websiteapi/teammembers/teammember/?format=json')
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true)
         $routeProvider
@@ -55,5 +52,8 @@ angular.module('CampusMediusApp', [
     .run(function($rootScope) {
         $rootScope.$on('actorTriggered', function(event, args) {
             $rootScope.$broadcast('showActor', args);
-        });    
+        });
+        $rootScope.$on('mediaObjectClicked', function(event, args) {
+            $rootScope.$broadcast('showMediaObject', args);
+        });
     });

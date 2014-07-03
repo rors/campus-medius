@@ -1,5 +1,6 @@
 $grayLight: #EAEAEA;
-$titleFont: 'Titillium Web', sans-serif;
+$titleFont: "nimbus-sans", sans-serif;
+$bodyFont: 'adelle', serif;
 
 rzslider span.pointer{
     background-color: #CCC;
@@ -50,6 +51,15 @@ h2{
 }
 hr{
     width:100%;
+}
+p{
+    font-family: $bodyFont;
+}
+.serify{
+    font-family: $bodyFont;
+}
+.sansy{
+    font-family: $titleFont;
 }
 blockquote, blockquote p{
     border:none;
@@ -291,12 +301,12 @@ button.close{
     padding: 5px;
 }
 .rn-carousel-control.rn-carousel-control-next:before{
-    content: "\e600";
-    font-family: icomoon;
+    content: "\e605";
+    font-family: campusmedius;
 }
 .rn-carousel-control.rn-carousel-control-prev:before{
-    content: "\e601";
-    font-family: icomoon;
+    content: "\e600";
+    font-family: campusmedius;
 }
 .event-carousel{
     width:100%;
@@ -321,17 +331,144 @@ vg-controls{
 }
 
 .caption{
-    // position: absolute;
-    // bottom: 0;
-    // background: rgba(0,0,0,.6);
-    // color: white;
-    max-height: 90px;
     width: 100%;
-    padding:10px;
-    overflow: scroll;
+    padding:20px;
     font-size: 14px;
     a{
         font-weight: bold;
         text-decoration: underline;
+    }
+}
+
+.member{
+    width:200px;
+    position:absolute;
+    z-index: 999;
+    cursor:pointer;
+    &.active{
+    }
+}
+.member-1{
+    right:20px;
+    top:0;
+}
+.member-2{
+    right:235px;
+    top:110px;
+}
+.member-3{
+    right:20px;
+    top:225px;
+}
+.member-4{
+    right:235px;
+    top:335px;
+}
+.member-5{
+    right:20px;
+    top:450px;
+}
+
+.connector-line{
+    width: 2px;
+    background: black;
+    position: absolute;
+    z-index: 1;
+}
+.vertical-connector{
+    height: 500px;
+    right: 136px;
+    top:50px;
+}
+.angled-connector{
+    height: 310px;
+    right: 252px;
+    top: -7px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(60deg);
+    -moz-transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    &.lower-connector{
+        top:225px;
+    }
+}
+
+.zoomable {
+  -webkit-transform: scale(1, 1);
+  transition: .3s;
+  cursor: pointer;}
+  .zoomable:hover {
+    -webkit-transform: scale(1.05, 1.05); }
+  .zoomable.active:hover {
+    -webkit-transform: none; }
+
+/*media objects */
+.media-object{
+    padding: 3px 5px;
+    line-height: 2  ;
+    border-radius: 5px;
+    display: inline;
+    cursor: pointer;
+    transition:.3s ease;
+    -webkit-transition:.3s ease;
+        background: #f8f7e2;
+    &:hover{
+    background: #f4f2cc;
+    }
+    &:before{
+        margin-right: 5px;
+        font-family: 'campusmedius';
+        line-height: 1;
+        -webkit-font-smoothing:antialiased;
+    }
+}
+.media-object-image:before{
+    content:"\e602";
+}
+
+.media-object-video:before{
+    content:"\e604";
+}
+
+.media-object-document:before{
+    content:"\e603";
+}
+
+
+.proportional-container {
+    background: red;
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    float: left;
+    height: 0;
+    background: #EAEAEA; 
+
+    iframe {
+        position: absolute;
+        left: 0;
+        border: none;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%; 
+    }
+}
+
+.actor-paginate{
+    position:absolute;
+    width:59px;
+    height:150px;
+    top:40%;
+    cursor:pointer;
+    &.actor-paginate-prev{
+        left:-59px;
+        background:url(../images/btn-prev.png) top left no-repeat;
+        background-size:contain;
+    }
+
+    &.actor-paginate-next{
+        right:-59px;
+        background:url(../images/btn-next.png) top left no-repeat;
+        background-size:contain;
     }
 }
