@@ -14,10 +14,13 @@ angular.module('CampusMediusApp')
           $scope.actor = ActorService.get($routeParams.actorId);
           var description = $scope.actor.description;
           var compiled = $compile(description)($scope);
-          angular.element('#actor-description').append(compiled);
+          angular.element('#actor-description')
+            .empty()
+            .append(compiled);
       });  
       $scope.$on('mediaObjectClicked', function(e, args) {
         console.log('args', args);
+        return;
         var index = parseInt(args.id) - 1;
         angular.element('.rn-carousel-indicator>span:eq(' + index +')').click();
         $scope.$apply();
