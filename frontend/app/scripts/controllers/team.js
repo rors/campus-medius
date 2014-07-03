@@ -8,7 +8,7 @@ angular.module('CampusMediusApp')
             .then(function(members) {
                 $scope.members = members;
                 console.log($scope.members);
-                $scope.current = members[0].slug;
+                $scope.current = members[3].slug;
             });
 
         $scope.trustHtml = function(txt) {
