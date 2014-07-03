@@ -80,6 +80,13 @@ angular.module('CampusMediusApp')
                             }
                         });
 
+
+                        // get prev and next slugs for this actor
+                        var prevIndex = key > 0 ? key-1 : data.objects.length-1;
+                        var nextIndex = key < data.objects.length-1 ? key+1 : 0;
+                        val.prevItem = data.objects[prevIndex].slug;
+                        val.nextItem = data.objects[nextIndex].slug;
+
                         // TODO: This needs to be in a directive. As it stands, I am embarrassed 
                         // to say I did this. 
                         // TODO: implement this
@@ -111,6 +118,7 @@ angular.module('CampusMediusApp')
             //id = parseInt(id);
             for(var i=0; i<actors.length; i++) {
                 if(actors[i].slug === id) {
+                    console.log(actors[i]);
                     return actors[i];
                 }
             }
