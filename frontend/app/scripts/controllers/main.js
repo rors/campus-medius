@@ -29,7 +29,7 @@ angular.module('CampusMediusApp')
 		      baselayers: {
 		        vienna: {
       			  name: 'Vienna 1933',
-      			  url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
+      			  url: 'http://campusmedius.net:8888/v2/another/{z}/{x}/{y}.png',
       			  type: 'xyz'
       		  },
 		        osm: {
