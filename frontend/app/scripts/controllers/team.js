@@ -10,4 +10,8 @@ angular.module('CampusMediusApp')
                 console.log($scope.members);
                 $scope.current = members[0].slug;
             });
+
+        $scope.trustHtml = function(txt) {
+            return $sce.trustAsHtml(txt);
+        };
     }]);
