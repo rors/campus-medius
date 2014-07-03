@@ -1,5 +1,6 @@
 $grayLight: #EAEAEA;
-$titleFont: 'Titillium Web', sans-serif;
+$titleFont: "nimbus-sans", sans-serif;
+$bodyFont: 'adelle', serif;
 
 rzslider span.pointer{
     background-color: #CCC;
@@ -50,6 +51,15 @@ h2{
 }
 hr{
     width:100%;
+}
+p{
+    font-family: $bodyFont;
+}
+.serify{
+    font-family: $bodyFont;
+}
+.sansy{
+    font-family: $titleFont;
 }
 blockquote, blockquote p{
     border:none;
@@ -322,7 +332,7 @@ vg-controls{
 
 .caption{
     width: 100%;
-    padding:10px;
+    padding:20px;
     font-size: 14px;
     a{
         font-weight: bold;
@@ -394,12 +404,17 @@ vg-controls{
 
 /*media objects */
 .media-object{
-    background: #eaeaea;
     padding: 3px 5px;
-    line-height: 1.7;
+    line-height: 2  ;
     border-radius: 5px;
     display: inline;
     cursor: pointer;
+    transition:.3s ease;
+    -webkit-transition:.3s ease;
+        background: #f8f7e2;
+    &:hover{
+    background: #f4f2cc;
+    }
     &:before{
         margin-right: 5px;
         font-family: 'campusmedius';
