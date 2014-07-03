@@ -54,7 +54,6 @@ angular.module('CampusMediusApp', [
             $rootScope.$broadcast('showActor', args);
         });
         $rootScope.$on('mediaObjectClicked', function(event, args) {
-            console.log('broadcasting MO clicked', args)
             $rootScope.$broadcast('showMediaObject', args);
         });
     });

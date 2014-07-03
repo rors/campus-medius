@@ -12,6 +12,7 @@
                         </div>
                         <div class="text-window" id="actor-description"></div>
                     </div>
+                    
                     <div class="col-sm-7">
                         <ul rn-carousel rn-carousel-indicator rn-carousel-control class="image carousel ng-cloak event-carousel">
                             
@@ -19,8 +20,7 @@
                                 <div ng-if="obj.type=='Video'">
                                   <div ng-controller="VideoCtrl">
                                   <div class="proportional-container">
-                                        <iframe ng-src="{{getIframeSrc(obj.vimeo_id)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                      
+                                    <iframe ng-src="{{getIframeSrc(obj.vimeo_id)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                                   </div>
                                   </div>
                                 </div>
@@ -29,11 +29,11 @@
                                     <img ng-src="http://campusmedius.net/{{obj.url}}">
                                     
                                 </div>
-                                <div class="caption" ng-bind-html="obj.caption"></div>
+                                <div class="caption" ng-bind-html="{{trustHtml(obj.caption)}}"></div>
                             </li>
-
                         </ul>
                     </div>
+
                 </div>
             </div>
         </div>

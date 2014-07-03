@@ -109,7 +109,6 @@ angular.module('CampusMediusApp')
         },
         get: function(id) {
             //id = parseInt(id);
-            console.log('getting', id);
             for(var i=0; i<actors.length; i++) {
                 if(actors[i].slug === id) {
                     return actors[i];
