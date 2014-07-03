@@ -20,48 +20,39 @@ angular.module('CampusMediusApp')
     		  lng: 16.384735107421875,
     		  zoom: 13
 	      },
-        // paths: {
-        //     p1: {
-        //         color: '#008000',
-        //         weight: 8,
-        //         latlngs: [
-        //             { lat: 48.220766943861484, lng: 16.503220091740747 },
-        //             { lat: 48.216106093424855, lng: 16.501503477969553 },
-        //             { lat: 48.21730708933378, lng: 16.49240542499803 }
-        //         ],
-        //     }
-        // },
         defaults: {
-          scrollWheelZoom: false
+          scrollWheelZoom: false,
+          maxZoom: 16,
+          minZoom: 11
         },
 	      layers: {
-		  baselayers: {
-		      vienna: {
-			  name: 'Vienna 1933',
-			  url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
-			  type: 'xyz'
-		      },
-		      osm: {
-			  name: 'OpenStreetMap',
-			  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-			  type: 'xyz'
-		      },
-		      cloudmade2: {
-			  name: 'Cloudmade Tourist',
-			  type: 'xyz',
-			  url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-			  layerParams: {
-			      key: '007b9471b4c74da4a6ec7ff43552b16f',
-			      styleId: 7
-			  }
-		      }
-		  }
+		      baselayers: {
+		        vienna: {
+      			  name: 'Vienna 1933',
+      			  url: 'http://a.tiles.mapbox.com/v3/campusmedius.campusmedius/{z}/{x}/{y}.png',
+      			  type: 'xyz'
+      		  },
+		        osm: {
+              name: 'OpenStreetMap',
+              url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+              type: 'xyz'
+		        },
+  		      cloudmade2: {
+              name: 'Cloudmade Tourist',
+              type: 'xyz',
+              url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+              layerParams: {
+                key: '007b9471b4c74da4a6ec7ff43552b16f',
+                styleId: 7
+              }
+  		      }
+          }
 	      },
 	      events: {
-		  map: {
-		      enable: ['click', 'popupopen'],
-		      logic: 'emit'
-		  }
+          map: {
+              enable: ['click', 'popupopen'],
+              logic: 'emit'
+          }
 	      },
 	      // TODO: hard coded; should come from service
 	      historical: ['All', 'Sovereign', 'Disciplinary', 'Control']
