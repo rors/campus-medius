@@ -1,9 +1,8 @@
 <div ng-include="'/views/actor.html'" id="actorView"></div>
 
-<leaflet center="centerMarker" width="100%" resize markers="markers" paths="paths" layers="layers" event-broadcast="events"></leaflet>
+<leaflet center="centerMarker" width="100%" resize markers="markers" paths="paths" layers="layers" defaults="defaults" event-broadcast="events"></leaflet>
 <div id="filters">
     <!--p><select ng-model="historicalFilter" ng-options="value for value in historical" ng-change="filterActors()"></select></p-->
-
     <div ng-controller="TimelineCtrl">
         <button type="submit" class="btn btn-primary btn-timeline-trigger" slide-toggle="#timeline">timeline</button>
         <div id="timeline" class="slideable" duration="500ms" easing="ease">

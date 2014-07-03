@@ -14,11 +14,26 @@ angular.module('CampusMediusApp')
 	  angular.extend($scope, {
 	      actors: [],
 	      markers: [],
+        paths: [],
 	      centerMarker: {
-		  lat: 48.21037530761021,
-		  lng: 16.384735107421875,
-		  zoom: 13
+    		  lat: 48.21037530761021,
+    		  lng: 16.384735107421875,
+    		  zoom: 13
 	      },
+        // paths: {
+        //     p1: {
+        //         color: '#008000',
+        //         weight: 8,
+        //         latlngs: [
+        //             { lat: 48.220766943861484, lng: 16.503220091740747 },
+        //             { lat: 48.216106093424855, lng: 16.501503477969553 },
+        //             { lat: 48.21730708933378, lng: 16.49240542499803 }
+        //         ],
+        //     }
+        // },
+        defaults: {
+          scrollWheelZoom: false
+        },
 	      layers: {
 		  baselayers: {
 		      vienna: {
@@ -77,10 +92,9 @@ angular.module('CampusMediusApp')
 	      var markers_and_paths = ActorService.search(params);
 	      // updates our map markers
 	      angular.extend($scope, {
-		  markers: markers_and_paths.markers,
-		  paths: markers_and_paths.paths
-	      });
-
+          markers: markers_and_paths.markers,
+          paths: markers_and_paths.paths
+        });
 	      console.log('markers_and_paths.paths', markers_and_paths.paths);
 
 	      $location.search(params);

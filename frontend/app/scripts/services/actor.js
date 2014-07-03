@@ -111,18 +111,17 @@ angular.module('CampusMediusApp')
                         val.message = template;
                         val.media_objects = media;
 
-			// add some junk to the path:
-			if ( val.path ) {
-			    val.path.color = '#FF0000';
-			    val.path.weight = 12;
-			}
+                        // add some junk to the path:
+                        if ( val.path.latlngs.length > 0 ) {
+                            val.path.color = '#' + val.color;
+                            val.path.weight = 8;
+                        }
 
                     });
                     actors = data.objects;
                  });
         },
         get: function(id) {
-            //id = parseInt(id);
             for(var i=0; i<actors.length; i++) {
                 if(actors[i].slug === id) {
                     console.log(actors[i]);
@@ -140,17 +139,17 @@ angular.module('CampusMediusApp')
                 }
             });
 
-	    var paths = [];
-	    for (var i = 0; i < data.length; i++) {
-		if ( data[i].path ) {
-		    paths.push( data[i].path );
-		}
-	    }
+            var paths = [];
+            for (var i = 0; i < data.length; i++) {
+                if ( data[i].path.latlngs.length > 0 ) {
+                    paths.push(data[i].path);
+                }
+            }
 
             return {
-		markers: data,
-		paths: paths
-	    };
+                markers: data,
+                paths: paths
+            };
         }
     };
   });
