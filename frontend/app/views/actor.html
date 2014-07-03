@@ -18,18 +18,19 @@
                             
                             <li ng-repeat="obj in actor.media_objects">
                                 <div ng-if="obj.type=='Video'">
-                                  <div ng-controller="VideoCtrl">
-                                  <div class="proportional-container">
-                                    <iframe ng-src="{{getIframeSrc(obj.vimeo_id)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                                  </div>
+                                  <div ng-controller="VideoCtrl" style="overflow:hidden;">
+                                      <div class="proportional-container">
+                                        <iframe ng-src="{{getIframeSrc(obj.vimeo_id)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                      </div>
                                   </div>
                                 </div>
+
                                 <div ng-if="obj.type=='Image' || obj.type=='Document'"
                                     class="rn-carousel-slide-item ng-scope">
                                     <img ng-src="http://campusmedius.net/{{obj.url}}">
-                                    
                                 </div>
-                                <div class="caption" ng-bind-html="{{trustHtml(obj.caption)}}"></div>
+
+                                <div class="caption" ng-bind-html="trustHtml(obj.caption)"></div>
                             </li>
                         </ul>
                     </div>

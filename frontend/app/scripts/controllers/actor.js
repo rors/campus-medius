@@ -9,6 +9,10 @@ angular.module('CampusMediusApp')
         $scope.actor = false;
         $location.path('/actors');
       };
+
+      $scope.trustHtml = function(txt) {
+          return $sce.trustAsHtml(txt);
+      };
       
       $scope.$on('showActor', function(event, args) {
           $scope.actor = ActorService.get($routeParams.actorId);
@@ -22,5 +26,5 @@ angular.module('CampusMediusApp')
         var index = parseInt(args.id) - 1;
         angular.element('.rn-carousel-indicator>span:eq(' + index +')').click();
         $scope.$apply();
-      })
+      });
     }]);
