@@ -110,6 +110,13 @@ angular.module('CampusMediusApp')
                             </div>';
                         val.message = template;
                         val.media_objects = media;
+
+			// add some junk to the path:
+			if ( val.path ) {
+			    val.path.color = '#FF0000';
+			    val.path.weight = 12;
+			}
+
                     });
                     actors = data.objects;
                  });
@@ -132,7 +139,18 @@ angular.module('CampusMediusApp')
                     return el;
                 }
             });
-            return data;
+
+	    var paths = [];
+	    for (var i = 0; i < data.length; i++) {
+		if ( data[i].path ) {
+		    paths.push( data[i].path );
+		}
+	    }
+
+            return {
+		markers: data,
+		paths: paths
+	    };
         }
     };
   });
