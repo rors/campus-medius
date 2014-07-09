@@ -35,6 +35,9 @@ input {
     width: 120px;
     margin-right: 10px;
 }
+.leaflet-control-layers input {
+    width: 35px;
+}
 h1,h2,h3{
     font-family: $titleFont;
     font-weight: 600;

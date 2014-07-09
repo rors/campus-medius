@@ -35,36 +35,38 @@ angular.module('CampusMediusApp')
           maxZoom: 16,
           minZoom: 11
         },
-	      layers: {
-		      baselayers: {
-                        mapbox: {
-                            name: 'Mapbox',
-                            url: 'http://b.tiles.mapbox.com/v3/campusmedius.inmibebn/{z}/{x}/{y}.png',
-                            type: 'xyz'
-                        },
-		        osm: {
-              name: 'OpenStreetMap',
-              url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              type: 'xyz'
-		        },
-  		      cloudmade2: {
-              name: 'Cloudmade Tourist',
-              type: 'xyz',
-              url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-              layerParams: {
-                key: '007b9471b4c74da4a6ec7ff43552b16f',
-                styleId: 7
-              }
-  		      }
-		      },
-		  overlays: {
-		        vienna: {
-      			  name: 'Vienna 1933',
-      			  url: 'http://campusmedius.net:8888/v2/rectified-background/{z}/{x}/{y}.png',
-      			  type: 'xyz'
-      			}
-		  }
-	      },
+           layers: {
+            baselayers: {
+                // mapbox: {
+                //     name: 'Mapbox',
+                //     url: 'http://b.tiles.mapbox.com/v3/cart0graph.inmdjkbg/{z}/{x}/{y}.png', // campusmedius.inmibebn
+                //     type: 'xyz'
+                // },
+                osm: {
+                 name: 'OpenStreetMap (present day)',
+                 url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                 type: 'xyz'
+                }
+                // ,
+                // cloudmade2: {
+                //        name: 'Cloudmade Tourist',
+                //        type: 'xyz',
+                //        url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+                //        layerParams: {
+                //            key: '007b9471b4c74da4a6ec7ff43552b16f',
+                //            styleId: 7
+                //        }
+                // }
+            },
+            overlays: {
+                vienna: {
+                       name: 'Freytag &amp; Berndt: Gesamtplan von Wien (1933)',
+                       url: 'http://campusmedius.net:8888/v2/rectified-background/{z}/{x}/{y}.png',
+                       type: 'xyz',
+                 visible: true
+                      }
+            }
+           },
 	      events: {
           map: {
               enable: ['click', 'popupopen'],
