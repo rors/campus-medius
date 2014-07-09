@@ -29,10 +29,10 @@ angular.module('CampusMediusApp', [
         },
         popup: [0, 60]
     })
-    .constant('STATIC_URL', 'http://campusmedius.net')
-    .constant('API_ENDPOINT_ACTORS', 'http://api.campusmedius.net/api/event/?format=json')
-    .constant('API_ENDPOINT_PAGES', 'http://api.campusmedius.net/websiteapi/pages/page/?format=json')
-    .constant('API_ENDPOINT_TEAM', 'http://api.campusmedius.net/websiteapi/teammembers/teammember/?format=json')
+    .constant('STATIC_URL', 'http://api.campusmedius.net')
+    .constant('API_ENDPOINT_ACTORS', 'http://api.campusmedius.net/events/event/?format=json')
+    .constant('API_ENDPOINT_PAGES', 'http://api.campusmedius.net/website/pages/page/?format=json')
+    .constant('API_ENDPOINT_TEAM', 'http://api.campusmedius.net/website/teammembers/teammember/?format=json')
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true)
         $routeProvider

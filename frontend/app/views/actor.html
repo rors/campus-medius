@@ -29,7 +29,7 @@
 
                                 <div ng-if="obj.type=='Image' || obj.type=='Document'"
                                     class="rn-carousel-slide-item ng-scope">
-                                    <img ng-src="http://campusmedius.net/{{obj.url}}">
+                                    <img ng-src="http://api.campusmedius.net{{obj.url}}">
                                 </div>
 
                                 <div class="caption sansy" ng-bind-html="trustHtml(obj.caption)"></div>
