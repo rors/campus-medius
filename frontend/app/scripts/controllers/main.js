@@ -38,7 +38,7 @@ angular.module('CampusMediusApp')
            layers: {
             baselayers: {
                 osm: {
-                 name: 'OpenStreetMap (present day)',
+                 name: 'OpenStreetMap contributors (present day)',
                  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                  type: 'xyz'
                 }
