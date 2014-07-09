@@ -37,11 +37,11 @@ angular.module('CampusMediusApp')
         },
 	      layers: {
 		      baselayers: {
-		        vienna: {
-      			  name: 'Vienna 1933',
-      			  url: 'http://campusmedius.net:8888/v2/another/{z}/{x}/{y}.png',
-      			  type: 'xyz'
-      		  },
+                        mapbox: {
+                            name: 'Mapbox',
+                            url: 'http://b.tiles.mapbox.com/v3/campusmedius.inmibebn/{z}/{x}/{y}.png',
+                            type: 'xyz'
+                        },
 		        osm: {
               name: 'OpenStreetMap',
               url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -56,7 +56,14 @@ angular.module('CampusMediusApp')
                 styleId: 7
               }
   		      }
-          }
+		      },
+		  overlays: {
+		        vienna: {
+      			  name: 'Vienna 1933',
+      			  url: 'http://campusmedius.net:8888/v2/rectified-background/{z}/{x}/{y}.png',
+      			  type: 'xyz'
+      			}
+		  }
 	      },
 	      events: {
           map: {

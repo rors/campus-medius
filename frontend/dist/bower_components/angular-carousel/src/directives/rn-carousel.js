@@ -408,7 +408,9 @@
                         has3d,
                         transforms = {
                             'webkitTransform':'-webkit-transform',
+                            'OTransform':'-o-transform',
                             'msTransform':'-ms-transform',
+                            'MozTransform':'-moz-transform',
                             'transform':'transform'
                         };
                         // Add it to the body to get the computed style
@@ -440,7 +442,7 @@
                         winEl.unbind('orientationchange', onOrientationChange);
                         winEl.unbind('resize', onOrientationChange);
                     });
-                    onOrientationChange();
+
                 };
             }
         };
