@@ -19,6 +19,14 @@ angular.module('CampusMediusApp', [
             DEFAULT: [20, 81],
             LARGE: [20, 90]
         },
+        shadow: {
+            DEFAULT: [74, 111],
+            LARGE: [60, 90]
+        },
+        shadowAnchor: {
+            DEFAULT: [30, 94],
+            LARGE: [20, 90]
+        },
         popup: [0, 60]
     })
     .constant('STATIC_URL', 'http://campusmedius.net')

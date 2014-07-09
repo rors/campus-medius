@@ -54,7 +54,10 @@ angular.module('CampusMediusApp')
                             iconUrl: STATIC_URL + val.icon,
                             iconSize: ICON_SIZES.icon['DEFAULT'],
                             iconAnchor: ICON_SIZES.anchor['DEFAULT'],
-                            popupAnchor: ICON_SIZES.popup
+                            popupAnchor: ICON_SIZES.popup,
+                            shadowUrl: '/images/shadow.png',
+                            shadowSize: ICON_SIZES.shadow['DEFAULT'],
+                            shadowAnchor: ICON_SIZES.shadowAnchor['DEFAULT']
                         }
                         val.color = colors[val.political_affiliation];
 
