@@ -12,8 +12,8 @@ urlpatterns = patterns('',
 
     (r'^tinymce/', include('tinymce.urls')),
 
-    (r'^api/', include('events.urls')),
-    (r'^websiteapi/', include('website.urls')),
+    (r'^events/', include('events.urls')),
+    (r'^website/', include('website.urls')),
 )
 
 if settings.DEBUG:
