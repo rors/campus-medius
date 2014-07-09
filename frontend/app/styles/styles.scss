@@ -158,6 +158,7 @@ blockquote, blockquote p{
     overflow:scroll;
     padding-right: 20px;
     position: relative;
+    -ms-overflow-style: none;
 }
 button.close{
     color:#333;
@@ -324,6 +325,7 @@ button.close{
         background-repeat: no-repeat;
         background-position: center center;
         overflow:scroll;
+        -ms-overflow-style: none;
     }
     .rn-carousel-slide-item{
         max-height: 600px;

@@ -13,7 +13,7 @@
                         ng-click="showActor(actor.slug)" 
                         ng-mouseenter="highlightActor(actor.slug)" 
                         ng-mouseleave="highlightActor(actor.slug, true)" 
-                        style="margin-left:{{actor.startPercent}}%;width:{{actor.endPercent - actor.startPercent}}%;background-color:#{{actor.color}}">
+                        ng-style="{'margin-left':actor.startPercent + '%', width: actor.endPercent - actor.startPercent + '%', 'background-color':'#' + actor.color }">
                             <!--span>#{{actor.slug}}<br />{{actor.start}} - {{actor.end}}</span-->
                     </div>
                 </div>
