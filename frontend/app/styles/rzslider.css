@@ -42,10 +42,10 @@ rzslider span.bar.selection {
 }
 
 rzslider span.pointer {
-  top: -15px;
+  top: -11px;
   z-index: 2;
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
   background-color: #ffffff;
   -webkit-border-radius: 16px;
@@ -55,10 +55,10 @@ rzslider span.pointer {
 
 rzslider span.pointer:after {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
+  top: 8px;
+  left: 8px;
+  width: 7px;
+  height: 7px;
   background: #71818e;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
@@ -75,7 +75,7 @@ rzslider span.pointer.active:after {
 }
 
 rzslider span.bubble {
-  top: -32px;
+  top: -29px;
   padding: 1px 3px 1px 3px;
   cursor: default;
 }
