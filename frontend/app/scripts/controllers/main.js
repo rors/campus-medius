@@ -15,10 +15,20 @@ angular.module('CampusMediusApp')
 	      actors: [],
 	      markers: [],
         paths: [],
+        maxbounds: {
+          northEast: {
+              lat: 48.3046639877471,
+              lng: 16.580429077148438
+          },
+          southWest: {
+              lat: 48.12805945422104,
+              lng: 16.178054809570312
+          }
+        },
 	      centerMarker: {
     		  lat: 48.21037530761021,
     		  lng: 16.384735107421875,
-    		  zoom: 13
+          zoom: 13
 	      },
         defaults: {
           scrollWheelZoom: false,

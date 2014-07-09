@@ -58,8 +58,17 @@ p{
 .serify{
     font-family: $bodyFont;
 }
-.sansy{
+.sansy, .sansy p{
     font-family: $titleFont;
+}
+a{
+    color:#999;
+    transition: .3s;
+    -webkit-transition: .3s;
+}
+a:hover{
+    color:black;
+    text-decoration: underline;
 }
 blockquote, blockquote p{
     border:none;
@@ -82,7 +91,7 @@ blockquote, blockquote p{
 .nav a{
     color:white;
     font-family: $titleFont;
-    font-size:18px;
+    font-size:23px;
 }
 .nav > li > a:hover{
     border-bottom: 1px solid #666;
@@ -90,7 +99,7 @@ blockquote, blockquote p{
     border-radius: 0;
 }
 .nav-pills > li{
-    margin-right: 8px;
+    margin-right: 28px;
 }
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus{
     border-bottom: 1px solid white;
@@ -186,7 +195,7 @@ button.close{
 .btn-primary{
     background: black;
     font-family: $titleFont;
-    font-size:18px;
+    font-size:23px;
 }
 .btn-timeline-trigger,
 .btn-timeline-trigger:link,
