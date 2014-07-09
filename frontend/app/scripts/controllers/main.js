@@ -14,67 +14,59 @@ angular.module('CampusMediusApp')
 	  angular.extend($scope, {
 	      actors: [],
 	      markers: [],
-              paths: [],
-              maxbounds: {
-		  northEast: {
-		      lat: 48.3046639877471,
-		      lng: 16.580429077148438
-		  },
-		  southWest: {
-		      lat: 48.12805945422104,
-		      lng: 16.178054809570312
-		  }
-              },
+        paths: [],
+        maxbounds: {
+          northEast: {
+              lat: 48.3046639877471,
+              lng: 16.580429077148438
+          },
+          southWest: {
+              lat: 48.12805945422104,
+              lng: 16.178054809570312
+          }
+        },
 	      centerMarker: {
     		  lat: 48.21037530761021,
     		  lng: 16.384735107421875,
-		  zoom: 13
+          zoom: 13
 	      },
-              defaults: {
-		  scrollWheelZoom: false,
-		  maxZoom: 16,
-		  minZoom: 11
-              },
+        defaults: {
+          scrollWheelZoom: false,
+          maxZoom: 16,
+          minZoom: 11
+        },
 	      layers: {
-		  baselayers: {
-                      mapbox: {
-                          name: 'Mapbox',
-                          url: 'http://b.tiles.mapbox.com/v3/campusmedius.inmibebn/{z}/{x}/{y}.png',
-                          type: 'xyz'
-                      },
-		      osm: {
-			  name: 'OpenStreetMap',
-			  url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-			  type: 'xyz'
-		      },
+		      baselayers: {
+		        vienna: {
+      			  name: 'Vienna 1933',
+      			  url: 'http://campusmedius.net:8888/v2/another/{z}/{x}/{y}.png',
+      			  type: 'xyz'
+      		  },
+		        osm: {
+              name: 'OpenStreetMap',
+              url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+              type: 'xyz'
+		        },
   		      cloudmade2: {
-			  name: 'Cloudmade Tourist',
-			  type: 'xyz',
-			  url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-			  layerParams: {
-			      key: '007b9471b4c74da4a6ec7ff43552b16f',
-			      styleId: 7
-			  }
+              name: 'Cloudmade Tourist',
+              type: 'xyz',
+              url: 'http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
+              layerParams: {
+                key: '007b9471b4c74da4a6ec7ff43552b16f',
+                styleId: 7
+              }
   		      }
-		  }
-// ,
-// 		  overlays: {
-// 		      vienna: {
-//       			  name: 'Vienna 1933',
-//       			  url: 'http://campusmedius.net:8888/v2/rectified-background/{z}/{x}/{y}.png',
-//       			  type: 'xyz'
-//       		      }
-// 		  }
+          }
 	      },
 	      events: {
-		  map: {
-		      enable: ['click', 'popupopen'],
-		      logic: 'emit'
-		  }
+          map: {
+              enable: ['click', 'popupopen'],
+              logic: 'emit'
+          }
 	      },
 	      // TODO: hard coded; should come from service
 	      historical: ['All', 'Sovereign', 'Disciplinary', 'Control']
-	  });
+	  });  
 
 	  $scope.$watch( 
 	      function () { return FilterService.get('min'); }, 
